@@ -1,0 +1,1280 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Meridian Advisory — Accounting & Tax Consulting</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Libre+Baskerville:ital,wght@0,400;0,700;1,400&family=Nunito+Sans:wght@300;400;500;600;700&display=swap" rel="stylesheet">
+<style>
+/*
+  COLOUR PALETTE — Rationale:
+  --midnight  (#0B1E3D): Deep authoritative navy — conveys stability, trust, gravitas
+  --oxford    (#142a52): Mid navy — section alternation, cards
+  --cobalt    (#1A4FAA): Primary action blue — CTAs, highlights
+  --sapphire  (#2E6FE0): Hover/accent — slightly lighter for interaction
+  --gold      (#C9943A): Warm gold — trust, prosperity, premium feel; used sparingly as accent
+  --champagne (#F0E6CE): Warm off-white — gold's complement, testimonial backgrounds
+  --slate     (#5A7190): Supporting text, muted UI elements
+  --fog       (#DCE6F1): Light tint for subtle backgrounds on white sections
+  --white     (#F7F9FC): Off-white — cleaner than pure white, less clinical
+*/
+
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --midnight:   #0B1E3D;
+  --oxford:     #142a52;
+  --cobalt:     #1A4FAA;
+  --sapphire:   #2E6FE0;
+  --gold:       #C9943A;
+  --gold-lt:    #DBA94E;
+  --champagne:  #F0E6CE;
+  --slate:      #5A7190;
+  --fog:        #DCE6F1;
+  --white:      #F7F9FC;
+  --pure:       #ffffff;
+  --border:     rgba(26,79,170,0.16);
+  --border-lt:  rgba(220,230,241,0.4);
+  --shadow:     0 4px 28px rgba(11,30,61,0.12);
+  --shadow-lg:  0 16px 64px rgba(11,30,61,0.18);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Nunito Sans', sans-serif;
+  background: var(--white);
+  color: var(--midnight);
+  overflow-x: hidden;
+  line-height: 1.6;
+}
+
+/* ── SUBTLE DIAGONAL BG TEXTURE ── */
+.texture {
+  background-image: repeating-linear-gradient(
+    -55deg,
+    transparent,
+    transparent 28px,
+    rgba(26,79,170,0.022) 28px,
+    rgba(26,79,170,0.022) 29px
+  );
+}
+
+/* ════════════════════════════════
+   NAV
+════════════════════════════════ */
+nav {
+  position: fixed; top: 0; width: 100%; z-index: 200;
+  background: rgba(11,30,61,0.98);
+  backdrop-filter: blur(12px);
+  border-bottom: 1px solid rgba(201,148,58,0.3);
+  animation: navIn 0.7s ease both;
+}
+.nav-inner {
+  max-width: 1320px; margin: 0 auto;
+  padding: 0 56px;
+  display: flex; align-items: center; justify-content: space-between;
+  height: 76px;
+}
+.logo { display: flex; align-items: center; gap: 14px; text-decoration: none; }
+.logo-mark {
+  width: 42px; height: 42px;
+  background: linear-gradient(135deg, var(--cobalt) 0%, var(--sapphire) 100%);
+  border-radius: 6px;
+  display: flex; align-items: center; justify-content: center;
+  position: relative; overflow: hidden;
+}
+.logo-mark::before {
+  content: 'M';
+  font-family: 'Libre Baskerville', serif;
+  font-size: 22px; font-weight: 700; color: white;
+}
+.logo-mark::after {
+  content: '';
+  position: absolute; bottom: 0; left: 0; right: 0;
+  height: 3px;
+  background: var(--gold);
+}
+.logo-text { line-height: 1.15; }
+.logo-name {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 18px; font-weight: 700; color: var(--pure);
+  letter-spacing: 0.5px;
+}
+.logo-tag { font-size: 10px; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); font-weight: 600; }
+.nav-links { display: flex; gap: 36px; list-style: none; }
+.nav-links a {
+  color: rgba(247,249,252,0.72); text-decoration: none;
+  font-size: 13px; font-weight: 600; letter-spacing: 0.5px;
+  transition: color 0.25s; position: relative;
+}
+.nav-links a::after {
+  content: ''; position: absolute; left: 0; bottom: -3px;
+  width: 0; height: 1px; background: var(--gold);
+  transition: width 0.3s;
+}
+.nav-links a:hover { color: var(--pure); }
+.nav-links a:hover::after { width: 100%; }
+.nav-btn {
+  background: var(--gold); color: var(--midnight);
+  border: none; padding: 11px 26px; border-radius: 4px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 13px; font-weight: 700; letter-spacing: 0.5px;
+  cursor: pointer; transition: background 0.3s, transform 0.2s;
+  white-space: nowrap;
+}
+.nav-btn:hover { background: var(--gold-lt); transform: translateY(-1px); }
+
+/* ════════════════════════════════
+   HERO
+════════════════════════════════ */
+.hero {
+  min-height: 100vh;
+  background:
+    linear-gradient(118deg, rgba(11,30,61,0.97) 0%, rgba(20,42,82,0.88) 55%, rgba(11,30,61,0.94) 100%),
+    url('https://images.unsplash.com/photo-1454165804606-c3d57bc86b40?w=1800&q=80') center/cover no-repeat;
+  display: flex; align-items: center;
+  position: relative; overflow: hidden;
+}
+/* Fine dot-grid overlay */
+.hero::before {
+  content: '';
+  position: absolute; inset: 0; z-index: 0;
+  background-image: radial-gradient(rgba(220,230,241,0.08) 1px, transparent 1px);
+  background-size: 32px 32px;
+}
+/* Gold vertical accent line */
+.hero::after {
+  content: '';
+  position: absolute; top: 0; left: 0;
+  width: 4px; height: 100%;
+  background: linear-gradient(to bottom, var(--gold), transparent);
+}
+.hero-inner {
+  max-width: 1320px; margin: 0 auto; padding: 0 56px;
+  position: relative; z-index: 1; width: 100%;
+  display: grid; grid-template-columns: 1fr 420px; gap: 80px; align-items: center;
+}
+.hero-content { }
+.hero-pre {
+  display: inline-flex; align-items: center; gap: 10px;
+  background: rgba(201,148,58,0.12);
+  border: 1px solid rgba(201,148,58,0.35);
+  color: var(--gold); padding: 7px 18px; border-radius: 2px;
+  font-size: 12px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase;
+  margin-bottom: 28px;
+  animation: fadeUp 0.9s 0.3s ease both;
+}
+.hero-pre span { width: 5px; height: 5px; background: var(--gold); border-radius: 50%; animation: blink 2s infinite; }
+.hero-h1 {
+  font-family: 'Libre Baskerville', serif;
+  font-size: clamp(42px, 5.5vw, 76px);
+  font-weight: 700; line-height: 1.08;
+  color: var(--pure);
+  margin-bottom: 28px;
+  animation: fadeUp 0.9s 0.5s ease both;
+}
+.hero-h1 em { color: var(--gold); font-style: italic; }
+.hero-sub {
+  font-size: 17px; font-weight: 300; color: rgba(220,230,241,0.75);
+  line-height: 1.85; max-width: 520px;
+  margin-bottom: 44px;
+  animation: fadeUp 0.9s 0.7s ease both;
+}
+.hero-actions {
+  display: flex; gap: 16px; flex-wrap: wrap;
+  animation: fadeUp 0.9s 0.9s ease both;
+}
+.btn-primary {
+  background: var(--cobalt); color: var(--pure);
+  border: none; padding: 15px 36px; border-radius: 4px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 14px; font-weight: 700; letter-spacing: 0.3px;
+  cursor: pointer; transition: background 0.3s, transform 0.2s;
+}
+.btn-primary:hover { background: var(--sapphire); transform: translateY(-2px); }
+.btn-outline {
+  background: transparent; color: var(--pure);
+  border: 1.5px solid rgba(247,249,252,0.35);
+  padding: 15px 36px; border-radius: 4px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 14px; font-weight: 600;
+  cursor: pointer; transition: all 0.3s;
+}
+.btn-outline:hover { border-color: var(--gold); color: var(--gold); }
+.hero-metrics {
+  display: flex; gap: 0; margin-top: 64px;
+  animation: fadeUp 0.9s 1.1s ease both;
+}
+.metric {
+  padding-right: 36px; margin-right: 36px;
+  border-right: 1px solid rgba(220,230,241,0.15);
+}
+.metric:last-child { border-right: none; padding-right: 0; margin-right: 0; }
+.metric-num {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 40px; color: var(--gold); line-height: 1;
+}
+.metric-label { font-size: 12px; color: var(--slate); letter-spacing: 0.5px; margin-top: 6px; font-weight: 500; }
+
+/* Hero floating card */
+.hero-card {
+  background: rgba(255,255,255,0.04);
+  border: 1px solid rgba(220,230,241,0.12);
+  backdrop-filter: blur(16px);
+  border-radius: 8px; padding: 36px;
+  animation: fadeLeft 0.9s 0.7s ease both;
+}
+.hero-card-title {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 20px; color: var(--pure); margin-bottom: 24px;
+  padding-bottom: 16px; border-bottom: 1px solid rgba(201,148,58,0.25);
+}
+.hero-service-pill {
+  display: flex; align-items: center; gap: 12px;
+  padding: 14px 0; border-bottom: 1px solid rgba(220,230,241,0.07);
+}
+.hero-service-pill:last-child { border-bottom: none; padding-bottom: 0; }
+.pill-dot { width: 8px; height: 8px; background: var(--gold); border-radius: 50%; flex-shrink: 0; }
+.pill-text { font-size: 14px; color: rgba(220,230,241,0.8); font-weight: 400; }
+.pill-arrow { margin-left: auto; color: var(--cobalt); font-size: 12px; }
+.hero-card-cta {
+  margin-top: 24px; width: 100%; background: var(--gold); color: var(--midnight);
+  border: none; padding: 13px; border-radius: 4px;
+  font-family: 'Nunito Sans', sans-serif;
+  font-size: 13px; font-weight: 700; cursor: pointer; transition: background 0.3s;
+}
+.hero-card-cta:hover { background: var(--gold-lt); }
+
+/* ════════════════════════════════
+   TRUST BAR
+════════════════════════════════ */
+.trust-bar {
+  background: var(--midnight);
+  border-top: 1px solid rgba(201,148,58,0.2);
+  border-bottom: 1px solid rgba(201,148,58,0.2);
+  padding: 20px 56px;
+}
+.trust-inner {
+  max-width: 1320px; margin: 0 auto;
+  display: flex; align-items: center; justify-content: center; gap: 60px; flex-wrap: wrap;
+}
+.trust-item {
+  display: flex; align-items: center; gap: 10px;
+  font-size: 12px; font-weight: 600; letter-spacing: 1.5px; text-transform: uppercase;
+  color: rgba(220,230,241,0.45);
+}
+.trust-item::before { content: '✓'; color: var(--gold); font-size: 13px; font-weight: 700; }
+
+/* ════════════════════════════════
+   SECTION COMMONS
+════════════════════════════════ */
+.wrap { max-width: 1320px; margin: 0 auto; padding: 0 56px; }
+.section { padding: 108px 0; }
+.section-dark { background: var(--midnight); }
+.section-oxford { background: var(--oxford); }
+.section-fog { background: var(--fog); }
+.section-white { background: var(--pure); }
+
+.eyebrow {
+  display: inline-flex; align-items: center; gap: 12px;
+  font-size: 11px; font-weight: 700; letter-spacing: 3px; text-transform: uppercase;
+  color: var(--cobalt); margin-bottom: 18px;
+}
+.eyebrow::before { content: ''; display: block; width: 28px; height: 2px; background: var(--gold); }
+.section-h { font-family: 'Libre Baskerville', serif; font-size: clamp(32px, 4vw, 54px); font-weight: 700; line-height: 1.12; margin-bottom: 18px; }
+.section-h em { color: var(--cobalt); font-style: italic; }
+.section-h.light { color: var(--pure); }
+.section-h.light em { color: var(--gold); }
+.section-p { font-size: 16px; font-weight: 300; color: var(--slate); line-height: 1.85; max-width: 540px; }
+.section-p.light { color: rgba(220,230,241,0.65); }
+
+/* ════════════════════════════════
+   SERVICES
+════════════════════════════════ */
+.services-intro {
+  display: grid; grid-template-columns: 1fr 1fr; gap: 80px; align-items: center; margin-bottom: 72px;
+}
+.services-right { display: flex; flex-direction: column; gap: 20px; }
+.quick-stat {
+  background: rgba(26,79,170,0.08); border: 1px solid var(--border);
+  border-left: 3px solid var(--cobalt);
+  padding: 20px 24px; display: flex; align-items: center; gap: 20px;
+}
+.qs-num { font-family: 'Libre Baskerville', serif; font-size: 36px; color: var(--cobalt); line-height: 1; flex-shrink: 0; }
+.qs-label { font-size: 13px; color: var(--slate); line-height: 1.5; }
+.qs-label strong { display: block; color: var(--midnight); font-weight: 600; font-size: 14px; }
+
+.services-tabs { display: flex; gap: 2px; margin-bottom: 36px; }
+.stab {
+  background: var(--fog); color: var(--slate);
+  border: none; padding: 13px 28px; cursor: pointer;
+  font-family: 'Nunito Sans', sans-serif; font-size: 13px; font-weight: 600;
+  transition: all 0.25s; border-bottom: 2px solid transparent;
+}
+.stab.active { background: var(--cobalt); color: var(--pure); border-bottom-color: var(--gold); }
+.stab:hover:not(.active) { background: var(--border-lt); color: var(--midnight); }
+
+.service-panel { display: none; }
+.service-panel.active { display: block; animation: fadeUp 0.4s ease; }
+.service-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 20px; }
+.service-card {
+  background: var(--pure); border: 1px solid var(--fog);
+  padding: 36px 28px;
+  transition: transform 0.3s, box-shadow 0.3s, border-color 0.3s;
+  position: relative; overflow: hidden;
+}
+.service-card::after {
+  content: ''; position: absolute; top: 0; left: 0; right: 0; height: 3px;
+  background: var(--cobalt); transform: scaleX(0); transform-origin: left;
+  transition: transform 0.3s;
+}
+.service-card:hover { transform: translateY(-5px); box-shadow: var(--shadow-lg); border-color: var(--border); }
+.service-card:hover::after { transform: scaleX(1); }
+.sc-icon { font-size: 34px; margin-bottom: 20px; }
+.sc-title { font-family: 'Libre Baskerville', serif; font-size: 19px; font-weight: 700; color: var(--midnight); margin-bottom: 10px; }
+.sc-body { font-size: 14px; color: var(--slate); line-height: 1.75; margin-bottom: 20px; }
+.sc-list { list-style: none; }
+.sc-list li {
+  font-size: 13px; color: var(--slate); padding: 5px 0;
+  border-bottom: 1px solid var(--fog); display: flex; align-items: center; gap: 9px;
+}
+.sc-list li::before { content: '→'; color: var(--cobalt); font-size: 11px; flex-shrink: 0; }
+.sc-list li:last-child { border-bottom: none; }
+
+/* ════════════════════════════════
+   WHY CHOOSE US
+════════════════════════════════ */
+.why-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 0; }
+.why-visual {
+  background:
+    linear-gradient(135deg, rgba(11,30,61,0.8) 0%, rgba(20,42,82,0.6) 100%),
+    url('https://images.unsplash.com/photo-1551836022-deb4988cc6c0?w=900&q=80') center/cover;
+  min-height: 560px; display: flex; flex-direction: column; justify-content: flex-end;
+  padding: 60px;
+}
+.why-quote {
+  border-left: 3px solid var(--gold); padding-left: 24px;
+  font-family: 'Libre Baskerville', serif; font-style: italic;
+  font-size: 20px; color: var(--pure); line-height: 1.6; max-width: 380px;
+}
+.why-content { padding: 80px; background: var(--midnight); }
+.why-items { margin-top: 40px; display: flex; flex-direction: column; gap: 28px; }
+.why-item { display: flex; gap: 20px; align-items: flex-start; }
+.wi-icon { width: 44px; height: 44px; background: rgba(26,79,170,0.15); border: 1px solid var(--border); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 20px; flex-shrink: 0; }
+.wi-title { font-size: 15px; font-weight: 700; color: var(--pure); margin-bottom: 5px; }
+.wi-body { font-size: 13px; color: rgba(220,230,241,0.55); line-height: 1.7; }
+
+/* ════════════════════════════════
+   TEAM
+════════════════════════════════ */
+.team-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 24px; }
+.team-card {
+  background: var(--pure); border: 1px solid var(--fog);
+  overflow: hidden;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.team-card:hover { transform: translateY(-6px); box-shadow: var(--shadow-lg); }
+.team-img { width: 100%; height: 260px; object-fit: cover; object-position: top; filter: saturate(0.9); transition: filter 0.4s; }
+.team-card:hover .team-img { filter: saturate(1); }
+.team-body { padding: 24px; }
+.team-spec { font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--cobalt); margin-bottom: 6px; }
+.team-name { font-family: 'Libre Baskerville', serif; font-size: 18px; font-weight: 700; color: var(--midnight); margin-bottom: 8px; }
+.team-bio { font-size: 13px; color: var(--slate); line-height: 1.65; margin-bottom: 16px; }
+.team-quals { display: flex; flex-wrap: wrap; gap: 6px; }
+.qual { background: var(--fog); color: var(--cobalt); font-size: 11px; font-weight: 700; letter-spacing: 1px; padding: 4px 10px; border-radius: 2px; }
+
+/* ════════════════════════════════
+   TESTIMONIALS
+════════════════════════════════ */
+.testi-grid { display: grid; grid-template-columns: repeat(3, 1fr); gap: 24px; margin-top: 64px; }
+.testi-card {
+  background: var(--pure); border: 1px solid var(--fog);
+  padding: 36px;
+  position: relative;
+  transition: transform 0.3s, box-shadow 0.3s;
+}
+.testi-card:hover { transform: translateY(-4px); box-shadow: var(--shadow-lg); }
+.testi-card::before {
+  content: '\201C';
+  font-family: 'Libre Baskerville', serif;
+  position: absolute; top: 16px; left: 28px;
+  font-size: 80px; color: var(--fog); line-height: 1;
+  z-index: 0;
+}
+.testi-stars { color: var(--gold); font-size: 15px; margin-bottom: 16px; position: relative; z-index: 1; }
+.testi-text { font-size: 15px; color: var(--midnight); line-height: 1.8; font-style: italic; margin-bottom: 28px; position: relative; z-index: 1; }
+.testi-author { display: flex; align-items: center; gap: 14px; border-top: 1px solid var(--fog); padding-top: 20px; position: relative; z-index: 1; }
+.testi-avatar { width: 46px; height: 46px; border-radius: 50%; background: var(--fog); display: flex; align-items: center; justify-content: center; font-size: 20px; border: 2px solid var(--border); overflow: hidden; flex-shrink: 0; }
+.testi-avatar img { width: 100%; height: 100%; object-fit: cover; }
+.testi-name { font-weight: 700; font-size: 14px; color: var(--midnight); }
+.testi-role { font-size: 12px; color: var(--slate); }
+.testi-service { font-size: 11px; color: var(--cobalt); font-weight: 700; letter-spacing: 1.5px; text-transform: uppercase; margin-top: 3px; }
+
+/* ════════════════════════════════
+   BOOKING / CONSULTATION
+════════════════════════════════ */
+.booking-wrap { display: grid; grid-template-columns: 1fr 1.1fr; gap: 0; }
+.booking-left { padding: 100px 80px 100px 0; }
+.booking-features { display: flex; flex-direction: column; gap: 20px; margin-top: 36px; }
+.bf { display: flex; gap: 16px; align-items: flex-start; }
+.bf-icon { width: 40px; height: 40px; background: rgba(201,148,58,0.1); border: 1px solid rgba(201,148,58,0.25); border-radius: 6px; display: flex; align-items: center; justify-content: center; font-size: 18px; flex-shrink: 0; }
+.bf-title { font-size: 14px; font-weight: 700; color: var(--midnight); margin-bottom: 3px; }
+.bf-body { font-size: 13px; color: var(--slate); line-height: 1.6; }
+.booking-contact { display: flex; flex-direction: column; gap: 14px; margin-top: 40px; }
+.bc-row { display: flex; align-items: center; gap: 12px; }
+.bc-icon { width: 34px; height: 34px; background: var(--cobalt); border-radius: 4px; display: flex; align-items: center; justify-content: center; font-size: 15px; flex-shrink: 0; }
+.bc-text { font-size: 14px; color: var(--midnight); font-weight: 500; }
+
+.booking-form-card {
+  background: var(--midnight);
+  padding: 56px 56px;
+  border-left: 4px solid var(--gold);
+}
+.form-title {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 26px; font-weight: 700; color: var(--pure); margin-bottom: 8px;
+}
+.form-sub { font-size: 14px; color: rgba(220,230,241,0.5); margin-bottom: 36px; }
+
+.frow { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.fg { margin-bottom: 18px; }
+.fg.full { grid-column: 1 / -1; }
+.fg label { display: block; font-size: 11px; font-weight: 700; letter-spacing: 2px; text-transform: uppercase; color: var(--gold); margin-bottom: 8px; }
+.fg input, .fg select, .fg textarea {
+  width: 100%; background: rgba(247,249,252,0.05);
+  border: 1px solid rgba(220,230,241,0.12);
+  padding: 13px 16px; outline: none;
+  font-family: 'Nunito Sans', sans-serif; font-size: 15px; font-weight: 400;
+  color: var(--pure); transition: border-color 0.3s, background 0.3s;
+  border-radius: 2px;
+}
+.fg input::placeholder, .fg textarea::placeholder { color: rgba(220,230,241,0.25); }
+.fg input:focus, .fg select:focus, .fg textarea:focus { border-color: rgba(201,148,58,0.5); background: rgba(247,249,252,0.08); }
+.fg select option { background: var(--oxford); }
+.fg textarea { resize: vertical; min-height: 100px; }
+.form-check { display: flex; align-items: flex-start; gap: 10px; margin: 6px 0 20px; }
+.form-check input[type="checkbox"] { margin-top: 3px; accent-color: var(--gold); }
+.form-check label { font-size: 12px; color: rgba(220,230,241,0.45); line-height: 1.6; }
+.btn-book {
+  width: 100%; background: var(--gold); color: var(--midnight);
+  border: none; padding: 16px;
+  font-family: 'Nunito Sans', sans-serif; font-size: 14px; font-weight: 700; letter-spacing: 0.5px;
+  cursor: pointer; transition: background 0.3s, transform 0.2s; border-radius: 2px;
+}
+.btn-book:hover { background: var(--gold-lt); transform: translateY(-1px); }
+.form-success {
+  display: none; background: rgba(201,148,58,0.1); border: 1px solid rgba(201,148,58,0.35);
+  color: var(--gold); padding: 16px; text-align: center; font-size: 14px; font-weight: 600;
+  margin-top: 16px; border-radius: 2px;
+}
+
+/* ════════════════════════════════
+   PROCESS STEPS
+════════════════════════════════ */
+.process-grid { display: grid; grid-template-columns: repeat(4, 1fr); gap: 2px; margin-top: 64px; }
+.process-step {
+  background: var(--oxford); padding: 40px 32px;
+  border-bottom: 3px solid transparent;
+  transition: border-color 0.3s, background 0.3s;
+  position: relative;
+}
+.process-step:hover { background: var(--slate); border-color: var(--gold); }
+.ps-num {
+  font-family: 'Libre Baskerville', serif;
+  font-size: 60px; font-weight: 700; color: rgba(26,79,170,0.2);
+  line-height: 1; margin-bottom: 16px;
+  transition: color 0.3s;
+}
+.process-step:hover .ps-num { color: rgba(201,148,58,0.2); }
+.ps-icon { font-size: 30px; margin-bottom: 16px; }
+.ps-title { font-family: 'Libre Baskerville', serif; font-size: 18px; color: var(--pure); margin-bottom: 10px; }
+.ps-body { font-size: 13px; color: rgba(220,230,241,0.5); line-height: 1.75; }
+
+/* ════════════════════════════════
+   FOOTER
+════════════════════════════════ */
+footer { background: #060F1E; border-top: 1px solid rgba(201,148,58,0.2); padding: 80px 0 40px; }
+.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+.footer-brand .logo-name { color: var(--pure); font-size: 20px; }
+.footer-desc { font-size: 14px; font-weight: 300; color: rgba(220,230,241,0.35); line-height: 1.8; max-width: 280px; margin-top: 16px; }
+.footer-col h4 { font-size: 11px; font-weight: 700; letter-spacing: 2.5px; text-transform: uppercase; color: var(--gold); margin-bottom: 22px; padding-bottom: 10px; border-bottom: 1px solid rgba(201,148,58,0.15); }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 11px; }
+.footer-col ul a { color: rgba(220,230,241,0.4); text-decoration: none; font-size: 14px; font-weight: 300; transition: color 0.2s; }
+.footer-col ul a:hover { color: rgba(220,230,241,0.85); }
+.footer-bottom { border-top: 1px solid rgba(220,230,241,0.05); padding-top: 32px; display: flex; justify-content: space-between; align-items: center; flex-wrap: wrap; gap: 12px; }
+.footer-copy { font-size: 12px; color: rgba(220,230,241,0.25); }
+.footer-credit { font-size: 12px; color: rgba(220,230,241,0.3); }
+.footer-credit span { color: var(--gold); font-weight: 600; }
+
+/* ════════════════════════════════
+   KEYFRAMES
+════════════════════════════════ */
+@keyframes navIn { from { opacity:0; transform:translateY(-16px); } to { opacity:1; transform:none; } }
+@keyframes fadeUp { from { opacity:0; transform:translateY(32px); } to { opacity:1; transform:none; } }
+@keyframes fadeLeft { from { opacity:0; transform:translateX(28px); } to { opacity:1; transform:none; } }
+@keyframes blink { 0%,100%{opacity:1;} 50%{opacity:0.3;} }
+@keyframes scaleIn { from { opacity:0; transform:scale(0.97); } to { opacity:1; transform:none; } }
+
+/* SCROLL REVEAL */
+.reveal { opacity:0; transform:translateY(24px); transition:opacity 0.75s ease, transform 0.75s ease; }
+.reveal.visible { opacity:1; transform:none; }
+.rd1 { transition-delay:0.08s; }
+.rd2 { transition-delay:0.16s; }
+.rd3 { transition-delay:0.24s; }
+.rd4 { transition-delay:0.32s; }
+
+/* ════════════════════════════════
+   RESPONSIVE
+════════════════════════════════ */
+@media (max-width: 1100px) {
+  .nav-links, .nav-btn { display:none; }
+  .nav-inner { padding: 0 24px; }
+  .hero-inner { grid-template-columns:1fr; }
+  .hero-card { display:none; }
+  .hero-content, .hero-sub { max-width:100%; }
+  .wrap { padding: 0 24px; }
+  .section { padding: 72px 0; }
+  .services-intro { grid-template-columns:1fr; gap:40px; }
+  .service-grid { grid-template-columns:1fr; }
+  .why-grid { grid-template-columns:1fr; }
+  .why-content { padding: 60px 24px; }
+  .team-grid { grid-template-columns:1fr 1fr; }
+  .testi-grid { grid-template-columns:1fr; }
+  .booking-wrap { grid-template-columns:1fr; }
+  .booking-left { padding: 60px 24px 0; }
+  .booking-form-card { padding: 40px 24px; }
+  .process-grid { grid-template-columns:1fr 1fr; }
+  .footer-top { grid-template-columns:1fr 1fr; gap:40px; }
+  .footer-bottom { flex-direction:column; text-align:center; }
+  .frow { grid-template-columns:1fr; }
+  .trust-bar { padding: 20px 24px; }
+  .trust-inner { gap:24px; justify-content:flex-start; }
+  .hero-metrics { flex-wrap:wrap; gap:24px; }
+  .metric { border-right:none; }
+  .hero-inner { padding: 0 24px; }
+  .services-tabs { flex-wrap: wrap; }
+  .nav-btn-mobile { display: flex; }
+}
+</style>
+</head>
+<body>
+
+<!-- ══════════════════════════════════════════
+     NAV
+══════════════════════════════════════════ -->
+<nav>
+  <div class="nav-inner">
+    <a href="#" class="logo">
+      <div class="logo-mark"></div>
+      <div class="logo-text">
+        <div class="logo-name">Meridian Advisory</div>
+        <div class="logo-tag">Accounting & Tax Consulting</div>
+      </div>
+    </a>
+    <ul class="nav-links">
+      <li><a href="#services">Services</a></li>
+      <li><a href="#team">Our Team</a></li>
+      <li><a href="#testimonials">Clients</a></li>
+      <li><a href="#process">How We Work</a></li>
+      <li><a href="#booking">Contact</a></li>
+    </ul>
+    <button class="nav-btn" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Book Consultation</button>
+  </div>
+</nav>
+
+<!-- ══════════════════════════════════════════
+     HERO
+══════════════════════════════════════════ -->
+<section class="hero" id="home">
+  <div class="hero-inner" style="padding-top:76px">
+    <div class="hero-content">
+      <div class="hero-pre"><span></span>SARS Registered Tax Practitioners · SAIPA Accredited</div>
+      <h1 class="hero-h1">Financial Clarity.<br><em>Expertly</em> Delivered.</h1>
+      <p class="hero-sub">Meridian Advisory provides precision-driven accounting, tax compliance and strategic business consulting — helping South African businesses and individuals build lasting financial health.</p>
+      <div class="hero-actions">
+        <button class="btn-primary" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Book a Free Consultation</button>
+        <button class="btn-outline" onclick="document.getElementById('services').scrollIntoView({behavior:'smooth'})">Explore Services</button>
+      </div>
+      <div class="hero-metrics">
+        <div class="metric"><div class="metric-num">18+</div><div class="metric-label">Years in Practice</div></div>
+        <div class="metric"><div class="metric-num">650+</div><div class="metric-label">Active Clients</div></div>
+        <div class="metric"><div class="metric-num">R2.4bn</div><div class="metric-label">Tax Assessed Annually</div></div>
+        <div class="metric"><div class="metric-num">100%</div><div class="metric-label">SARS Compliance Rate</div></div>
+      </div>
+    </div>
+    <div class="hero-card">
+      <div class="hero-card-title">Our Core Practice Areas</div>
+      <div class="hero-service-pill">
+        <div class="pill-dot"></div>
+        <div class="pill-text">Individual & Corporate Tax</div>
+        <div class="pill-arrow">→</div>
+      </div>
+      <div class="hero-service-pill">
+        <div class="pill-dot"></div>
+        <div class="pill-text">Business Advisory & CFO Services</div>
+        <div class="pill-arrow">→</div>
+      </div>
+      <div class="hero-service-pill">
+        <div class="pill-dot"></div>
+        <div class="pill-text">Financial Planning & Wealth</div>
+        <div class="pill-arrow">→</div>
+      </div>
+      <div class="hero-service-pill">
+        <div class="pill-dot"></div>
+        <div class="pill-text">Payroll & Compliance</div>
+        <div class="pill-arrow">→</div>
+      </div>
+      <div class="hero-service-pill">
+        <div class="pill-dot"></div>
+        <div class="pill-text">Audit & Assurance</div>
+        <div class="pill-arrow">→</div>
+      </div>
+      <div class="hero-service-pill">
+        <div class="pill-dot"></div>
+        <div class="pill-text">Company Secretarial Services</div>
+        <div class="pill-arrow">→</div>
+      </div>
+      <button class="hero-card-cta" onclick="document.getElementById('booking').scrollIntoView({behavior:'smooth'})">Schedule Your Free Consult →</button>
+    </div>
+  </div>
+</section>
+
+<!-- TRUST BAR -->
+<div class="trust-bar">
+  <div class="trust-inner">
+    <div class="trust-item">SAIPA Accredited</div>
+    <div class="trust-item">SARS Registered Tax Practitioner</div>
+    <div class="trust-item">SAICA Member Firm</div>
+    <div class="trust-item">CIPC Compliance</div>
+    <div class="trust-item">ISO 9001:2015 Certified</div>
+    <div class="trust-item">FSCA Authorised FSP</div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     SERVICES
+══════════════════════════════════════════ -->
+<section class="section section-white" id="services">
+  <div class="wrap">
+    <div class="services-intro">
+      <div class="reveal">
+        <p class="eyebrow">What We Do</p>
+        <h2 class="section-h">A Full Suite of<br><em>Financial Services</em></h2>
+        <p class="section-p">From annual tax returns to complex corporate restructuring — Meridian brings the depth of a large firm and the personal attention of a boutique practice.</p>
+      </div>
+      <div class="services-right reveal rd2">
+        <div class="quick-stat">
+          <div class="qs-num">98%</div>
+          <div class="qs-label"><strong>Client Retention Rate</strong>Clients stay because results speak for themselves.</div>
+        </div>
+        <div class="quick-stat">
+          <div class="qs-num">48hr</div>
+          <div class="qs-label"><strong>Average Query Response</strong>Fast, clear answers when you need them most.</div>
+        </div>
+        <div class="quick-stat">
+          <div class="qs-num">Zero</div>
+          <div class="qs-label"><strong>SARS Penalties on Record</strong>Meticulous compliance, every time.</div>
+        </div>
+      </div>
+    </div>
+
+    <!-- Tabs -->
+    <div class="services-tabs reveal">
+      <button class="stab active" onclick="switchService('tax',this)">Tax Services</button>
+      <button class="stab" onclick="switchService('consulting',this)">Business Consulting</button>
+      <button class="stab" onclick="switchService('planning',this)">Financial Planning</button>
+      <button class="stab" onclick="switchService('compliance',this)">Payroll & Compliance</button>
+    </div>
+
+    <!-- TAX SERVICES -->
+    <div class="service-panel active reveal" id="panel-tax">
+      <div class="service-grid">
+        <div class="service-card">
+          <div class="sc-icon">🏢</div>
+          <div class="sc-title">Corporate Tax</div>
+          <p class="sc-body">End-to-end corporate income tax compliance for companies of all sizes — from SMEs to JSE-listed entities.</p>
+          <ul class="sc-list">
+            <li>Company Income Tax Returns (ITR14)</li>
+            <li>Provisional Tax Management</li>
+            <li>Transfer Pricing Advisory</li>
+            <li>Group Tax Structuring</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="sc-icon">👤</div>
+          <div class="sc-title">Personal Income Tax</div>
+          <p class="sc-body">Accurate, on-time personal tax returns maximising your legal deductions and minimising your tax liability.</p>
+          <ul class="sc-list">
+            <li>Individual ITR12 Submissions</li>
+            <li>SARS Dispute Resolution</li>
+            <li>Capital Gains Tax Planning</li>
+            <li>Foreign Income Disclosure</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="sc-icon">💼</div>
+          <div class="sc-title">VAT & Indirect Tax</div>
+          <p class="sc-body">Complete VAT registration, returns management, and indirect tax advisory for South African businesses.</p>
+          <ul class="sc-list">
+            <li>VAT Registration & Deregistration</li>
+            <li>Monthly/Bi-Monthly VAT Returns</li>
+            <li>VAT Audit Defence</li>
+            <li>Cross-border VAT Structuring</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- BUSINESS CONSULTING -->
+    <div class="service-panel" id="panel-consulting">
+      <div class="service-grid">
+        <div class="service-card">
+          <div class="sc-icon">📊</div>
+          <div class="sc-title">Outsourced CFO Services</div>
+          <p class="sc-body">Senior financial leadership on a fractional basis — the strategic insight of a CFO without the full-time cost.</p>
+          <ul class="sc-list">
+            <li>Management Accounts & Reporting</li>
+            <li>Cash Flow Forecasting</li>
+            <li>Board Reporting Packs</li>
+            <li>Investor-Ready Financials</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="sc-icon">🏗️</div>
+          <div class="sc-title">Business Structuring</div>
+          <p class="sc-body">Expert advice on optimal legal and tax structures for new ventures, acquisitions and reorganisations.</p>
+          <ul class="sc-list">
+            <li>Entity Type Selection</li>
+            <li>Holding Company Structures</li>
+            <li>Share Incentive Schemes</li>
+            <li>M&A Tax Due Diligence</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="sc-icon">📈</div>
+          <div class="sc-title">Business Turnaround</div>
+          <p class="sc-body">Identifying financial inefficiencies and developing actionable plans to restore profitability and growth.</p>
+          <ul class="sc-list">
+            <li>Financial Health Diagnostics</li>
+            <li>Creditor & Debtor Optimisation</li>
+            <li>Cost Reduction Strategy</li>
+            <li>Lender & Investor Negotiation</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- FINANCIAL PLANNING -->
+    <div class="service-panel" id="panel-planning">
+      <div class="service-grid">
+        <div class="service-card">
+          <div class="sc-icon">🎯</div>
+          <div class="sc-title">Personal Wealth Planning</div>
+          <p class="sc-body">Holistic financial plans tailored to your life goals — retirement, education funding, estate planning and wealth preservation.</p>
+          <ul class="sc-list">
+            <li>Retirement Annuity Planning</li>
+            <li>Living Annuity Structuring</li>
+            <li>Tax-Free Savings Accounts</li>
+            <li>Wills & Estate Planning</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="sc-icon">🛡️</div>
+          <div class="sc-title">Risk & Insurance Planning</div>
+          <p class="sc-body">Protecting what matters most — life cover, income protection and business continuity planning.</p>
+          <ul class="sc-list">
+            <li>Life & Disability Cover Review</li>
+            <li>Buy-and-Sell Agreements</li>
+            <li>Key Person Insurance</li>
+            <li>Business Assurance Structuring</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="sc-icon">🏦</div>
+          <div class="sc-title">Investment Advisory</div>
+          <p class="sc-body">Independent investment guidance aligned with your risk appetite and long-term financial objectives.</p>
+          <ul class="sc-list">
+            <li>Portfolio Construction</li>
+            <li>Offshore Investment Planning</li>
+            <li>Unit Trust Selection</li>
+            <li>Pension Fund Advisory</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+    <!-- PAYROLL -->
+    <div class="service-panel" id="panel-compliance">
+      <div class="service-grid">
+        <div class="service-card">
+          <div class="sc-icon">📋</div>
+          <div class="sc-title">Payroll Management</div>
+          <p class="sc-body">Accurate, timely payroll processing with full PAYE, UIF and SDL compliance for any workforce size.</p>
+          <ul class="sc-list">
+            <li>Monthly Payroll Processing</li>
+            <li>PAYE Submissions (EMP201/501)</li>
+            <li>IRP5 & IT3 Certificates</li>
+            <li>Leave & Benefit Administration</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="sc-icon">📑</div>
+          <div class="sc-title">Company Secretarial</div>
+          <p class="sc-body">Full CIPC compliance and statutory record-keeping so your business remains in good standing at all times.</p>
+          <ul class="sc-list">
+            <li>Annual Return Submissions</li>
+            <li>Director & Shareholder Changes</li>
+            <li>Company Registrations</li>
+            <li>Minutes & Resolutions</li>
+          </ul>
+        </div>
+        <div class="service-card">
+          <div class="sc-icon">✅</div>
+          <div class="sc-title">Statutory Compliance</div>
+          <p class="sc-body">Comprehensive compliance management covering all SARS, CIPC and labour law obligations.</p>
+          <ul class="sc-list">
+            <li>SARS Tax Clearance Certificates</li>
+            <li>Good Standing Certificates</li>
+            <li>COIDA & Return of Earnings</li>
+            <li>B-BBEE Compliance Support</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     WHY MERIDIAN
+══════════════════════════════════════════ -->
+<div class="why-grid">
+  <div class="why-visual">
+    <blockquote class="why-quote">"Our measure of success is not the complexity of the tax structure we build — but the clarity and confidence it gives our clients."</blockquote>
+  </div>
+  <div class="why-content">
+    <p class="eyebrow" style="color:var(--gold)">Why Meridian</p>
+    <h2 class="section-h light" style="font-size:clamp(28px,3.5vw,46px)">Partners in Your<br><em>Financial Success</em></h2>
+    <div class="why-items">
+      <div class="why-item reveal">
+        <div class="wi-icon">🎓</div>
+        <div><div class="wi-title">CA(SA) & CTA-Qualified Partners</div><div class="wi-body">All our partners hold CA(SA) designation or CTA qualification — the highest standard in South African accounting practice.</div></div>
+      </div>
+      <div class="why-item reveal rd1">
+        <div class="wi-icon">⚡</div>
+        <div><div class="wi-title">Proactive, Not Just Reactive</div><div class="wi-body">We don't wait for year-end. Our team monitors regulatory changes and flags planning opportunities throughout the year.</div></div>
+      </div>
+      <div class="why-item reveal rd2">
+        <div class="wi-icon">🤝</div>
+        <div><div class="wi-title">Dedicated Client Manager</div><div class="wi-body">Every client is assigned a dedicated account manager — one point of contact who knows your business inside-out.</div></div>
+      </div>
+      <div class="why-item reveal rd3">
+        <div class="wi-icon">🔒</div>
+        <div><div class="wi-title">Bank-Grade Data Security</div><div class="wi-body">ISO 27001-aligned data practices with encrypted portals and strict confidentiality — your financial data is always safe.</div></div>
+      </div>
+    </div>
+  </div>
+</div>
+
+<!-- ══════════════════════════════════════════
+     TEAM
+══════════════════════════════════════════ -->
+<section class="section section-fog" id="team">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto 64px">
+      <p class="eyebrow" style="justify-content:center">Our People</p>
+      <h2 class="section-h" style="text-align:center">Meet the <em>Advisory Team</em></h2>
+      <p class="section-p" style="margin:0 auto;text-align:center">Qualified professionals with deep specialisation — and a genuine commitment to your financial wellbeing.</p>
+    </div>
+    <div class="team-grid">
+      <div class="team-card reveal rd1">
+        <img src="https://images.unsplash.com/photo-1573496359142-b8d87734a5a2?w=400&q=80" class="team-img" alt="Nadia Botha">
+        <div class="team-body">
+          <div class="team-spec">Tax & Compliance</div>
+          <div class="team-name">Nadia Botha</div>
+          <p class="team-bio">Founding partner and Head of Tax with 22 years of SARS dispute resolution and corporate tax structuring experience.</p>
+          <div class="team-quals"><span class="qual">CA(SA)</span><span class="qual">CTA</span><span class="qual">MTP(SA)</span></div>
+        </div>
+      </div>
+      <div class="team-card reveal rd2">
+        <img src="https://images.unsplash.com/photo-1472099645785-5658abf4ff4e?w=400&q=80" class="team-img" alt="Sipho Dlamini">
+        <div class="team-body">
+          <div class="team-spec">Business Advisory</div>
+          <div class="team-name">Sipho Dlamini</div>
+          <p class="team-bio">Former Big-4 director heading Business Consulting. Specialist in M&A transactions and corporate restructuring.</p>
+          <div class="team-quals"><span class="qual">CA(SA)</span><span class="qual">MBA</span><span class="qual">CFA</span></div>
+        </div>
+      </div>
+      <div class="team-card reveal rd3">
+        <img src="https://images.unsplash.com/photo-1580489944761-15a19d654956?w=400&q=80" class="team-img" alt="Priya Naidoo">
+        <div class="team-body">
+          <div class="team-spec">Financial Planning</div>
+          <div class="team-name">Priya Naidoo</div>
+          <p class="team-bio">CERTIFIED FINANCIAL PLANNER™ professional specialising in high-net-worth individuals and intergenerational wealth transfer.</p>
+          <div class="team-quals"><span class="qual">CFP®</span><span class="qual">FSCA FSP</span></div>
+        </div>
+      </div>
+      <div class="team-card reveal rd4">
+        <img src="https://images.unsplash.com/photo-1560250097-0b93528c311a?w=400&q=80" class="team-img" alt="Marco van Wyk">
+        <div class="team-body">
+          <div class="team-spec">Audit & Assurance</div>
+          <div class="team-name">Marco van Wyk</div>
+          <p class="team-bio">Audit Manager with a background in public-sector auditing and IFRS reporting for listed companies.</p>
+          <div class="team-quals"><span class="qual">CA(SA)</span><span class="qual">RA</span><span class="qual">IRBA</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     TESTIMONIALS
+══════════════════════════════════════════ -->
+<section class="section section-white" id="testimonials">
+  <div class="wrap">
+    <div class="reveal" style="text-align:center;max-width:600px;margin:0 auto">
+      <p class="eyebrow" style="justify-content:center">Client Voices</p>
+      <h2 class="section-h" style="text-align:center">What Our <em>Clients Say</em></h2>
+      <p class="section-p" style="margin:0 auto;text-align:center">Real results from real clients across industries, company sizes and life stages.</p>
+    </div>
+    <div class="testi-grid">
+      <div class="testi-card reveal rd1">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Nadia and the team restructured our group tax position and saved us over R1.8 million in the first year alone. Their proactive approach is something we'd never experienced with a previous firm.</p>
+        <div class="testi-author">
+          <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1507003211169-0a1dd7228f2d?w=100&q=80" alt=""></div>
+          <div>
+            <div class="testi-name">Andile Khumalo</div>
+            <div class="testi-role">CEO, AK Holdings (Pty) Ltd</div>
+            <div class="testi-service">Corporate Tax · Business Advisory</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal rd2">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">As a sole proprietor I always dreaded tax season. Meridian turned that around completely — my returns are filed early, I know my liability months in advance, and I've never paid a penalty.</p>
+        <div class="testi-author">
+          <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1494790108755-2616b612b6fd?w=100&q=80" alt=""></div>
+          <div>
+            <div class="testi-name">Fatima Moosa</div>
+            <div class="testi-role">Independent Architect</div>
+            <div class="testi-service">Personal Tax · Financial Planning</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal rd3">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Sipho acts as our part-time CFO. The quality of management reporting has improved dramatically, and our board finally has the financial visibility to make confident strategic decisions.</p>
+        <div class="testi-author">
+          <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1519345182560-3f2917c472ef?w=100&q=80" alt=""></div>
+          <div>
+            <div class="testi-name">Riaan Louw</div>
+            <div class="testi-role">MD, Louw Logistics Group</div>
+            <div class="testi-service">Outsourced CFO · Business Consulting</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal rd1">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Priya built us a retirement plan that actually made sense for where we are in life. For the first time in years, my husband and I feel genuinely confident about our financial future.</p>
+        <div class="testi-author">
+          <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1438761681033-6461ffad8d80?w=100&q=80" alt=""></div>
+          <div>
+            <div class="testi-name">Lerato & David Sithole</div>
+            <div class="testi-role">Private Clients</div>
+            <div class="testi-service">Wealth & Retirement Planning</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal rd2">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">We faced a complex SARS audit that had us terrified. Meridian handled every interaction with total professionalism, and the matter was resolved with zero additional assessment. Outstanding.</p>
+        <div class="testi-author">
+          <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1500648767791-00dcc994a43e?w=100&q=80" alt=""></div>
+          <div>
+            <div class="testi-name">Stephen Ferreira</div>
+            <div class="testi-role">Director, Ferreira Properties</div>
+            <div class="testi-service">Tax · SARS Dispute Resolution</div>
+          </div>
+        </div>
+      </div>
+      <div class="testi-card reveal rd3">
+        <div class="testi-stars">★★★★★</div>
+        <p class="testi-text">Our payroll runs like clockwork every month. The Meridian team handles 85 employees without a single error in two years. Their attention to UIF and SDL compliance gives us complete peace of mind.</p>
+        <div class="testi-author">
+          <div class="testi-avatar"><img src="https://images.unsplash.com/photo-1544723795-3fb6469f5b39?w=100&q=80" alt=""></div>
+          <div>
+            <div class="testi-name">Yolanda Mthembu</div>
+            <div class="testi-role">HR Director, BuildRight SA</div>
+            <div class="testi-service">Payroll Management · Compliance</div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     HOW WE WORK
+══════════════════════════════════════════ -->
+<section class="section section-dark" id="process">
+  <div class="wrap reveal" style="max-width:700px;margin-bottom:0">
+    <p class="eyebrow" style="color:var(--gold)">Our Process</p>
+    <h2 class="section-h light">Simple Steps to <em>Financial Confidence</em></h2>
+    <p class="section-p light">Getting started with Meridian is straightforward. Here's how we work together from day one.</p>
+  </div>
+  <div class="process-grid">
+    <div class="process-step reveal rd1">
+      <div class="ps-num">01</div>
+      <div class="ps-icon">☎️</div>
+      <div class="ps-title">Free Discovery Call</div>
+      <p class="ps-body">A 30-minute conversation to understand your needs, current situation and goals — completely free, no obligation.</p>
+    </div>
+    <div class="process-step reveal rd2">
+      <div class="ps-num">02</div>
+      <div class="ps-icon">📋</div>
+      <div class="ps-title">Tailored Proposal</div>
+      <p class="ps-body">We prepare a clear, fixed-fee proposal detailing exactly which services you need and precisely what you'll pay.</p>
+    </div>
+    <div class="process-step reveal rd3">
+      <div class="ps-num">03</div>
+      <div class="ps-icon">🤝</div>
+      <div class="ps-title">Onboarding & Setup</div>
+      <p class="ps-body">Your dedicated client manager completes a structured onboarding — collecting data, setting up systems and meeting deadlines.</p>
+    </div>
+    <div class="process-step reveal rd4">
+      <div class="ps-num">04</div>
+      <div class="ps-icon">🔄</div>
+      <div class="ps-title">Ongoing Partnership</div>
+      <p class="ps-body">Regular reporting, proactive planning calls and instant access to your team — year-round, not just at tax time.</p>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     BOOKING
+══════════════════════════════════════════ -->
+<section class="section section-fog" id="booking">
+  <div class="wrap">
+    <div class="booking-wrap">
+      <div class="booking-left">
+        <p class="eyebrow">Let's Talk</p>
+        <h2 class="section-h">Book a Free<br><em>Consultation</em></h2>
+        <p class="section-p">Ready to take control of your financial position? Fill in the form and a Meridian advisor will contact you within one business day to schedule your free consultation.</p>
+        <div class="booking-features">
+          <div class="bf reveal rd1">
+            <div class="bf-icon">⏱️</div>
+            <div>
+              <div class="bf-title">30-Minute Discovery Session</div>
+              <div class="bf-body">A no-pressure conversation to understand your needs and show you how we can help.</div>
+            </div>
+          </div>
+          <div class="bf reveal rd2">
+            <div class="bf-icon">💰</div>
+            <div>
+              <div class="bf-title">Completely Free — No Obligation</div>
+              <div class="bf-body">No invoice, no commitment. Just honest advice and a clear proposal if you'd like to proceed.</div>
+            </div>
+          </div>
+          <div class="bf reveal rd3">
+            <div class="bf-icon">🔐</div>
+            <div>
+              <div class="bf-title">Strict Confidentiality</div>
+              <div class="bf-body">Everything discussed is protected by professional privilege and our strict privacy policy.</div>
+            </div>
+          </div>
+        </div>
+        <div class="booking-contact">
+          <div class="bc-row reveal">
+            <div class="bc-icon">📞</div>
+            <div class="bc-text">+27 11 555 0600</div>
+          </div>
+          <div class="bc-row reveal rd1">
+            <div class="bc-icon">✉️</div>
+            <div class="bc-text">consult@meridianadvisory.co.za</div>
+          </div>
+          <div class="bc-row reveal rd2">
+            <div class="bc-icon">📍</div>
+            <div class="bc-text">The Towers, 25 Owl Street, Braamfontein, Johannesburg</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="booking-form-card reveal rd2">
+        <div class="form-title">Request Your Consultation</div>
+        <div class="form-sub">All fields marked * are required. We respond within one business day.</div>
+        <div class="frow">
+          <div class="fg">
+            <label>First Name *</label>
+            <input type="text" id="bfname" placeholder="Your first name">
+          </div>
+          <div class="fg">
+            <label>Surname *</label>
+            <input type="text" id="blname" placeholder="Your surname">
+          </div>
+          <div class="fg">
+            <label>Email Address *</label>
+            <input type="email" id="bemail" placeholder="your@email.co.za">
+          </div>
+          <div class="fg">
+            <label>Phone Number *</label>
+            <input type="tel" id="bphone" placeholder="+27 00 000 0000">
+          </div>
+          <div class="fg">
+            <label>Company / Entity Name</label>
+            <input type="text" id="bcompany" placeholder="Company name (if applicable)">
+          </div>
+          <div class="fg">
+            <label>Entity Type</label>
+            <select id="betype">
+              <option value="">Select…</option>
+              <option>Individual / Sole Proprietor</option>
+              <option>Close Corporation (CC)</option>
+              <option>Private Company (Pty) Ltd</option>
+              <option>Trust</option>
+              <option>NPO / Section 21</option>
+              <option>Listed Company</option>
+            </select>
+          </div>
+          <div class="fg full">
+            <label>Primary Service Interest *</label>
+            <select id="bservice">
+              <option value="">Select a service area…</option>
+              <option>Individual Income Tax</option>
+              <option>Corporate Tax & Compliance</option>
+              <option>VAT Registration & Returns</option>
+              <option>Business Advisory / Outsourced CFO</option>
+              <option>Financial Planning & Wealth</option>
+              <option>Payroll Management</option>
+              <option>Audit & Assurance</option>
+              <option>Company Secretarial</option>
+              <option>Multiple / Unsure</option>
+            </select>
+          </div>
+          <div class="fg">
+            <label>Preferred Date</label>
+            <input type="date" id="bdate">
+          </div>
+          <div class="fg">
+            <label>Preferred Time</label>
+            <select id="btime">
+              <option>08:00 – 09:00</option>
+              <option>09:00 – 10:00</option>
+              <option>10:00 – 11:00</option>
+              <option>11:00 – 12:00</option>
+              <option>14:00 – 15:00</option>
+              <option>15:00 – 16:00</option>
+            </select>
+          </div>
+          <div class="fg full">
+            <label>Brief Overview of Your Situation</label>
+            <textarea id="bmessage" placeholder="Tell us a little about your current situation and what you're hoping to achieve…"></textarea>
+          </div>
+        </div>
+        <div class="form-check">
+          <input type="checkbox" id="bprivacy">
+          <label for="bprivacy">I consent to Meridian Advisory processing my personal information for the purpose of responding to this enquiry, in accordance with the Protection of Personal Information Act (POPIA).</label>
+        </div>
+        <button class="btn-book" onclick="submitBooking()">Request My Free Consultation →</button>
+        <div class="form-success" id="bookSuccess">✓ Thank you! A Meridian advisor will contact you within one business day to confirm your consultation.</div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- ══════════════════════════════════════════
+     FOOTER
+══════════════════════════════════════════ -->
+<footer>
+  <div class="wrap">
+    <div class="footer-top">
+      <div class="footer-brand">
+        <div class="logo" style="margin-bottom:16px">
+          <div class="logo-mark"></div>
+          <div class="logo-text">
+            <div class="logo-name">Meridian Advisory</div>
+            <div class="logo-tag">Accounting & Tax Consulting</div>
+          </div>
+        </div>
+        <p class="footer-desc">SAIPA-accredited accounting and tax consulting practice serving individuals, SMEs and corporates across South Africa since 2006. Registered Tax Practitioners (SARS). FSCA Authorised FSP.</p>
+      </div>
+      <div class="footer-col">
+        <h4>Services</h4>
+        <ul>
+          <li><a href="#">Corporate & Personal Tax</a></li>
+          <li><a href="#">VAT & Indirect Tax</a></li>
+          <li><a href="#">Business Advisory</a></li>
+          <li><a href="#">Outsourced CFO</a></li>
+          <li><a href="#">Financial Planning</a></li>
+          <li><a href="#">Payroll & Compliance</a></li>
+          <li><a href="#">Audit & Assurance</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Company</h4>
+        <ul>
+          <li><a href="#">About Meridian</a></li>
+          <li><a href="#">Our Partners</a></li>
+          <li><a href="#">Client Results</a></li>
+          <li><a href="#">News & Tax Updates</a></li>
+          <li><a href="#">Careers</a></li>
+          <li><a href="#">POPIA Privacy Policy</a></li>
+        </ul>
+      </div>
+      <div class="footer-col">
+        <h4>Contact</h4>
+        <ul>
+          <li><a href="tel:+27115550600">+27 11 555 0600</a></li>
+          <li><a href="mailto:consult@meridianadvisory.co.za">consult@meridianadvisory.co.za</a></li>
+          <li><a href="#">25 Owl Street, Braamfontein</a></li>
+          <li><a href="#">Johannesburg, 2001</a></li>
+          <li><a href="#">Mon–Fri: 08:00 – 17:00</a></li>
+        </ul>
+      </div>
+    </div>
+    <div class="footer-bottom">
+      <div class="footer-copy">© 2025 Meridian Advisory (Pty) Ltd. All rights reserved. | Reg. No. 2006/012345/07 | SAIPA Reg. No. 001234 | SARS Tax Prac. No. PR-000001</div>
+      <div class="footer-credit">Website designed and developed by <span>VusoNgwane Consulting</span></div>
+    </div>
+  </div>
+</footer>
+
+<script>
+// ── SERVICE TABS ──
+function switchService(name, btn) {
+  document.querySelectorAll('.stab').forEach(t => t.classList.remove('active'));
+  btn.classList.add('active');
+  document.querySelectorAll('.service-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('panel-' + name).classList.add('active');
+}
+
+// ── BOOKING FORM ──
+function submitBooking() {
+  const req = ['bfname','blname','bemail','bphone','bservice'];
+  const ok = req.every(id => document.getElementById(id).value.trim());
+  const privacy = document.getElementById('bprivacy').checked;
+  if (!ok) { alert('Please complete all required fields.'); return; }
+  if (!privacy) { alert('Please accept the privacy consent to proceed.'); return; }
+  document.getElementById('bookSuccess').style.display = 'block';
+  ['bfname','blname','bemail','bphone','bcompany','bmessage'].forEach(id => document.getElementById(id).value = '');
+  document.getElementById('bservice').selectedIndex = 0;
+  document.getElementById('bprivacy').checked = false;
+  document.getElementById('bookSuccess').scrollIntoView({ behavior: 'smooth', block: 'center' });
+  setTimeout(() => document.getElementById('bookSuccess').style.display = 'none', 8000);
+}
+
+// ── DATE MIN ──
+const today = new Date().toISOString().split('T')[0];
+const bdEl = document.getElementById('bdate');
+if (bdEl) bdEl.min = today;
+
+// ── SCROLL REVEAL ──
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.07 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

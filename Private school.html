@@ -1,0 +1,636 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Blue Ridge Private School</title>
+  <meta name="description" content="A modern, professional private school website with admissions, academic programs, school news, and parent portal access." />
+  <style>
+    :root {
+      --navy: #123a6d;
+      --blue: #1f5fa8;
+      --gold: #c9a74a;
+      --gold-soft: #e7d29a;
+      --bg: #f5f8fc;
+      --white: #ffffff;
+      --text: #1d2a3a;
+      --muted: #5f6f85;
+      --line: #dbe4f0;
+      --shadow: 0 18px 40px rgba(18, 58, 109, 0.12);
+      --radius: 18px;
+      --max: 1180px;
+    }
+
+    * {
+      box-sizing: border-box;
+      margin: 0;
+      padding: 0;
+    }
+
+    body {
+      font-family: Arial, Helvetica, sans-serif;
+      background: var(--bg);
+      color: var(--text);
+      line-height: 1.6;
+    }
+
+    a {
+      color: inherit;
+      text-decoration: none;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 32px));
+      margin: 0 auto;
+    }
+
+    header {
+      background: linear-gradient(135deg, rgba(18,58,109,0.96), rgba(31,95,168,0.92));
+      color: var(--white);
+      position: sticky;
+      top: 0;
+      z-index: 50;
+      backdrop-filter: blur(8px);
+      box-shadow: 0 10px 24px rgba(0,0,0,0.08);
+    }
+
+    .nav {
+      display: flex;
+      justify-content: space-between;
+      align-items: center;
+      padding: 18px 0;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+      font-weight: 700;
+      letter-spacing: 0.4px;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 12px;
+      background: linear-gradient(135deg, var(--gold), var(--gold-soft));
+      color: var(--navy);
+      display: grid;
+      place-items: center;
+      font-weight: 800;
+      font-size: 1.05rem;
+    }
+
+    nav ul {
+      list-style: none;
+      display: flex;
+      gap: 24px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    nav a {
+      color: rgba(255,255,255,0.95);
+      font-size: 0.96rem;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      padding: 13px 22px;
+      border-radius: 999px;
+      font-weight: 700;
+      transition: 0.25s ease;
+    }
+
+    .btn-primary {
+      background: linear-gradient(135deg, var(--gold), #b98e2f);
+      color: var(--navy);
+      box-shadow: 0 12px 24px rgba(201,167,74,0.26);
+    }
+
+    .btn-primary:hover,
+    .btn-light:hover {
+      transform: translateY(-2px);
+    }
+
+    .btn-light {
+      background: rgba(255,255,255,0.14);
+      color: var(--white);
+      border: 1px solid rgba(255,255,255,0.24);
+    }
+
+    .hero {
+      background:
+        linear-gradient(rgba(10, 31, 58, 0.64), rgba(14, 41, 77, 0.72)),
+        url('https://images.unsplash.com/photo-1509062522246-3755977927d7?auto=format&fit=crop&w=1600&q=80') center/cover;
+      color: var(--white);
+      padding: 90px 0 110px;
+    }
+
+    .hero-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 0.8fr;
+      gap: 34px;
+      align-items: center;
+    }
+
+    .hero h1 {
+      font-size: clamp(2.2rem, 4vw, 4.4rem);
+      line-height: 1.08;
+      margin-bottom: 18px;
+      max-width: 12ch;
+    }
+
+    .hero p {
+      max-width: 620px;
+      color: rgba(255,255,255,0.92);
+      font-size: 1.05rem;
+      margin-bottom: 28px;
+    }
+
+    .hero-actions {
+      display: flex;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .hero-card {
+      background: rgba(255,255,255,0.12);
+      border: 1px solid rgba(255,255,255,0.2);
+      border-radius: 24px;
+      padding: 26px;
+      backdrop-filter: blur(10px);
+      box-shadow: var(--shadow);
+    }
+
+    .hero-card h3 {
+      margin-bottom: 12px;
+      font-size: 1.3rem;
+    }
+
+    .hero-card p {
+      margin-bottom: 16px;
+      font-size: 0.98rem;
+    }
+
+    .portal-box {
+      background: rgba(255,255,255,0.95);
+      color: var(--text);
+      padding: 18px;
+      border-radius: 16px;
+      margin-top: 18px;
+    }
+
+    .portal-box input {
+      width: 100%;
+      padding: 12px 14px;
+      border: 1px solid var(--line);
+      border-radius: 12px;
+      margin-bottom: 12px;
+      font-size: 0.96rem;
+    }
+
+    .portal-box button {
+      width: 100%;
+      border: none;
+      cursor: pointer;
+    }
+
+    section {
+      padding: 80px 0;
+    }
+
+    .section-title {
+      max-width: 720px;
+      margin-bottom: 34px;
+    }
+
+    .section-title span {
+      display: inline-block;
+      color: var(--blue);
+      font-weight: 700;
+      letter-spacing: 0.5px;
+      text-transform: uppercase;
+      margin-bottom: 10px;
+      font-size: 0.86rem;
+    }
+
+    .section-title h2 {
+      font-size: clamp(1.8rem, 3vw, 2.8rem);
+      margin-bottom: 12px;
+      color: var(--navy);
+    }
+
+    .section-title p {
+      color: var(--muted);
+    }
+
+    .grid-3,
+    .grid-2 {
+      display: grid;
+      gap: 24px;
+    }
+
+    .grid-3 {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .grid-2 {
+      grid-template-columns: repeat(2, 1fr);
+      align-items: start;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: var(--radius);
+      padding: 26px;
+      box-shadow: var(--shadow);
+    }
+
+    .card h3 {
+      color: var(--navy);
+      margin-bottom: 10px;
+      font-size: 1.2rem;
+    }
+
+    .card p,
+    .card li {
+      color: var(--muted);
+      font-size: 0.97rem;
+    }
+
+    .overview-stats {
+      display: grid;
+      grid-template-columns: repeat(4, 1fr);
+      gap: 16px;
+      margin-top: 28px;
+    }
+
+    .stat {
+      background: var(--white);
+      border: 1px solid var(--line);
+      border-radius: 16px;
+      padding: 22px;
+      text-align: center;
+      box-shadow: var(--shadow);
+    }
+
+    .stat strong {
+      display: block;
+      font-size: 1.7rem;
+      color: var(--navy);
+      margin-bottom: 4px;
+    }
+
+    .principal {
+      background: linear-gradient(180deg, #fff, #f8fbff);
+    }
+
+    .principal-quote {
+      border-left: 4px solid var(--gold);
+      padding-left: 18px;
+      margin-top: 18px;
+      color: var(--muted);
+      font-style: italic;
+    }
+
+    .program-list,
+    .admissions-steps,
+    .news-list {
+      list-style: none;
+      display: grid;
+      gap: 14px;
+      margin-top: 14px;
+    }
+
+    .program-list li,
+    .admissions-steps li,
+    .news-item {
+      padding: 16px 18px;
+      border-radius: 14px;
+      background: #f8fbff;
+      border: 1px solid var(--line);
+    }
+
+    .news-item small {
+      color: var(--blue);
+      font-weight: 700;
+      display: block;
+      margin-bottom: 6px;
+    }
+
+    .cta {
+      background: linear-gradient(135deg, var(--navy), var(--blue));
+      color: var(--white);
+      border-radius: 28px;
+      padding: 42px;
+      box-shadow: var(--shadow);
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      align-items: center;
+      flex-wrap: wrap;
+    }
+
+    footer {
+      background: #0d2747;
+      color: rgba(255,255,255,0.85);
+      padding: 34px 0;
+      margin-top: 40px;
+    }
+
+    .footer-wrap {
+      display: flex;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      align-items: center;
+    }
+
+    .footer-credit {
+      font-size: 0.95rem;
+      color: rgba(255,255,255,0.88);
+    }
+
+    .footer-credit strong {
+      color: var(--gold-soft);
+    }
+
+    @media (max-width: 980px) {
+      .hero-grid,
+      .grid-2,
+      .grid-3,
+      .overview-stats {
+        grid-template-columns: 1fr;
+      }
+
+      nav ul {
+        display: none;
+      }
+
+      .hero {
+        padding-top: 70px;
+      }
+    }
+
+    @media (max-width: 640px) {
+      .nav {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+
+      .cta {
+        padding: 28px;
+      }
+
+      .hero-card,
+      .card {
+        padding: 20px;
+      }
+    }
+  </style>
+</head>
+<body>
+  <header>
+    <div class="container nav">
+      <a href="#" class="brand">
+        <div class="brand-mark">BR</div>
+        <div>
+          <div>Blue Ridge</div>
+          <small style="opacity:.8; font-weight:400;">Private School</small>
+        </div>
+      </a>
+      <nav>
+        <ul>
+          <li><a href="#overview">Overview</a></li>
+          <li><a href="#principal">Principal</a></li>
+          <li><a href="#programs">Programs</a></li>
+          <li><a href="#admissions">Admissions</a></li>
+          <li><a href="#news">News</a></li>
+          <li><a href="#portal">Portal</a></li>
+        </ul>
+      </nav>
+      <a class="btn btn-light" href="#admissions">Apply Now</a>
+    </div>
+  </header>
+
+  <section class="hero">
+    <div class="container hero-grid">
+      <div>
+        <h1>Shaping confident learners for a changing world</h1>
+        <p>
+          Blue Ridge Private School offers a balanced, future-focused education built on academic excellence,
+          character development, and a supportive school community.
+        </p>
+        <div class="hero-actions">
+          <a class="btn btn-primary" href="#admissions">Start Admissions</a>
+          <a class="btn btn-light" href="#programs">View Programs</a>
+        </div>
+      </div>
+      <div class="hero-card" id="portal">
+        <h3>Parent Portal</h3>
+        <p>Access student updates, academic records, notices, and school communication in one secure place.</p>
+        <div class="portal-box">
+          <input type="text" placeholder="Parent email" />
+          <input type="password" placeholder="Password" />
+          <button class="btn btn-primary">Login to Portal</button>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="overview">
+    <div class="container">
+      <div class="section-title">
+        <span>School Overview</span>
+        <h2>A strong foundation for academic growth and leadership</h2>
+        <p>
+          We provide a caring, disciplined, and inspiring environment where students are encouraged to excel in the classroom,
+          participate in school life, and develop values that prepare them for life beyond school.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>Academic Excellence</h3>
+          <p>Structured teaching, clear learning outcomes, and a curriculum designed to build strong fundamentals and critical thinking.</p>
+        </div>
+        <div class="card">
+          <h3>Character Development</h3>
+          <p>We place equal focus on discipline, respect, leadership, and responsibility so learners grow into principled adults.</p>
+        </div>
+        <div class="card">
+          <h3>Whole Child Approach</h3>
+          <p>Students are supported through academics, sport, culture, and pastoral care to help them grow with confidence.</p>
+        </div>
+      </div>
+
+      <div class="overview-stats">
+        <div class="stat"><strong>98%</strong><span>Pass Rate</span></div>
+        <div class="stat"><strong>650+</strong><span>Enrolled Students</span></div>
+        <div class="stat"><strong>35</strong><span>Qualified Educators</span></div>
+        <div class="stat"><strong>20+</strong><span>Clubs and Activities</span></div>
+      </div>
+    </div>
+  </section>
+
+  <section class="principal" id="principal">
+    <div class="container grid-2">
+      <div class="section-title">
+        <span>Principal Message</span>
+        <h2>Welcome to a school where purpose, discipline, and excellence meet</h2>
+        <p>
+          At Blue Ridge Private School, we believe education should equip learners academically while also shaping their confidence,
+          character, and vision for the future.
+        </p>
+        <p class="principal-quote">
+          Our mission is to create an environment where every child is known, challenged, and supported to reach their highest potential.
+        </p>
+      </div>
+      <div class="card">
+        <h3>From the Principal</h3>
+        <p>
+          We are committed to maintaining high standards while nurturing a culture of care and belonging. Through strong partnerships with parents,
+          dedicated educators, and a forward-looking academic model, we prepare learners not only for examinations, but for life.
+        </p>
+        <p style="margin-top:12px;"><strong style="color:var(--navy);">Mrs. A. Dlamini</strong><br><span style="color:var(--muted);">Principal</span></p>
+      </div>
+    </div>
+  </section>
+
+  <section id="programs">
+    <div class="container">
+      <div class="section-title">
+        <span>Academic Programs</span>
+        <h2>Programs designed for every stage of learning</h2>
+        <p>
+          Our academic structure supports learners from foundation phase through senior levels with a focus on excellence, progression, and readiness for the future.
+        </p>
+      </div>
+
+      <div class="grid-3">
+        <div class="card">
+          <h3>Foundation Phase</h3>
+          <p>Building literacy, numeracy, confidence, and curiosity through structured, engaging learning experiences.</p>
+          <ul class="program-list">
+            <li>Language and Reading Development</li>
+            <li>Mathematics and Early Science</li>
+            <li>Creative Arts and Life Skills</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Intermediate Phase</h3>
+          <p>Strengthening academic depth while encouraging problem-solving, teamwork, and personal responsibility.</p>
+          <ul class="program-list">
+            <li>Core Academic Subjects</li>
+            <li>STEM Enrichment</li>
+            <li>Leadership and Public Speaking</li>
+          </ul>
+        </div>
+        <div class="card">
+          <h3>Senior Phase</h3>
+          <p>Preparing learners for examinations, career pathways, and confident transition into higher education or professional life.</p>
+          <ul class="program-list">
+            <li>Advanced Subject Streams</li>
+            <li>Career Guidance and Mentorship</li>
+            <li>Exam Preparation Support</li>
+          </ul>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section id="admissions">
+    <div class="container grid-2">
+      <div>
+        <div class="section-title">
+          <span>Admissions</span>
+          <h2>Join a school committed to excellence</h2>
+          <p>
+            Our admissions process is straightforward and welcoming. We encourage families to apply early and arrange a campus visit.
+          </p>
+        </div>
+        <ul class="admissions-steps">
+          <li><strong style="color:var(--navy);">Step 1:</strong> Submit an online enquiry or application form</li>
+          <li><strong style="color:var(--navy);">Step 2:</strong> Upload academic records and required supporting documents</li>
+          <li><strong style="color:var(--navy);">Step 3:</strong> Schedule an assessment or interview where applicable</li>
+          <li><strong style="color:var(--navy);">Step 4:</strong> Receive admission outcome and complete registration</li>
+        </ul>
+      </div>
+      <div class="card">
+        <h3>Request Admissions Information</h3>
+        <p style="margin-bottom:16px;">Complete the form below and our admissions office will contact you.</p>
+        <form>
+          <input style="width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;margin-bottom:12px;" type="text" placeholder="Parent or guardian name" />
+          <input style="width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;margin-bottom:12px;" type="email" placeholder="Email address" />
+          <input style="width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;margin-bottom:12px;" type="text" placeholder="Student grade applying for" />
+          <textarea style="width:100%;padding:12px 14px;border:1px solid var(--line);border-radius:12px;margin-bottom:12px;min-height:120px;" placeholder="Tell us a bit about your enquiry"></textarea>
+          <button type="submit" class="btn btn-primary" style="border:none;cursor:pointer;">Send Enquiry</button>
+        </form>
+      </div>
+    </div>
+  </section>
+
+  <section id="news">
+    <div class="container">
+      <div class="section-title">
+        <span>News and Events</span>
+        <h2>What is happening at Blue Ridge</h2>
+        <p>
+          Keep up with the latest academic milestones, student achievements, important notices, and school events.
+        </p>
+      </div>
+      <div class="grid-3">
+        <div class="card news-item">
+          <small>18 March 2026</small>
+          <h3>Open Day for Prospective Families</h3>
+          <p>Families are invited to tour the campus, meet teachers, and learn more about our academic programs and school culture.</p>
+        </div>
+        <div class="card news-item">
+          <small>25 March 2026</small>
+          <h3>Science and Innovation Week</h3>
+          <p>Learners will present projects, experiments, and practical ideas that encourage creativity and critical thinking.</p>
+        </div>
+        <div class="card news-item">
+          <small>2 April 2026</small>
+          <h3>Term One Parent Information Evening</h3>
+          <p>An opportunity for parents to receive updates, connect with educators, and prepare for the next phase of the school term.</p>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="cta">
+        <div>
+          <h2 style="margin-bottom:10px;">Give your child a strong educational foundation</h2>
+          <p style="color:rgba(255,255,255,0.9); max-width:700px;">Start your admissions enquiry today and discover a school community committed to growth, discipline, and excellence.</p>
+        </div>
+        <a href="#admissions" class="btn btn-primary">Apply for Admission</a>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container footer-wrap">
+      <div>
+        <strong style="font-size:1.05rem; color:#fff;">Blue Ridge Private School</strong><br>
+        <span style="opacity:.85;">Building futures through education, discipline, and leadership.</span>
+      </div>
+      <div class="footer-credit">
+        Website designed by <strong>VusoNgwane Consulting</strong>
+      </div>
+    </div>
+  </footer>
+</body>
+</html>

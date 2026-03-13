@@ -1,0 +1,1131 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>EMBER — Contemporary Fine Dining</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Playfair+Display:ital,wght@0,400;0,500;0,700;1,400;1,500&family=Jost:wght@200;300;400;500;600&display=swap" rel="stylesheet">
+<style>
+*, *::before, *::after { box-sizing: border-box; margin: 0; padding: 0; }
+
+:root {
+  --black:    #0a0907;
+  --dark:     #110f0c;
+  --card:     #1a1713;
+  --surface:  #231f1a;
+  --amber:    #c8853a;
+  --gold:     #e4a84e;
+  --cream:    #f0e6d3;
+  --muted:    #7a6e62;
+  --border:   rgba(200,133,58,0.2);
+  --glow:     0 0 40px rgba(200,133,58,0.15);
+}
+
+html { scroll-behavior: smooth; }
+body {
+  font-family: 'Jost', sans-serif;
+  background: var(--black);
+  color: var(--cream);
+  overflow-x: hidden;
+  cursor: none;
+}
+
+/* CUSTOM CURSOR */
+#cursor {
+  width: 10px; height: 10px;
+  border-radius: 50%; background: var(--amber);
+  position: fixed; pointer-events: none; z-index: 9999;
+  transition: transform 0.15s ease, width 0.3s, height 0.3s, background 0.3s;
+  transform: translate(-50%, -50%);
+}
+#cursor-ring {
+  width: 36px; height: 36px; border-radius: 50%;
+  border: 1px solid rgba(200,133,58,0.5);
+  position: fixed; pointer-events: none; z-index: 9998;
+  transform: translate(-50%, -50%);
+  transition: transform 0.4s ease, width 0.3s, height 0.3s, border-color 0.3s;
+}
+body:has(a:hover) #cursor, body:has(button:hover) #cursor { width: 16px; height: 16px; }
+
+/* GRAIN OVERLAY */
+body::before {
+  content: '';
+  position: fixed; inset: 0; z-index: 9997;
+  pointer-events: none;
+  background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+  opacity: 0.4;
+}
+
+/* ─── NAV ─── */
+nav {
+  position: fixed; top: 0; width: 100%; z-index: 100;
+  padding: 28px 72px;
+  display: flex; align-items: center; justify-content: space-between;
+  background: linear-gradient(to bottom, rgba(10,9,7,0.98), transparent);
+  animation: fadeDown 0.9s ease both;
+}
+.nav-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 28px; letter-spacing: 8px;
+  color: var(--cream); text-decoration: none;
+  position: relative;
+}
+.nav-logo::after {
+  content: ''; position: absolute; bottom: -4px; left: 0;
+  width: 100%; height: 1px; background: var(--amber);
+}
+.nav-links { display: flex; gap: 40px; list-style: none; }
+.nav-links a {
+  color: rgba(240,230,211,0.6); text-decoration: none;
+  font-size: 12px; letter-spacing: 3px; text-transform: uppercase; font-weight: 500;
+  transition: color 0.3s;
+}
+.nav-links a:hover { color: var(--gold); }
+.nav-res {
+  background: transparent; border: 1px solid var(--amber);
+  color: var(--amber); padding: 11px 28px;
+  font-family: 'Jost', sans-serif; font-size: 11px;
+  letter-spacing: 3px; text-transform: uppercase; font-weight: 500;
+  cursor: pointer; transition: all 0.3s;
+}
+.nav-res:hover { background: var(--amber); color: var(--black); }
+
+/* ─── HERO ─── */
+.hero {
+  height: 100vh; position: relative;
+  display: flex; align-items: center; justify-content: center;
+  overflow: hidden; text-align: center;
+}
+.hero-reel {
+  position: absolute; inset: 0;
+  display: grid; grid-template-columns: repeat(3, 1fr);
+  opacity: 0.45; overflow: hidden;
+}
+.hero-reel-img {
+  height: 100%; object-fit: cover;
+  transition: transform 8s ease;
+  animation: kenBurns 12s ease-in-out infinite alternate;
+}
+.hero-reel-img:nth-child(2) { animation-delay: -4s; }
+.hero-reel-img:nth-child(3) { animation-delay: -8s; }
+.hero-overlay {
+  position: absolute; inset: 0;
+  background:
+    radial-gradient(ellipse at center, rgba(10,9,7,0.3) 0%, rgba(10,9,7,0.85) 100%),
+    linear-gradient(to bottom, rgba(10,9,7,0.6) 0%, transparent 40%, transparent 60%, rgba(10,9,7,0.95) 100%);
+}
+.hero-content { position: relative; z-index: 1; }
+.hero-tag {
+  font-size: 11px; letter-spacing: 6px; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 28px;
+  animation: fadeUp 1s 0.4s ease both;
+}
+.hero-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(72px, 10vw, 140px);
+  font-weight: 400; line-height: 0.9;
+  letter-spacing: -2px;
+  animation: fadeUp 1s 0.6s ease both;
+}
+.hero-title em { color: var(--amber); font-style: italic; }
+.hero-sub {
+  font-size: 16px; font-weight: 200; letter-spacing: 2px;
+  color: rgba(240,230,211,0.6);
+  margin: 32px auto 48px; max-width: 440px;
+  animation: fadeUp 1s 0.8s ease both;
+}
+.hero-actions {
+  display: flex; gap: 20px; justify-content: center;
+  animation: fadeUp 1s 1s ease both;
+}
+.btn-gold {
+  background: var(--amber); color: var(--black);
+  border: none; padding: 16px 40px;
+  font-family: 'Jost', sans-serif; font-size: 11px;
+  letter-spacing: 3px; text-transform: uppercase; font-weight: 600;
+  cursor: pointer; transition: background 0.3s, transform 0.2s;
+}
+.btn-gold:hover { background: var(--gold); transform: translateY(-2px); }
+.btn-ghost {
+  background: transparent; color: var(--cream);
+  border: 1px solid rgba(240,230,211,0.3); padding: 16px 40px;
+  font-family: 'Jost', sans-serif; font-size: 11px;
+  letter-spacing: 3px; text-transform: uppercase; font-weight: 400;
+  cursor: pointer; transition: all 0.3s;
+}
+.btn-ghost:hover { border-color: var(--amber); color: var(--amber); }
+.hero-scroll {
+  position: absolute; bottom: 40px; left: 50%; transform: translateX(-50%);
+  z-index: 1; display: flex; flex-direction: column; align-items: center; gap: 8px;
+  animation: fadeUp 1s 1.4s ease both;
+}
+.hero-scroll span { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--muted); }
+.scroll-line {
+  width: 1px; height: 50px; background: linear-gradient(to bottom, var(--amber), transparent);
+  animation: scrollPulse 2s ease-in-out infinite;
+}
+
+/* ─── SECTIONS ─── */
+.section { padding: 120px 72px; }
+.section-dark { background: var(--dark); }
+.section-card { background: var(--card); }
+.section-center { text-align: center; }
+.eyebrow {
+  font-size: 11px; letter-spacing: 5px; text-transform: uppercase;
+  color: var(--amber); margin-bottom: 20px;
+  display: flex; align-items: center; justify-content: center; gap: 16px;
+}
+.eyebrow::before, .eyebrow::after {
+  content: ''; display: block; height: 1px; width: 40px; background: var(--border);
+}
+.section-title {
+  font-family: 'Playfair Display', serif;
+  font-size: clamp(36px, 5vw, 64px);
+  font-weight: 400; line-height: 1.1;
+  margin-bottom: 20px;
+}
+.section-title em { font-style: italic; color: var(--amber); }
+.section-sub {
+  font-size: 16px; font-weight: 300; color: var(--muted);
+  line-height: 1.8; max-width: 520px; margin: 0 auto;
+}
+
+/* ─── MENU ─── */
+.menu-tabs {
+  display: flex; justify-content: center; gap: 0;
+  margin-bottom: 72px; border: 1px solid var(--border);
+  width: fit-content; margin-left: auto; margin-right: auto;
+}
+.menu-tab {
+  background: transparent; color: var(--muted);
+  border: none; padding: 14px 36px;
+  font-family: 'Jost', sans-serif; font-size: 11px;
+  letter-spacing: 3px; text-transform: uppercase; font-weight: 500;
+  cursor: pointer; transition: all 0.3s;
+  border-right: 1px solid var(--border);
+}
+.menu-tab:last-child { border-right: none; }
+.menu-tab.active, .menu-tab:hover { background: var(--amber); color: var(--black); }
+.menu-panel { display: none; }
+.menu-panel.active { display: block; }
+.menu-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 2px; }
+.menu-item {
+  background: var(--card); padding: 32px;
+  border: 1px solid transparent;
+  transition: border-color 0.3s, background 0.3s;
+  display: flex; gap: 24px; align-items: flex-start;
+}
+.menu-item:hover { border-color: var(--border); background: var(--surface); }
+.menu-item-img {
+  width: 90px; height: 90px; object-fit: cover;
+  border-radius: 4px; flex-shrink: 0;
+}
+.menu-item-body { flex: 1; }
+.menu-item-head { display: flex; justify-content: space-between; align-items: baseline; margin-bottom: 8px; }
+.menu-item-name {
+  font-family: 'Playfair Display', serif;
+  font-size: 18px; color: var(--cream);
+}
+.menu-item-price { font-size: 16px; color: var(--amber); font-weight: 500; letter-spacing: 1px; }
+.menu-item-desc { font-size: 13px; color: var(--muted); line-height: 1.65; }
+.menu-item-tags { margin-top: 10px; display: flex; gap: 8px; flex-wrap: wrap; }
+.menu-tag {
+  font-size: 9px; letter-spacing: 2px; text-transform: uppercase;
+  border: 1px solid var(--border); color: var(--amber);
+  padding: 3px 9px; border-radius: 2px;
+}
+.menu-divider {
+  text-align: center; padding: 20px 0;
+  font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: 20px; color: var(--amber); letter-spacing: 4px;
+  grid-column: 1 / -1;
+}
+
+/* ─── CHEF ─── */
+.chef-section {
+  display: grid; grid-template-columns: 1fr 1fr;
+  min-height: 80vh; padding: 0;
+}
+.chef-visual { position: relative; overflow: hidden; }
+.chef-img { width: 100%; height: 100%; object-fit: cover; min-height: 600px; filter: contrast(1.05); }
+.chef-visual-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to right, transparent 60%, var(--dark) 100%);
+}
+.chef-quote {
+  position: absolute; bottom: 48px; left: 48px;
+  font-family: 'Playfair Display', serif; font-style: italic;
+  font-size: 20px; color: var(--amber); max-width: 320px;
+  border-left: 2px solid var(--amber); padding-left: 24px;
+}
+.chef-content {
+  padding: 100px 72px; display: flex;
+  flex-direction: column; justify-content: center;
+  background: var(--dark);
+}
+.chef-content .eyebrow { justify-content: flex-start; }
+.chef-content .eyebrow::before { display: none; }
+.chef-content .section-title { text-align: left; font-size: clamp(32px, 3.5vw, 52px); }
+.chef-name { font-family: 'Playfair Display', serif; font-size: 28px; color: var(--amber); font-style: italic; margin-bottom: 8px; }
+.chef-title { font-size: 11px; letter-spacing: 4px; text-transform: uppercase; color: var(--muted); margin-bottom: 32px; }
+.chef-bio { font-size: 15px; font-weight: 300; color: var(--muted); line-height: 1.9; margin-bottom: 24px; }
+.chef-awards { display: flex; gap: 24px; flex-wrap: wrap; margin-top: 32px; }
+.chef-award { text-align: center; }
+.chef-award-num { font-family: 'Playfair Display', serif; font-size: 36px; color: var(--amber); }
+.chef-award-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--muted); }
+
+/* ─── GALLERY ─── */
+.gallery-masonry {
+  columns: 3; column-gap: 4px;
+}
+.gallery-item {
+  break-inside: avoid; margin-bottom: 4px;
+  position: relative; overflow: hidden;
+}
+.gallery-item img {
+  width: 100%; display: block;
+  transition: transform 0.6s cubic-bezier(0.25,0.46,0.45,0.94), filter 0.4s;
+  filter: brightness(0.85);
+}
+.gallery-item:hover img { transform: scale(1.05); filter: brightness(1); }
+.gallery-item-overlay {
+  position: absolute; inset: 0;
+  background: linear-gradient(to top, rgba(10,9,7,0.7) 0%, transparent 50%);
+  opacity: 0; transition: opacity 0.4s;
+  display: flex; align-items: flex-end; padding: 20px;
+}
+.gallery-item:hover .gallery-item-overlay { opacity: 1; }
+.gallery-item-label { font-family: 'Playfair Display', serif; font-style: italic; font-size: 16px; color: var(--cream); }
+
+/* ─── RESERVATION & REVIEWS ─── */
+.booking-reviews {
+  display: grid; grid-template-columns: 1fr 1fr;
+  gap: 0; padding: 0;
+}
+.booking-side { padding: 100px 72px; background: var(--surface); }
+.reviews-side { padding: 100px 72px; background: var(--card); }
+.booking-side .eyebrow { justify-content: flex-start; }
+.booking-side .eyebrow::before { display: none; }
+.reviews-side .eyebrow { justify-content: flex-start; }
+.reviews-side .eyebrow::before { display: none; }
+.booking-side .section-title, .reviews-side .section-title { text-align: left; font-size: 40px; }
+
+.form-group { margin-bottom: 20px; }
+.form-group label {
+  display: block; font-size: 10px; letter-spacing: 3px;
+  text-transform: uppercase; color: var(--amber); margin-bottom: 10px;
+}
+.form-group input, .form-group select, .form-group textarea {
+  width: 100%; background: rgba(240,230,211,0.04);
+  border: 1px solid var(--border); padding: 14px 18px;
+  font-family: 'Jost', sans-serif; font-size: 15px; font-weight: 300;
+  color: var(--cream); outline: none;
+  transition: border-color 0.3s, background 0.3s;
+}
+.form-group input:focus, .form-group select:focus, .form-group textarea:focus {
+  border-color: var(--amber); background: rgba(200,133,58,0.05);
+}
+.form-group select option { background: var(--surface); }
+.form-group textarea { resize: vertical; min-height: 100px; }
+.form-row { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+.btn-submit {
+  width: 100%; background: var(--amber); color: var(--black);
+  border: none; padding: 17px;
+  font-family: 'Jost', sans-serif; font-size: 11px;
+  letter-spacing: 4px; text-transform: uppercase; font-weight: 600;
+  cursor: pointer; transition: background 0.3s; margin-top: 8px;
+}
+.btn-submit:hover { background: var(--gold); }
+.form-success {
+  display: none; background: rgba(200,133,58,0.1);
+  border: 1px solid var(--amber); color: var(--amber);
+  padding: 16px; text-align: center; font-size: 13px;
+  letter-spacing: 1px; margin-top: 16px;
+}
+
+/* REVIEWS */
+.review-list { margin-bottom: 40px; }
+.review-card {
+  background: var(--surface); padding: 24px;
+  margin-bottom: 16px; border-left: 2px solid var(--amber);
+  transition: transform 0.2s;
+}
+.review-card:hover { transform: translateX(4px); }
+.review-header { display: flex; justify-content: space-between; align-items: flex-start; margin-bottom: 12px; }
+.reviewer-name { font-family: 'Playfair Display', serif; font-size: 17px; }
+.reviewer-date { font-size: 11px; color: var(--muted); }
+.review-stars { color: var(--amber); font-size: 13px; margin-bottom: 8px; }
+.review-text { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.7; font-style: italic; }
+.star-select { display: flex; gap: 8px; margin-bottom: 8px; }
+.star-btn { background: none; border: none; font-size: 22px; cursor: pointer; color: var(--muted); transition: color 0.2s, transform 0.2s; }
+.star-btn.active, .star-btn:hover { color: var(--amber); transform: scale(1.2); }
+
+/* ─── INFO BAR ─── */
+.info-bar {
+  background: var(--surface); border-top: 1px solid var(--border);
+  display: grid; grid-template-columns: repeat(4, 1fr);
+  divide-x: 1px solid var(--border);
+  padding: 0;
+}
+.info-item {
+  padding: 52px 48px; text-align: center;
+  border-right: 1px solid var(--border);
+}
+.info-item:last-child { border-right: none; }
+.info-icon { font-size: 28px; margin-bottom: 12px; }
+.info-label { font-size: 10px; letter-spacing: 3px; text-transform: uppercase; color: var(--amber); margin-bottom: 10px; }
+.info-value { font-family: 'Playfair Display', serif; font-size: 17px; line-height: 1.7; }
+.info-sub { font-size: 12px; color: var(--muted); margin-top: 6px; }
+
+/* ─── MAP ─── */
+.location-section { padding: 0; display: grid; grid-template-columns: 1fr 1.4fr; min-height: 500px; }
+.location-info { padding: 80px 72px; background: var(--dark); display: flex; flex-direction: column; justify-content: center; }
+.location-info .eyebrow { justify-content: flex-start; }
+.location-info .eyebrow::before { display: none; }
+.location-info h2 { font-family: 'Playfair Display', serif; font-size: 40px; margin-bottom: 36px; text-align: left; }
+.loc-row { display: flex; gap: 16px; margin-bottom: 24px; align-items: flex-start; }
+.loc-icon { font-size: 20px; margin-top: 2px; }
+.loc-label { font-size: 10px; letter-spacing: 2px; text-transform: uppercase; color: var(--amber); margin-bottom: 4px; }
+.loc-val { font-size: 15px; font-weight: 300; color: rgba(240,230,211,0.75); line-height: 1.6; }
+.map-block {
+  background: linear-gradient(135deg, var(--card) 0%, var(--surface) 100%);
+  display: flex; align-items: center; justify-content: center;
+  flex-direction: column; gap: 20px; position: relative; overflow: hidden;
+}
+.map-block::before {
+  content: '';
+  position: absolute; inset: 0;
+  background:
+    repeating-linear-gradient(0deg, transparent, transparent 39px, var(--border) 39px, var(--border) 40px),
+    repeating-linear-gradient(90deg, transparent, transparent 39px, var(--border) 39px, var(--border) 40px);
+  opacity: 0.3;
+}
+.map-pin { font-size: 56px; animation: float 2.5s ease-in-out infinite; position: relative; z-index: 1; }
+.map-addr { font-family: 'Playfair Display', serif; font-style: italic; font-size: 22px; color: var(--cream); text-align: center; z-index: 1; line-height: 1.5; }
+.map-cta { z-index: 1; }
+
+/* ─── FOOTER ─── */
+footer {
+  background: var(--black);
+  border-top: 1px solid var(--border);
+  padding: 80px 72px 40px;
+}
+.footer-top { display: grid; grid-template-columns: 2fr 1fr 1fr 1fr; gap: 60px; margin-bottom: 60px; }
+.footer-logo {
+  font-family: 'Playfair Display', serif;
+  font-size: 36px; letter-spacing: 6px;
+  color: var(--cream); margin-bottom: 16px;
+}
+.footer-logo span { color: var(--amber); }
+.footer-desc { font-size: 14px; font-weight: 300; color: var(--muted); line-height: 1.9; max-width: 260px; }
+.footer-col h4 { font-size: 10px; letter-spacing: 4px; text-transform: uppercase; color: var(--amber); margin-bottom: 24px; }
+.footer-col ul { list-style: none; }
+.footer-col ul li { margin-bottom: 12px; }
+.footer-col ul a { color: var(--muted); text-decoration: none; font-size: 14px; font-weight: 300; transition: color 0.3s; }
+.footer-col ul a:hover { color: var(--cream); }
+.footer-social { display: flex; gap: 12px; margin-top: 24px; }
+.social-btn {
+  width: 38px; height: 38px; border: 1px solid var(--border);
+  display: flex; align-items: center; justify-content: center;
+  color: var(--muted); text-decoration: none; font-size: 14px;
+  transition: all 0.3s;
+}
+.social-btn:hover { border-color: var(--amber); color: var(--amber); }
+.footer-bottom {
+  border-top: 1px solid var(--border); padding-top: 32px;
+  display: flex; justify-content: space-between; align-items: center;
+}
+.footer-copy { font-size: 12px; color: var(--muted); letter-spacing: 1px; }
+.footer-credit { font-size: 12px; color: var(--muted); }
+.footer-credit span { color: var(--amber); }
+
+/* ─── KEYFRAMES ─── */
+@keyframes fadeDown { from { opacity:0; transform:translateY(-20px); } to { opacity:1; transform:none; } }
+@keyframes fadeUp { from { opacity:0; transform:translateY(32px); } to { opacity:1; transform:none; } }
+@keyframes kenBurns { from { transform: scale(1); } to { transform: scale(1.08); } }
+@keyframes scrollPulse { 0%,100% { opacity:1; transform:scaleY(1); } 50% { opacity:0.4; transform:scaleY(0.6); } }
+@keyframes float { 0%,100% { transform:translateY(0); } 50% { transform:translateY(-10px); } }
+@keyframes scaleIn { from { opacity:0; transform:scale(0.95); } to { opacity:1; transform:scale(1); } }
+
+/* REVEAL */
+.reveal { opacity:0; transform:translateY(28px); transition: opacity 0.8s ease, transform 0.8s ease; }
+.reveal.visible { opacity:1; transform:none; }
+.reveal-d1 { transition-delay:0.1s; }
+.reveal-d2 { transition-delay:0.2s; }
+.reveal-d3 { transition-delay:0.3s; }
+.reveal-d4 { transition-delay:0.4s; }
+
+/* LIGHTBOX */
+.lightbox { display:none; position:fixed; inset:0; background:rgba(10,9,7,0.96); z-index:1000; align-items:center; justify-content:center; }
+.lightbox.active { display:flex; animation:scaleIn 0.3s ease; }
+.lightbox img { max-width:88vw; max-height:88vh; object-fit:contain; box-shadow:0 0 80px rgba(0,0,0,0.8); }
+.lightbox-close { position:absolute; top:24px; right:32px; background:none; border:1px solid var(--border); color:var(--cream); width:40px; height:40px; font-size:18px; cursor:pointer; display:flex; align-items:center; justify-content:center; transition:border-color 0.3s, color 0.3s; }
+.lightbox-close:hover { border-color:var(--amber); color:var(--amber); }
+
+@media (max-width:1024px) {
+  nav { padding: 20px 24px; }
+  .nav-links { display:none; }
+  .section { padding: 72px 24px; }
+  .menu-grid { grid-template-columns: 1fr; }
+  .chef-section { grid-template-columns:1fr; }
+  .chef-content { padding: 60px 24px; }
+  .booking-reviews { grid-template-columns:1fr; }
+  .booking-side, .reviews-side { padding: 72px 24px; }
+  .info-bar { grid-template-columns:1fr 1fr; }
+  .location-section { grid-template-columns:1fr; }
+  .location-info { padding: 60px 24px; }
+  .gallery-masonry { columns:2; }
+  .footer-top { grid-template-columns:1fr 1fr; gap:40px; }
+  .footer-bottom { flex-direction:column; gap:12px; text-align:center; }
+  .hero-reel { grid-template-columns:1fr; }
+  .hero-reel-img:not(:first-child) { display:none; }
+}
+</style>
+</head>
+<body>
+
+<div id="cursor"></div>
+<div id="cursor-ring"></div>
+
+<!-- NAV -->
+<nav>
+  <a href="#" class="nav-logo">EMBER</a>
+  <ul class="nav-links">
+    <li><a href="#menu">Menu</a></li>
+    <li><a href="#chef">Our Chef</a></li>
+    <li><a href="#gallery">Gallery</a></li>
+    <li><a href="#reservations">Reserve</a></li>
+    <li><a href="#location">Location</a></li>
+  </ul>
+  <button class="nav-res" onclick="scrollTo('#reservations')">Reserve a Table</button>
+</nav>
+
+<!-- HERO -->
+<section class="hero" id="home">
+  <div class="hero-reel">
+    <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=800&q=80" class="hero-reel-img" alt="Fine dining">
+    <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=800&q=80" class="hero-reel-img" alt="Gourmet dish">
+    <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=800&q=80" class="hero-reel-img" alt="Restaurant ambiance">
+  </div>
+  <div class="hero-overlay"></div>
+  <div class="hero-content">
+    <p class="hero-tag">Contemporary Fine Dining · Est. 2014</p>
+    <h1 class="hero-title">EM<em>B</em>ER</h1>
+    <p class="hero-sub">Where fire meets finesse. An intimate culinary journey through bold flavours and artful composition.</p>
+    <div class="hero-actions">
+      <button class="btn-gold" onclick="scrollTo('#reservations')">Reserve a Table</button>
+      <button class="btn-ghost" onclick="scrollTo('#menu')">Explore the Menu</button>
+    </div>
+  </div>
+  <div class="hero-scroll">
+    <span>Discover</span>
+    <div class="scroll-line"></div>
+  </div>
+</section>
+
+<!-- MENU -->
+<section class="section section-dark section-center" id="menu">
+  <div class="section-header reveal" style="margin-bottom:52px">
+    <p class="eyebrow">Curated Selections</p>
+    <h2 class="section-title">The <em>Menu</em></h2>
+    <p class="section-sub">Seasonal ingredients, elevated craft. Our menu shifts with the harvest — always bold, always honest.</p>
+  </div>
+
+  <div class="menu-tabs reveal">
+    <button class="menu-tab active" onclick="switchTab('starters')">Starters</button>
+    <button class="menu-tab" onclick="switchTab('mains')">Mains</button>
+    <button class="menu-tab" onclick="switchTab('desserts')">Desserts</button>
+    <button class="menu-tab" onclick="switchTab('drinks')">Drinks</button>
+  </div>
+
+  <!-- STARTERS -->
+  <div class="menu-panel active" id="tab-starters">
+    <div class="menu-grid">
+      <div class="menu-item">
+        <img src="https://images.unsplash.com/photo-1541014741259-de529411b96a?w=200&q=80" class="menu-item-img" alt="Tuna Tartare">
+        <div class="menu-item-body">
+          <div class="menu-item-head"><span class="menu-item-name">Yellowfin Tuna Tartare</span><span class="menu-item-price">R 195</span></div>
+          <p class="menu-item-desc">Avocado mousse, sesame crisp, ponzu gel, micro shiso and compressed cucumber.</p>
+          <div class="menu-item-tags"><span class="menu-tag">Raw</span><span class="menu-tag">Gluten-Free</span></div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <img src="https://images.unsplash.com/photo-1476124369491-e7addf5db371?w=200&q=80" class="menu-item-img" alt="Beef Carpaccio">
+        <div class="menu-item-body">
+          <div class="menu-item-head"><span class="menu-item-name">Wagyu Beef Carpaccio</span><span class="menu-item-price">R 220</span></div>
+          <p class="menu-item-desc">Shaved 32-day dry-aged wagyu, truffle aioli, caperberry, Parmesan snow and truffle oil.</p>
+          <div class="menu-item-tags"><span class="menu-tag">Signature</span></div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <img src="https://images.unsplash.com/photo-1606914501449-5a96b6ce24ca?w=200&q=80" class="menu-item-img" alt="Lobster Bisque">
+        <div class="menu-item-body">
+          <div class="menu-item-head"><span class="menu-item-name">Cape Lobster Bisque</span><span class="menu-item-price">R 175</span></div>
+          <p class="menu-item-desc">Velvety lobster reduction, cognac cream, tarragon oil and sourdough crostini.</p>
+          <div class="menu-item-tags"><span class="menu-tag">Chef's Pick</span></div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <img src="https://images.unsplash.com/photo-1505253716362-afaea1d3d1af?w=200&q=80" class="menu-item-img" alt="Burrata">
+        <div class="menu-item-body">
+          <div class="menu-item-head"><span class="menu-item-name">Heirloom Burrata</span><span class="menu-item-price">R 165</span></div>
+          <p class="menu-item-desc">Heirloom tomatoes, aged balsamic, basil oil, smoked fleur de sel and toasted pine nuts.</p>
+          <div class="menu-item-tags"><span class="menu-tag">Vegetarian</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- MAINS -->
+  <div class="menu-panel" id="tab-mains">
+    <div class="menu-grid">
+      <div class="menu-item">
+        <img src="https://images.unsplash.com/photo-1558030006-450675393462?w=200&q=80" class="menu-item-img" alt="Fillet">
+        <div class="menu-item-body">
+          <div class="menu-item-head"><span class="menu-item-name">Smoked Beef Fillet</span><span class="menu-item-price">R 495</span></div>
+          <p class="menu-item-desc">200g prime fillet, truffle pomme purée, roasted bone marrow, red wine jus and seasonal greens.</p>
+          <div class="menu-item-tags"><span class="menu-tag">Signature</span><span class="menu-tag">Gluten-Free</span></div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <img src="https://images.unsplash.com/photo-1519708227418-c8fd9a32b7a2?w=200&q=80" class="menu-item-img" alt="Sea Bass">
+        <div class="menu-item-body">
+          <div class="menu-item-head"><span class="menu-item-name">Pan-Seared Sea Bass</span><span class="menu-item-price">R 395</span></div>
+          <p class="menu-item-desc">Wild-caught sea bass, saffron beurre blanc, fennel confit, crispy capers and samphire.</p>
+          <div class="menu-item-tags"><span class="menu-tag">Sustainable</span></div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <img src="https://images.unsplash.com/photo-1574484284002-952d92456975?w=200&q=80" class="menu-item-img" alt="Duck">
+        <div class="menu-item-body">
+          <div class="menu-item-head"><span class="menu-item-name">Duck à l'Orange</span><span class="menu-item-price">R 425</span></div>
+          <p class="menu-item-desc">Slow-roasted duck breast, citrus gastrique, dauphinoise potato, wilted spinach and crispy skin.</p>
+          <div class="menu-item-tags"><span class="menu-tag">Classic</span></div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <img src="https://images.unsplash.com/photo-1512621776951-a57141f2eefd?w=200&q=80" class="menu-item-img" alt="Mushroom Risotto">
+        <div class="menu-item-body">
+          <div class="menu-item-head"><span class="menu-item-name">Wild Mushroom Risotto</span><span class="menu-item-price">R 295</span></div>
+          <p class="menu-item-desc">Arborio rice, forest mushroom medley, aged Parmigiano-Reggiano, truffle butter and chives.</p>
+          <div class="menu-item-tags"><span class="menu-tag">Vegetarian</span><span class="menu-tag">Chef's Pick</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DESSERTS -->
+  <div class="menu-panel" id="tab-desserts">
+    <div class="menu-grid">
+      <div class="menu-item">
+        <img src="https://images.unsplash.com/photo-1611329532992-0b7e06f39d62?w=200&q=80" class="menu-item-img" alt="Chocolate">
+        <div class="menu-item-body">
+          <div class="menu-item-head"><span class="menu-item-name">Warm Chocolate Fondant</span><span class="menu-item-price">R 145</span></div>
+          <p class="menu-item-desc">72% Valrhona dark chocolate, salted caramel core, vanilla bean ice cream and hazelnut praline.</p>
+          <div class="menu-item-tags"><span class="menu-tag">Signature</span></div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <img src="https://images.unsplash.com/photo-1488477181946-6428a0291777?w=200&q=80" class="menu-item-img" alt="Pavlova">
+        <div class="menu-item-body">
+          <div class="menu-item-head"><span class="menu-item-name">Ember Pavlova</span><span class="menu-item-price">R 125</span></div>
+          <p class="menu-item-desc">Torched meringue, passion fruit curd, fresh seasonal berries and edible flowers.</p>
+          <div class="menu-item-tags"><span class="menu-tag">Gluten-Free</span></div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <img src="https://images.unsplash.com/photo-1562440499-64b9a86b5d5a?w=200&q=80" class="menu-item-img" alt="Crème Brûlée">
+        <div class="menu-item-body">
+          <div class="menu-item-head"><span class="menu-item-name">Vanilla Crème Brûlée</span><span class="menu-item-price">R 115</span></div>
+          <p class="menu-item-desc">Classic Tahitian vanilla custard, torched demerara, crystallised violets and shortbread.</p>
+          <div class="menu-item-tags"><span class="menu-tag">Classic</span></div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <img src="https://images.unsplash.com/photo-1579954115545-a95591f28bfc?w=200&q=80" class="menu-item-img" alt="Tart">
+        <div class="menu-item-body">
+          <div class="menu-item-head"><span class="menu-item-name">Lemon & Thyme Tart</span><span class="menu-item-price">R 120</span></div>
+          <p class="menu-item-desc">Silky lemon curd, buttery pastry shell, candied thyme, Italian meringue and lemon zest.</p>
+          <div class="menu-item-tags"><span class="menu-tag">Vegetarian</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+
+  <!-- DRINKS -->
+  <div class="menu-panel" id="tab-drinks">
+    <div class="menu-grid">
+      <div class="menu-item">
+        <img src="https://images.unsplash.com/photo-1560512823-829485b8bf24?w=200&q=80" class="menu-item-img" alt="Cocktail">
+        <div class="menu-item-body">
+          <div class="menu-item-head"><span class="menu-item-name">The Ember Old Fashioned</span><span class="menu-item-price">R 145</span></div>
+          <p class="menu-item-desc">Smoked Woodford Reserve bourbon, house-made demerara, Angostura bitters, expressed orange peel.</p>
+          <div class="menu-item-tags"><span class="menu-tag">Signature Cocktail</span></div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <img src="https://images.unsplash.com/photo-1551024709-8f23befc6f87?w=200&q=80" class="menu-item-img" alt="Wine">
+        <div class="menu-item-body">
+          <div class="menu-item-head"><span class="menu-item-name">Stellenbosch Cabernet</span><span class="menu-item-price">R 185</span></div>
+          <p class="menu-item-desc">Kanonkop Estate 2019. Blackcurrant, cedar, dark chocolate. Full-bodied with a long, elegant finish.</p>
+          <div class="menu-item-tags"><span class="menu-tag">Sommelier's Choice</span></div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <img src="https://images.unsplash.com/photo-1544145945-f90425340c7e?w=200&q=80" class="menu-item-img" alt="Whisky">
+        <div class="menu-item-body">
+          <div class="menu-item-head"><span class="menu-item-name">Japanese Highball</span><span class="menu-item-price">R 165</span></div>
+          <p class="menu-item-desc">Suntory Toki whisky, Japanese tonic, fresh yuzu twist, hand-cut crystal ice sphere.</p>
+          <div class="menu-item-tags"><span class="menu-tag">Crafted</span></div>
+        </div>
+      </div>
+      <div class="menu-item">
+        <img src="https://images.unsplash.com/photo-1563227812-0ea4c22e6cc8?w=200&q=80" class="menu-item-img" alt="Mocktail">
+        <div class="menu-item-body">
+          <div class="menu-item-head"><span class="menu-item-name">Garden Spritz (Non-Alc)</span><span class="menu-item-price">R 85</span></div>
+          <p class="menu-item-desc">House-pressed cucumber, elderflower, lime, mint, sparkling water with rose and herb garnish.</p>
+          <div class="menu-item-tags"><span class="menu-tag">Alcohol-Free</span></div>
+        </div>
+      </div>
+    </div>
+  </div>
+</section>
+
+<!-- CHEF -->
+<div class="chef-section" id="chef">
+  <div class="chef-visual">
+    <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=900&q=80" class="chef-img" alt="Executive Chef">
+    <div class="chef-visual-overlay"></div>
+    <blockquote class="chef-quote">"Fire is not just heat — it is transformation."</blockquote>
+  </div>
+  <div class="chef-content">
+    <p class="eyebrow">The Craftsman</p>
+    <h2 class="section-title">A Story of <em>Obsession</em></h2>
+    <p class="chef-name">Chef Armand Voss</p>
+    <p class="chef-title">Executive Chef & Founder</p>
+    <p class="chef-bio">Born in Stellenbosch and trained under three Michelin-starred mentors across Paris, Tokyo and Copenhagen, Armand Voss returned to South Africa with one vision: to create a dining experience that felt both rooted in African terroir and alive with global technique.</p>
+    <p class="chef-bio">His cooking philosophy is simple: find the finest ingredient at its peak, then get out of its way. Every dish at Ember begins with a fire — open flames, hot coals, smouldering wood — because Armand believes heat is the most honest expression of flavour.</p>
+    <div class="chef-awards">
+      <div class="chef-award"><div class="chef-award-num">3×</div><div class="chef-award-label">Eat Out Award</div></div>
+      <div class="chef-award"><div class="chef-award-num">12yr</div><div class="chef-award-label">Head Chef</div></div>
+      <div class="chef-award"><div class="chef-award-num">Top 50</div><div class="chef-award-label">Africa's Best</div></div>
+    </div>
+  </div>
+</div>
+
+<!-- GALLERY -->
+<section class="section section-dark" id="gallery">
+  <div class="section-header reveal section-center" style="margin-bottom:56px">
+    <p class="eyebrow">Visual Feast</p>
+    <h2 class="section-title">The <em>Gallery</em></h2>
+    <p class="section-sub">A glimpse into our world — the dishes, the space, the moments.</p>
+  </div>
+  <div class="gallery-masonry reveal">
+    <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=1200&q=90')">
+      <img src="https://images.unsplash.com/photo-1414235077428-338989a2e8c0?w=600&q=80" alt="Dining room">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">The Dining Room</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=1200&q=90')">
+      <img src="https://images.unsplash.com/photo-1504674900247-0877df9cc836?w=600&q=80" alt="Signature dish">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Signature Plate</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1559339352-11d035aa65de?w=1200&q=90')">
+      <img src="https://images.unsplash.com/photo-1559339352-11d035aa65de?w=600&q=80" alt="Candlelit dinner">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Candlelit Evening</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=1200&q=90')">
+      <img src="https://images.unsplash.com/photo-1555396273-367ea4eb4db5?w=600&q=80" alt="Bar">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">The Ember Bar</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1482275548304-a58859dc31b7?w=1200&q=90')">
+      <img src="https://images.unsplash.com/photo-1482275548304-a58859dc31b7?w=600&q=80" alt="Dessert">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Sweet Endings</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=1200&q=90')">
+      <img src="https://images.unsplash.com/photo-1577219491135-ce391730fb2c?w=600&q=80" alt="Kitchen">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Behind the Pass</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1550966871-3ed3cfd6b01a?w=1200&q=90')">
+      <img src="https://images.unsplash.com/photo-1550966871-3ed3cfd6b01a?w=600&q=80" alt="Wine">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">The Wine Cellar</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=1200&q=90')">
+      <img src="https://images.unsplash.com/photo-1567620905732-2d1ec7ab7445?w=600&q=80" alt="Pancakes">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Weekend Brunch</span></div>
+    </div>
+    <div class="gallery-item" onclick="openLightbox('https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=1200&q=90')">
+      <img src="https://images.unsplash.com/photo-1470337458703-46ad1756a187?w=600&q=80" alt="Cocktails">
+      <div class="gallery-item-overlay"><span class="gallery-item-label">Craft Cocktails</span></div>
+    </div>
+  </div>
+</section>
+
+<!-- LIGHTBOX -->
+<div class="lightbox" id="lightbox" onclick="closeLightbox()">
+  <button class="lightbox-close" onclick="closeLightbox()">✕</button>
+  <img id="lightbox-img" src="" alt="Gallery image">
+</div>
+
+<!-- RESERVATION + REVIEWS -->
+<div class="booking-reviews" id="reservations">
+  <!-- BOOKING -->
+  <div class="booking-side">
+    <p class="eyebrow" style="justify-content:flex-start">Reserve Your Evening</p>
+    <h2 class="section-title">Book a <em>Table</em></h2>
+    <p style="font-size:15px;font-weight:300;color:var(--muted);line-height:1.8;margin-bottom:36px">We recommend booking at least 3 days in advance for weekend dining. Confirmation will be sent via email within 2 hours.</p>
+    <div class="form-row">
+      <div class="form-group">
+        <label>First Name</label>
+        <input type="text" id="rfname" placeholder="Your first name">
+      </div>
+      <div class="form-group">
+        <label>Surname</label>
+        <input type="text" id="rlname" placeholder="Your surname">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Email</label>
+        <input type="email" id="remail" placeholder="your@email.com">
+      </div>
+      <div class="form-group">
+        <label>Phone</label>
+        <input type="tel" id="rphone" placeholder="+27 00 000 0000">
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Date</label>
+        <input type="date" id="rdate">
+      </div>
+      <div class="form-group">
+        <label>Time</label>
+        <select id="rtime">
+          <option>18:00</option>
+          <option>18:30</option>
+          <option>19:00</option>
+          <option>19:30</option>
+          <option>20:00</option>
+          <option>20:30</option>
+          <option>21:00</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-row">
+      <div class="form-group">
+        <label>Guests</label>
+        <select id="rguests">
+          <option>1 Guest</option>
+          <option>2 Guests</option>
+          <option>3 Guests</option>
+          <option>4 Guests</option>
+          <option>5 Guests</option>
+          <option>6 Guests</option>
+          <option>Private Dining (7+)</option>
+        </select>
+      </div>
+      <div class="form-group">
+        <label>Occasion</label>
+        <select id="roccasion">
+          <option>None</option>
+          <option>Birthday</option>
+          <option>Anniversary</option>
+          <option>Business Dinner</option>
+          <option>Proposal</option>
+          <option>Date Night</option>
+        </select>
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Special Requests</label>
+      <textarea id="rrequest" placeholder="Dietary requirements, allergies, seating preferences…"></textarea>
+    </div>
+    <button class="btn-submit" onclick="submitReservation()">Confirm Reservation</button>
+    <div class="form-success" id="resSuccess">✦ Your table is reserved. We look forward to welcoming you.</div>
+  </div>
+
+  <!-- REVIEWS -->
+  <div class="reviews-side" id="reviews">
+    <p class="eyebrow" style="justify-content:flex-start">Guest Experiences</p>
+    <h2 class="section-title">Reviews & <em>Stories</em></h2>
+
+    <div class="review-list" id="reviewList">
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer-name">Naledi Dlamini</div>
+          <div class="reviewer-date">March 2025</div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">The wagyu carpaccio was ethereal — I'm still dreaming about it. Service was flawless without being stiff. Ember is genuinely the finest restaurant in the city.</p>
+      </div>
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer-name">James & Sarah Koekemoer</div>
+          <div class="reviewer-date">February 2025</div>
+        </div>
+        <div class="review-stars">★★★★★</div>
+        <p class="review-text">Our anniversary dinner exceeded every expectation. The sommelier's pairing was inspired, and the chocolate fondant was the finest dessert we've had on any continent.</p>
+      </div>
+      <div class="review-card">
+        <div class="review-header">
+          <div class="reviewer-name">Thabo Nkosi</div>
+          <div class="reviewer-date">January 2025</div>
+        </div>
+        <div class="review-stars">★★★★☆</div>
+        <p class="review-text">Exceptional tasting menu — Chef Voss's technique is undeniable. The atmosphere is dark and intimate in exactly the right way. Will be returning very soon.</p>
+      </div>
+    </div>
+
+    <!-- WRITE A REVIEW -->
+    <div style="border-top:1px solid var(--border);padding-top:32px;margin-top:8px">
+      <p style="font-size:11px;letter-spacing:3px;text-transform:uppercase;color:var(--amber);margin-bottom:20px">Leave a Review</p>
+      <div class="form-row">
+        <div class="form-group">
+          <label>Your Name</label>
+          <input type="text" id="revname" placeholder="Full name">
+        </div>
+        <div class="form-group">
+          <label>Visit Date</label>
+          <input type="month" id="revdate">
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Rating</label>
+        <div class="star-select" id="starSelect">
+          <button class="star-btn" data-val="1" onclick="setStars(1)">★</button>
+          <button class="star-btn" data-val="2" onclick="setStars(2)">★</button>
+          <button class="star-btn" data-val="3" onclick="setStars(3)">★</button>
+          <button class="star-btn" data-val="4" onclick="setStars(4)">★</button>
+          <button class="star-btn" data-val="5" onclick="setStars(5)">★</button>
+        </div>
+      </div>
+      <div class="form-group">
+        <label>Your Experience</label>
+        <textarea id="revtext" placeholder="Share your Ember experience…" style="min-height:80px"></textarea>
+      </div>
+      <button class="btn-submit" onclick="submitReview()">Publish Review</button>
+      <div class="form-success" id="revSuccess">✦ Thank you. Your review has been added.</div>
+    </div>
+  </div>
+</div>
+
+<!-- INFO BAR -->
+<div class="info-bar reveal">
+  <div class="info-item">
+    <div class="info-icon">🕯️</div>
+    <div class="info-label">Dinner Service</div>
+    <div class="info-value">Tue – Sun<br>18:00 – 22:30</div>
+    <div class="info-sub">Last seating at 21:00</div>
+  </div>
+  <div class="info-item">
+    <div class="info-icon">☕</div>
+    <div class="info-label">Weekend Brunch</div>
+    <div class="info-value">Sat & Sun<br>10:00 – 14:00</div>
+    <div class="info-sub">Walk-ins welcome</div>
+  </div>
+  <div class="info-item">
+    <div class="info-icon">📞</div>
+    <div class="info-label">Reservations</div>
+    <div class="info-value">+27 21 555 0300</div>
+    <div class="info-sub">reservations@emberct.co.za</div>
+  </div>
+  <div class="info-item">
+    <div class="info-icon">🎉</div>
+    <div class="info-label">Private Dining</div>
+    <div class="info-value">Up to 30 Guests</div>
+    <div class="info-sub">events@emberct.co.za</div>
+  </div>
+</div>
+
+<!-- LOCATION -->
+<div class="location-section" id="location">
+  <div class="location-info reveal">
+    <p class="eyebrow">Find Us</p>
+    <h2>How to <em style="color:var(--amber);font-style:italic">Find Us</em></h2>
+    <div class="loc-row">
+      <div class="loc-icon">📍</div>
+      <div>
+        <div class="loc-label">Address</div>
+        <div class="loc-val">14 Shortmarket Street<br>Cape Town City Bowl, 8001<br>South Africa</div>
+      </div>
+    </div>
+    <div class="loc-row">
+      <div class="loc-icon">🚗</div>
+      <div>
+        <div class="loc-label">Parking</div>
+        <div class="loc-val">Complimentary valet on arrival.<br>NPC Parking on Bree St — 80m walk.</div>
+      </div>
+    </div>
+    <div class="loc-row">
+      <div class="loc-icon">🚇</div>
+      <div>
+        <div class="loc-label">Transport</div>
+        <div class="loc-val">Adderley MyCiTi stop — 6 min walk.<br>Uber drop-off directly outside.</div>
+      </div>
+    </div>
+    <div class="loc-row">
+      <div class="loc-icon">✉️</div>
+      <div>
+        <div class="loc-label">Get in Touch</div>
+        <div class="loc-val">hello@emberct.co.za<br>+27 21 555 0300</div>
+      </div>
+    </div>
+  </div>
+  <div class="map-block">
+    <div class="map-pin">🍽️</div>
+    <div class="map-addr">14 Shortmarket Street<br>Cape Town City Bowl</div>
+    <button class="btn-gold map-cta" onclick="window.open('https://maps.google.com?q=Shortmarket+Street+Cape+Town','_blank')">Open in Google Maps →</button>
+  </div>
+</div>
+
+<!-- FOOTER -->
+<footer>
+  <div class="footer-top">
+    <div>
+      <div class="footer-logo">EMBER<span>.</span></div>
+      <p class="footer-desc">Contemporary fire-driven cuisine in the heart of Cape Town. An experience for the senses — bold, honest, unforgettable.</p>
+      <div class="footer-social">
+        <a class="social-btn" href="#" title="Instagram">Ig</a>
+        <a class="social-btn" href="#" title="Facebook">Fb</a>
+        <a class="social-btn" href="#" title="TikTok">Tk</a>
+        <a class="social-btn" href="#" title="Twitter">X</a>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Explore</h4>
+      <ul>
+        <li><a href="#menu">The Menu</a></li>
+        <li><a href="#chef">Our Chef</a></li>
+        <li><a href="#gallery">Gallery</a></li>
+        <li><a href="#reservations">Reservations</a></li>
+        <li><a href="#location">Location</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Dining</h4>
+      <ul>
+        <li><a href="#">Tasting Menu</a></li>
+        <li><a href="#">Wine Pairing</a></li>
+        <li><a href="#">Private Events</a></li>
+        <li><a href="#">Weekend Brunch</a></li>
+        <li><a href="#">Gift Vouchers</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Hours</h4>
+      <ul>
+        <li><a href="#">Tue–Sun: 18:00–22:30</a></li>
+        <li><a href="#">Sat & Sun Brunch: 10:00–14:00</a></li>
+        <li><a href="#">Monday: Closed</a></li>
+        <li><a href="#">+27 21 555 0300</a></li>
+        <li><a href="#">hello@emberct.co.za</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div class="footer-copy">© 2025 Ember Restaurant. All rights reserved.</div>
+    <div class="footer-credit">Website designed and developed by <span>VusoNgwane Consulting</span></div>
+  </div>
+</footer>
+
+<script>
+// CURSOR
+const cursor = document.getElementById('cursor');
+const ring = document.getElementById('cursor-ring');
+document.addEventListener('mousemove', e => {
+  cursor.style.left = e.clientX + 'px';
+  cursor.style.top = e.clientY + 'px';
+  setTimeout(() => {
+    ring.style.left = e.clientX + 'px';
+    ring.style.top = e.clientY + 'px';
+  }, 80);
+});
+
+// SMOOTH SCROLL
+function scrollTo(id) { document.querySelector(id).scrollIntoView({ behavior: 'smooth' }); }
+
+// MENU TABS
+function switchTab(name) {
+  document.querySelectorAll('.menu-tab').forEach((t,i) => {
+    const tabs = ['starters','mains','desserts','drinks'];
+    t.classList.toggle('active', tabs[i] === name);
+  });
+  document.querySelectorAll('.menu-panel').forEach(p => p.classList.remove('active'));
+  document.getElementById('tab-' + name).classList.add('active');
+}
+
+// MIN DATE
+const today = new Date().toISOString().split('T')[0];
+const rdateEl = document.getElementById('rdate');
+if (rdateEl) rdateEl.min = today;
+
+// RESERVATION SUBMIT
+function submitReservation() {
+  const fields = ['rfname','rlname','remail','rphone','rdate'];
+  if (!fields.every(id => document.getElementById(id).value.trim())) {
+    alert('Please fill in all required fields.'); return;
+  }
+  document.getElementById('resSuccess').style.display = 'block';
+  ['rfname','rlname','remail','rphone','rrequest'].forEach(id => document.getElementById(id).value = '');
+  setTimeout(() => document.getElementById('resSuccess').style.display = 'none', 5000);
+}
+
+// STARS
+let selectedStars = 0;
+function setStars(n) {
+  selectedStars = n;
+  document.querySelectorAll('.star-btn').forEach((b, i) => b.classList.toggle('active', i < n));
+}
+
+// REVIEW SUBMIT
+function submitReview() {
+  const name = document.getElementById('revname').value.trim();
+  const text = document.getElementById('revtext').value.trim();
+  const dateVal = document.getElementById('revdate').value;
+  if (!name || !text || !selectedStars) { alert('Please enter your name, a rating, and your review.'); return; }
+  const stars = '★'.repeat(selectedStars) + '☆'.repeat(5 - selectedStars);
+  const monthNames = ['Jan','Feb','Mar','Apr','May','Jun','Jul','Aug','Sep','Oct','Nov','Dec'];
+  let dateLabel = 'Recently';
+  if (dateVal) {
+    const [y, m] = dateVal.split('-');
+    dateLabel = monthNames[parseInt(m)-1] + ' ' + y;
+  }
+  const card = document.createElement('div');
+  card.className = 'review-card';
+  card.style.animation = 'scaleIn 0.4s ease';
+  card.innerHTML = `
+    <div class="review-header">
+      <div class="reviewer-name">${name}</div>
+      <div class="reviewer-date">${dateLabel}</div>
+    </div>
+    <div class="review-stars">${stars}</div>
+    <p class="review-text">${text}</p>`;
+  document.getElementById('reviewList').prepend(card);
+  document.getElementById('revSuccess').style.display = 'block';
+  document.getElementById('revname').value = '';
+  document.getElementById('revtext').value = '';
+  document.getElementById('revdate').value = '';
+  setStars(0);
+  setTimeout(() => document.getElementById('revSuccess').style.display = 'none', 4000);
+}
+
+// GALLERY LIGHTBOX
+function openLightbox(src) {
+  document.getElementById('lightbox-img').src = src;
+  document.getElementById('lightbox').classList.add('active');
+  document.body.style.overflow = 'hidden';
+}
+function closeLightbox() {
+  document.getElementById('lightbox').classList.remove('active');
+  document.body.style.overflow = '';
+}
+
+// SCROLL REVEAL
+const obs = new IntersectionObserver(entries => {
+  entries.forEach(e => { if (e.isIntersecting) { e.target.classList.add('visible'); obs.unobserve(e.target); } });
+}, { threshold: 0.07 });
+document.querySelectorAll('.reveal').forEach(el => obs.observe(el));
+</script>
+</body>
+</html>

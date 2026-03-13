@@ -1,0 +1,2496 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8" />
+  <meta name="viewport" content="width=device-width, initial-scale=1.0" />
+  <title>Covenant Fire Church | Welcome Home</title>
+  <meta
+    name="description"
+    content="Covenant Fire Church is a welcoming church in Johannesburg with Sunday services, prayer gatherings, family ministries, online messages, and a place for every generation."
+  />
+  <link rel="preconnect" href="https://fonts.googleapis.com" />
+  <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin />
+  <link
+    href="https://fonts.googleapis.com/css2?family=Cinzel:wght@400;500;600;700;800&family=Lora:ital,wght@0,400;0,500;0,600;1,400&family=Nunito+Sans:wght@300;400;600;700&display=swap"
+    rel="stylesheet"
+  />
+
+  <style>
+    * { margin: 0; padding: 0; box-sizing: border-box; }
+    html { scroll-behavior: smooth; }
+
+    :root {
+      --burgundy: #5c1a1a;
+      --burgundy-dark: #3f1111;
+      --burgundy-soft: #7b2b2b;
+      --gold: #c9973a;
+      --gold-light: #e6be72;
+      --gold-pale: #f5e7cb;
+      --cream: #faf6ef;
+      --cream-dark: #f2eadc;
+      --white: #fffdfa;
+      --text: #2b1b10;
+      --text-soft: #5f4735;
+      --text-muted: #8b6b55;
+      --border: #dfcfb6;
+      --ink: #1d1111;
+      --success: #1f6b46;
+      --whatsapp: #25D366;
+      --shadow: 0 18px 40px rgba(49, 21, 8, 0.08);
+      --max: 1240px;
+    }
+
+    body {
+      font-family: "Lora", serif;
+      background: var(--cream);
+      color: var(--text);
+      overflow-x: hidden;
+    }
+
+    img {
+      max-width: 100%;
+      display: block;
+    }
+
+    a {
+      text-decoration: none;
+      color: inherit;
+    }
+
+    .container {
+      width: min(var(--max), calc(100% - 40px));
+      margin: 0 auto;
+    }
+
+    .eyebrow {
+      display: inline-flex;
+      align-items: center;
+      gap: 12px;
+      font-family: "Nunito Sans", sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.24em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 14px;
+    }
+
+    .eyebrow::before {
+      content: "";
+      width: 34px;
+      height: 1px;
+      background: var(--gold);
+    }
+
+    .section-title {
+      font-family: "Cinzel", serif;
+      font-size: clamp(30px, 4vw, 48px);
+      line-height: 1.15;
+      color: var(--burgundy);
+      margin-bottom: 14px;
+    }
+
+    .section-title.light {
+      color: var(--gold-pale);
+    }
+
+    .section-title em {
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .section-copy {
+      font-size: 16px;
+      line-height: 1.85;
+      color: var(--text-soft);
+      max-width: 700px;
+    }
+
+    .gold-rule {
+      width: 68px;
+      height: 2px;
+      background: linear-gradient(to right, var(--gold), var(--gold-light));
+      margin: 18px 0 24px;
+    }
+
+    .btn {
+      display: inline-flex;
+      align-items: center;
+      justify-content: center;
+      gap: 10px;
+      padding: 15px 28px;
+      border: 2px solid transparent;
+      font-family: "Nunito Sans", sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      transition: all 0.25s ease;
+      cursor: pointer;
+    }
+
+    .btn-primary {
+      background: var(--gold);
+      color: var(--ink);
+      border-color: var(--gold);
+    }
+
+    .btn-primary:hover {
+      background: var(--gold-light);
+      border-color: var(--gold-light);
+      transform: translateY(-2px);
+    }
+
+    .btn-secondary {
+      background: transparent;
+      color: var(--gold-pale);
+      border-color: rgba(201, 151, 58, 0.45);
+    }
+
+    .btn-secondary:hover {
+      border-color: var(--gold);
+      color: var(--gold);
+    }
+
+    .btn-burgundy {
+      background: var(--burgundy);
+      color: var(--gold-pale);
+      border-color: var(--burgundy);
+    }
+
+    .btn-burgundy:hover {
+      background: var(--burgundy-dark);
+      border-color: var(--burgundy-dark);
+      transform: translateY(-2px);
+    }
+
+    .topbar {
+      background: var(--burgundy-dark);
+      border-bottom: 1px solid rgba(201, 151, 58, 0.18);
+      color: rgba(255,255,255,0.7);
+      font-family: "Nunito Sans", sans-serif;
+      font-size: 12px;
+    }
+
+    .topbar .container {
+      min-height: 42px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+      flex-wrap: wrap;
+      padding: 8px 0;
+    }
+
+    .topbar-left,
+    .topbar-right {
+      display: flex;
+      align-items: center;
+      gap: 20px;
+      flex-wrap: wrap;
+    }
+
+    .topbar strong {
+      color: var(--gold-light);
+      font-weight: 700;
+    }
+
+    nav {
+      position: sticky;
+      top: 0;
+      z-index: 1000;
+      background: rgba(255, 253, 250, 0.96);
+      backdrop-filter: blur(14px);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .nav-inner {
+      min-height: 76px;
+      display: flex;
+      align-items: center;
+      justify-content: space-between;
+      gap: 20px;
+    }
+
+    .brand {
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .brand-mark {
+      width: 42px;
+      height: 42px;
+      border-radius: 50%;
+      border: 1px solid rgba(201, 151, 58, 0.35);
+      display: grid;
+      place-items: center;
+      background: linear-gradient(180deg, #fff8ec, #f7ead0);
+      flex-shrink: 0;
+    }
+
+    .brand-mark svg {
+      width: 24px;
+      height: 24px;
+    }
+
+    .brand-name {
+      font-family: "Cinzel", serif;
+      font-size: 17px;
+      font-weight: 700;
+      line-height: 1.1;
+      letter-spacing: 0.05em;
+      color: var(--burgundy);
+    }
+
+    .brand-tag {
+      font-family: "Nunito Sans", sans-serif;
+      font-size: 10px;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+      margin-top: 3px;
+    }
+
+    .nav-links {
+      display: flex;
+      align-items: center;
+      gap: 28px;
+      list-style: none;
+      flex-wrap: wrap;
+    }
+
+    .nav-links a {
+      font-family: "Nunito Sans", sans-serif;
+      font-size: 12px;
+      font-weight: 700;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+      color: var(--text-soft);
+      position: relative;
+    }
+
+    .nav-links a::after {
+      content: "";
+      position: absolute;
+      left: 0;
+      bottom: -5px;
+      width: 0;
+      height: 1px;
+      background: var(--gold);
+      transition: width 0.25s ease;
+    }
+
+    .nav-links a:hover {
+      color: var(--burgundy);
+    }
+
+    .nav-links a:hover::after {
+      width: 100%;
+    }
+
+    .nav-cta {
+      padding: 12px 20px;
+      background: var(--burgundy);
+      color: var(--gold-pale);
+      border: 1px solid var(--burgundy);
+      font-family: "Nunito Sans", sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      white-space: nowrap;
+    }
+
+    .nav-cta:hover {
+      background: var(--burgundy-dark);
+    }
+
+    .hero {
+      position: relative;
+      min-height: 100vh;
+      background:
+        radial-gradient(circle at 50% 35%, rgba(201, 151, 58, 0.16), transparent 28%),
+        linear-gradient(180deg, rgba(48,13,13,0.96), rgba(62,17,17,0.98));
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+      justify-content: center;
+      text-align: center;
+    }
+
+    .hero::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201, 151, 58, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201, 151, 58, 0.035) 1px, transparent 1px);
+      background-size: 70px 70px;
+      pointer-events: none;
+    }
+
+    .hero-window {
+      position: absolute;
+      width: min(720px, 92vw);
+      aspect-ratio: 1;
+      border-radius: 50%;
+      border: 1px solid rgba(201, 151, 58, 0.1);
+      box-shadow:
+        0 0 0 25px rgba(201, 151, 58, 0.03),
+        0 0 0 60px rgba(201, 151, 58, 0.02);
+      opacity: 0.85;
+    }
+
+    .hero-inner {
+      position: relative;
+      z-index: 2;
+      width: min(900px, calc(100% - 40px));
+      margin: 0 auto;
+      padding: 120px 0 180px;
+    }
+
+    .hero-icon {
+      width: 58px;
+      height: 58px;
+      margin: 0 auto 24px;
+    }
+
+    .hero-kicker {
+      font-family: "Nunito Sans", sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.38em;
+      text-transform: uppercase;
+      color: var(--gold-light);
+      margin-bottom: 20px;
+    }
+
+    .hero h1 {
+      font-family: "Cinzel", serif;
+      font-size: clamp(42px, 7vw, 92px);
+      font-weight: 800;
+      line-height: 0.95;
+      color: var(--gold-pale);
+      letter-spacing: 0.04em;
+      margin-bottom: 10px;
+    }
+
+    .hero h1 span {
+      display: block;
+      font-size: clamp(26px, 4vw, 60px);
+      font-weight: 400;
+      color: var(--gold-light);
+      letter-spacing: 0.18em;
+      margin-top: 8px;
+    }
+
+    .hero-sub {
+      max-width: 660px;
+      margin: 0 auto;
+      font-size: 18px;
+      line-height: 1.9;
+      color: rgba(255,255,255,0.75);
+    }
+
+    .hero-verse {
+      max-width: 600px;
+      margin: 28px auto 0;
+      color: rgba(255,255,255,0.52);
+      font-style: italic;
+      line-height: 1.8;
+      font-size: 17px;
+    }
+
+    .hero-verse cite {
+      display: block;
+      margin-top: 8px;
+      font-family: "Nunito Sans", sans-serif;
+      font-style: normal;
+      font-size: 12px;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .hero-actions {
+      margin-top: 38px;
+      display: flex;
+      justify-content: center;
+      gap: 14px;
+      flex-wrap: wrap;
+    }
+
+    .hero-times {
+      position: absolute;
+      left: 50%;
+      bottom: 40px;
+      transform: translateX(-50%);
+      z-index: 2;
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 14px;
+      width: min(860px, calc(100% - 40px));
+    }
+
+    .time-card {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(201, 151, 58, 0.18);
+      backdrop-filter: blur(10px);
+      padding: 16px 18px;
+      text-align: center;
+    }
+
+    .time-day {
+      font-family: "Nunito Sans", sans-serif;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.22em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 6px;
+    }
+
+    .time-main {
+      font-family: "Cinzel", serif;
+      font-size: 18px;
+      color: var(--gold-pale);
+      margin-bottom: 4px;
+    }
+
+    .time-sub {
+      font-family: "Nunito Sans", sans-serif;
+      font-size: 11px;
+      letter-spacing: 0.08em;
+      color: rgba(255,255,255,0.46);
+    }
+
+    .ticker {
+      background: var(--gold);
+      min-height: 48px;
+      overflow: hidden;
+      display: flex;
+      align-items: center;
+    }
+
+    .ticker-track {
+      display: flex;
+      white-space: nowrap;
+      animation: tickerMove 24s linear infinite;
+    }
+
+    @keyframes tickerMove {
+      from { transform: translateX(0); }
+      to { transform: translateX(-50%); }
+    }
+
+    .ticker-item {
+      font-family: "Cinzel", serif;
+      font-size: 13px;
+      letter-spacing: 0.12em;
+      color: var(--ink);
+      padding: 0 34px;
+      display: flex;
+      align-items: center;
+      gap: 14px;
+    }
+
+    .ticker-dot {
+      width: 5px;
+      height: 5px;
+      border-radius: 50%;
+      background: var(--burgundy);
+      opacity: 0.4;
+    }
+
+    section {
+      padding: 100px 0;
+    }
+
+    .about-grid,
+    .watch-grid,
+    .giving-grid,
+    .visit-grid,
+    .contact-grid {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 54px;
+      align-items: center;
+    }
+
+    .card {
+      background: var(--white);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+    }
+
+    .about-quote {
+      position: relative;
+      padding: 44px;
+    }
+
+    .about-quote::before {
+      content: "";
+      position: absolute;
+      left: 0;
+      top: 0;
+      width: 4px;
+      height: 100%;
+      background: linear-gradient(to bottom, var(--gold), var(--burgundy-soft));
+    }
+
+    .about-quote-mark {
+      position: absolute;
+      right: 24px;
+      top: 14px;
+      font-family: "Cinzel", serif;
+      font-size: 72px;
+      line-height: 1;
+      color: #f4e7cb;
+    }
+
+    .about-quote blockquote {
+      font-size: 20px;
+      line-height: 1.8;
+      font-style: italic;
+      color: var(--text-soft);
+      margin-bottom: 16px;
+      position: relative;
+      z-index: 1;
+    }
+
+    .about-quote cite {
+      font-family: "Nunito Sans", sans-serif;
+      font-size: 12px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--gold);
+      font-style: normal;
+    }
+
+    .stats-grid {
+      display: grid;
+      grid-template-columns: repeat(2, 1fr);
+      gap: 2px;
+      margin-top: 24px;
+      background: var(--border);
+    }
+
+    .stat-box {
+      background: var(--cream-dark);
+      padding: 24px;
+      text-align: center;
+    }
+
+    .stat-num {
+      font-family: "Cinzel", serif;
+      font-size: 36px;
+      color: var(--burgundy);
+      margin-bottom: 6px;
+    }
+
+    .stat-label {
+      font-family: "Nunito Sans", sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .beliefs {
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .center-head {
+      text-align: center;
+      margin-bottom: 56px;
+    }
+
+    .center-head .eyebrow {
+      justify-content: center;
+    }
+
+    .center-head .eyebrow::before {
+      display: none;
+    }
+
+    .beliefs-grid,
+    .services-grid,
+    .ministries-grid,
+    .testimonials-grid,
+    .expect-grid {
+      display: grid;
+      gap: 2px;
+      background: var(--border);
+    }
+
+    .beliefs-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .belief-card,
+    .service-card,
+    .ministry-card,
+    .testimonial-card,
+    .expect-card {
+      background: var(--cream);
+      padding: 40px 32px;
+    }
+
+    .belief-card {
+      text-align: center;
+      transition: transform 0.25s ease, background 0.25s ease;
+    }
+
+    .belief-card:hover,
+    .ministry-card:hover,
+    .expect-card:hover {
+      transform: translateY(-4px);
+      background: var(--white);
+    }
+
+    .belief-icon {
+      width: 68px;
+      height: 68px;
+      margin: 0 auto 22px;
+      border-radius: 50%;
+      background: var(--gold-pale);
+      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+    }
+
+    .belief-title,
+    .service-title,
+    .ministry-title,
+    .expect-title {
+      font-family: "Cinzel", serif;
+      font-size: 20px;
+      color: var(--burgundy);
+      margin-bottom: 12px;
+    }
+
+    .belief-text,
+    .service-text,
+    .ministry-text,
+    .expect-text {
+      font-size: 14px;
+      line-height: 1.85;
+      color: var(--text-soft);
+    }
+
+    .belief-verse {
+      margin-top: 14px;
+      display: block;
+      font-size: 12px;
+      line-height: 1.7;
+      font-style: italic;
+      color: var(--gold);
+    }
+
+    .watch {
+      background:
+        linear-gradient(180deg, rgba(59, 16, 16, 0.97), rgba(76, 21, 21, 0.98));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .watch::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201, 151, 58, 0.045) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201, 151, 58, 0.045) 1px, transparent 1px);
+      background-size: 62px 62px;
+      pointer-events: none;
+    }
+
+    .watch-box {
+      position: relative;
+      z-index: 1;
+    }
+
+    .watch-copy .section-copy {
+      color: rgba(255,255,255,0.72);
+    }
+
+    .watch-panel {
+      background: rgba(255,255,255,0.06);
+      border: 1px solid rgba(201, 151, 58, 0.18);
+      min-height: 360px;
+      display: grid;
+      place-items: center;
+      padding: 30px;
+      position: relative;
+    }
+
+    .watch-panel::before {
+      content: "";
+      position: absolute;
+      inset: 16px;
+      border: 1px solid rgba(201,151,58,0.12);
+    }
+
+    .watch-frame {
+      position: relative;
+      z-index: 1;
+      text-align: center;
+      max-width: 420px;
+    }
+
+    .play-circle {
+      width: 86px;
+      height: 86px;
+      border-radius: 50%;
+      background: var(--gold);
+      color: var(--ink);
+      display: grid;
+      place-items: center;
+      margin: 0 auto 20px;
+      font-size: 28px;
+      box-shadow: 0 12px 30px rgba(201, 151, 58, 0.28);
+    }
+
+    .watch-frame h3 {
+      font-family: "Cinzel", serif;
+      font-size: 28px;
+      color: var(--gold-pale);
+      margin-bottom: 12px;
+    }
+
+    .watch-frame p {
+      color: rgba(255,255,255,0.68);
+      line-height: 1.9;
+      margin-bottom: 22px;
+      font-size: 15px;
+    }
+
+    .watch-links {
+      display: flex;
+      justify-content: center;
+      gap: 10px;
+      flex-wrap: wrap;
+    }
+
+    .watch-chip {
+      padding: 10px 14px;
+      border: 1px solid rgba(201, 151, 58, 0.24);
+      color: var(--gold-light);
+      font-family: "Nunito Sans", sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.12em;
+      text-transform: uppercase;
+    }
+
+    .services {
+      background: var(--cream);
+    }
+
+    .services-grid {
+      grid-template-columns: repeat(3, 1fr);
+    }
+
+    .service-card {
+      background: var(--white);
+      border-top: 3px solid transparent;
+      transition: border-color 0.25s ease, transform 0.25s ease;
+    }
+
+    .service-card:hover {
+      border-top-color: var(--gold);
+      transform: translateY(-4px);
+    }
+
+    .service-day {
+      font-family: "Cinzel", serif;
+      font-size: 28px;
+      color: var(--burgundy);
+      margin-bottom: 4px;
+    }
+
+    .service-time {
+      font-family: "Nunito Sans", sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .service-badge {
+      display: inline-block;
+      margin-top: 16px;
+      padding: 5px 12px;
+      border: 1px solid var(--border);
+      color: var(--text-muted);
+      font-family: "Nunito Sans", sans-serif;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .leadership {
+      background: var(--white);
+      border-top: 1px solid var(--border);
+    }
+
+    .leaders-grid {
+      display: grid;
+      grid-template-columns: 1.2fr 1fr 1fr;
+      gap: 28px;
+      margin-top: 56px;
+    }
+
+    .leader-card {
+      background: var(--white);
+    }
+
+    .leader-photo {
+      aspect-ratio: 3 / 4;
+      position: relative;
+      overflow: hidden;
+      background: linear-gradient(155deg, #451313 0%, #7a2a2a 50%, #451313 100%);
+      border: 1px solid var(--border);
+    }
+
+    .leader-card:first-child .leader-photo {
+      aspect-ratio: 2 / 3;
+    }
+
+    .leader-photo.placeholder-2 {
+      background: linear-gradient(155deg, #2d1610 0%, #5a2c1c 50%, #2d1610 100%);
+    }
+
+    .leader-photo.placeholder-3 {
+      background: linear-gradient(155deg, #231814 0%, #4a3629 50%, #231814 100%);
+    }
+
+    .leader-photo::before {
+      content: "Replace with real ministry photo";
+      position: absolute;
+      inset: auto 16px 16px 16px;
+      background: rgba(255,255,255,0.14);
+      color: rgba(255,255,255,0.88);
+      border: 1px solid rgba(255,255,255,0.22);
+      font-family: "Nunito Sans", sans-serif;
+      font-size: 11px;
+      font-weight: 700;
+      letter-spacing: 0.08em;
+      text-transform: uppercase;
+      text-align: center;
+      padding: 10px 12px;
+      backdrop-filter: blur(5px);
+    }
+
+    .leader-badge {
+      position: absolute;
+      left: 16px;
+      top: 16px;
+      background: var(--gold);
+      color: var(--ink);
+      font-family: "Nunito Sans", sans-serif;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      padding: 6px 10px;
+    }
+
+    .leader-content {
+      padding-top: 18px;
+    }
+
+    .leader-name {
+      font-family: "Cinzel", serif;
+      font-size: 25px;
+      color: var(--burgundy);
+      margin-bottom: 4px;
+    }
+
+    .leader-card:first-child .leader-name {
+      font-size: 30px;
+    }
+
+    .leader-role {
+      font-family: "Nunito Sans", sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .leader-rule {
+      width: 42px;
+      height: 1px;
+      background: var(--gold);
+      margin-bottom: 12px;
+    }
+
+    .leader-bio {
+      font-size: 14px;
+      line-height: 1.85;
+      color: var(--text-soft);
+    }
+
+    .expect {
+      background: var(--cream-dark);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .expect-grid {
+      grid-template-columns: repeat(4, 1fr);
+    }
+
+    .expect-card {
+      background: var(--white);
+    }
+
+    .expect-icon {
+      width: 56px;
+      height: 56px;
+      border-radius: 50%;
+      background: var(--gold-pale);
+      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+      margin-bottom: 18px;
+      color: var(--burgundy);
+      font-size: 22px;
+    }
+
+    .ministries-grid {
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 46px;
+    }
+
+    .ministry-card {
+      background: var(--white);
+      border-top: 3px solid transparent;
+      transition: transform 0.25s ease, border-color 0.25s ease;
+    }
+
+    .ministry-card:hover {
+      border-top-color: var(--gold);
+      transform: translateY(-4px);
+    }
+
+    .ministry-tag {
+      display: inline-block;
+      margin-bottom: 14px;
+      padding: 5px 10px;
+      border: 1px solid var(--border);
+      color: var(--gold);
+      font-family: "Nunito Sans", sans-serif;
+      font-size: 10px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+    }
+
+    .testimonials-grid {
+      grid-template-columns: repeat(3, 1fr);
+      margin-top: 28px;
+    }
+
+    .testimonial-card {
+      background: var(--white);
+      border-top: 3px solid transparent;
+      transition: border-color 0.25s ease;
+    }
+
+    .testimonial-card:hover {
+      border-top-color: var(--gold);
+    }
+
+    .quote-mark {
+      font-family: "Cinzel", serif;
+      font-size: 70px;
+      line-height: 0.8;
+      color: var(--gold-pale);
+      display: block;
+      margin-bottom: 10px;
+    }
+
+    .testimonial-text {
+      font-size: 15px;
+      line-height: 1.9;
+      color: var(--text-soft);
+      font-style: italic;
+      margin-bottom: 22px;
+    }
+
+    .testimonial-author {
+      display: flex;
+      align-items: center;
+      gap: 12px;
+    }
+
+    .avatar {
+      width: 44px;
+      height: 44px;
+      border-radius: 50%;
+      background: var(--gold-pale);
+      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+      font-family: "Cinzel", serif;
+      color: var(--burgundy);
+      font-size: 18px;
+      flex-shrink: 0;
+    }
+
+    .author-name {
+      font-family: "Nunito Sans", sans-serif;
+      font-size: 13px;
+      font-weight: 800;
+      color: var(--text);
+    }
+
+    .author-meta {
+      font-family: "Nunito Sans", sans-serif;
+      font-size: 11px;
+      color: var(--text-muted);
+      letter-spacing: 0.05em;
+      margin-top: 2px;
+    }
+
+    .giving {
+      background:
+        linear-gradient(180deg, rgba(59, 16, 16, 0.98), rgba(51, 14, 14, 0.99));
+      position: relative;
+      overflow: hidden;
+    }
+
+    .giving::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(201, 151, 58, 0.035) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(201, 151, 58, 0.035) 1px, transparent 1px);
+      background-size: 54px 54px;
+      pointer-events: none;
+    }
+
+    .giving-copy,
+    .giving-panel {
+      position: relative;
+      z-index: 1;
+    }
+
+    .giving-copy .section-copy {
+      color: rgba(255,255,255,0.72);
+    }
+
+    .giving-scripture {
+      margin: 26px 0;
+      border-left: 3px solid var(--gold);
+      padding: 14px 18px;
+      color: rgba(255,255,255,0.66);
+      font-style: italic;
+      line-height: 1.85;
+      font-size: 17px;
+    }
+
+    .giving-scripture cite {
+      display: block;
+      margin-top: 8px;
+      font-family: "Nunito Sans", sans-serif;
+      font-style: normal;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+    }
+
+    .giving-list {
+      display: grid;
+      gap: 12px;
+      margin-top: 18px;
+    }
+
+    .giving-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: rgba(255,255,255,0.05);
+      border: 1px solid rgba(201,151,58,0.14);
+      padding: 15px 16px;
+    }
+
+    .giving-icon {
+      width: 38px;
+      height: 38px;
+      display: grid;
+      place-items: center;
+      background: rgba(201,151,58,0.12);
+      border: 1px solid rgba(201,151,58,0.2);
+      flex-shrink: 0;
+    }
+
+    .giving-label {
+      font-family: "Nunito Sans", sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.16em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+
+    .giving-value {
+      color: rgba(255,255,255,0.72);
+      font-size: 14px;
+      line-height: 1.75;
+    }
+
+    .giving-panel {
+      background: var(--white);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 36px;
+    }
+
+    .giving-panel h3 {
+      font-family: "Cinzel", serif;
+      font-size: 28px;
+      color: var(--burgundy);
+      margin-bottom: 6px;
+    }
+
+    .giving-panel p {
+      font-size: 14px;
+      line-height: 1.7;
+      color: var(--text-muted);
+      margin-bottom: 24px;
+    }
+
+    .amount-grid {
+      display: grid;
+      grid-template-columns: repeat(3, 1fr);
+      gap: 10px;
+      margin-bottom: 16px;
+    }
+
+    .amount-btn {
+      padding: 14px 10px;
+      border: 1px solid var(--border);
+      background: var(--cream);
+      color: var(--burgundy);
+      font-family: "Cinzel", serif;
+      font-size: 16px;
+      font-weight: 700;
+      cursor: pointer;
+      transition: all 0.2s ease;
+    }
+
+    .amount-btn:hover,
+    .amount-btn.active {
+      background: var(--burgundy);
+      color: var(--gold-pale);
+      border-color: var(--burgundy);
+    }
+
+    .field {
+      margin-bottom: 14px;
+    }
+
+    .field label {
+      display: block;
+      margin-bottom: 8px;
+      font-family: "Nunito Sans", sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.14em;
+      text-transform: uppercase;
+      color: var(--text-muted);
+    }
+
+    .field input,
+    .field select,
+    .field textarea {
+      width: 100%;
+      padding: 13px 14px;
+      border: 1px solid var(--border);
+      background: var(--cream);
+      color: var(--text);
+      font-family: "Lora", serif;
+      font-size: 14px;
+      outline: none;
+    }
+
+    .field input:focus,
+    .field select:focus,
+    .field textarea:focus {
+      border-color: var(--gold);
+      background: var(--white);
+    }
+
+    .field-row {
+      display: grid;
+      grid-template-columns: 1fr 1fr;
+      gap: 12px;
+    }
+
+    .secure-note {
+      text-align: center;
+      margin-top: 12px;
+      font-family: "Nunito Sans", sans-serif;
+      font-size: 11px;
+      color: var(--text-muted);
+    }
+
+    .visit {
+      background: var(--white);
+      border-top: 1px solid var(--border);
+      border-bottom: 1px solid var(--border);
+    }
+
+    .visit-map {
+      min-height: 420px;
+      background:
+        linear-gradient(135deg, rgba(92,26,26,0.04), rgba(201,151,58,0.08)),
+        var(--cream-dark);
+      border: 1px solid var(--border);
+      position: relative;
+      overflow: hidden;
+      box-shadow: var(--shadow);
+    }
+
+    .visit-map::before {
+      content: "";
+      position: absolute;
+      inset: 0;
+      background-image:
+        linear-gradient(rgba(92,26,26,0.06) 1px, transparent 1px),
+        linear-gradient(90deg, rgba(92,26,26,0.06) 1px, transparent 1px);
+      background-size: 44px 44px;
+    }
+
+    .map-center {
+      position: absolute;
+      inset: 0;
+      display: grid;
+      place-items: center;
+      text-align: center;
+      padding: 30px;
+    }
+
+    .map-pin {
+      width: 78px;
+      height: 78px;
+      border-radius: 50%;
+      background: var(--burgundy);
+      color: var(--gold-pale);
+      display: grid;
+      place-items: center;
+      font-size: 34px;
+      margin: 0 auto 16px;
+      box-shadow: 0 18px 30px rgba(92, 26, 26, 0.2);
+    }
+
+    .map-center h3 {
+      font-family: "Cinzel", serif;
+      font-size: 30px;
+      color: var(--burgundy);
+      margin-bottom: 10px;
+    }
+
+    .map-center p {
+      max-width: 380px;
+      margin: 0 auto 18px;
+      color: var(--text-soft);
+      line-height: 1.85;
+    }
+
+    .visit-list {
+      display: grid;
+      gap: 14px;
+      margin-top: 24px;
+    }
+
+    .visit-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      background: var(--cream);
+      border: 1px solid var(--border);
+      padding: 16px;
+    }
+
+    .visit-icon {
+      width: 40px;
+      height: 40px;
+      display: grid;
+      place-items: center;
+      border-radius: 50%;
+      background: var(--gold-pale);
+      border: 1px solid var(--border);
+      color: var(--burgundy);
+      flex-shrink: 0;
+    }
+
+    .visit-label {
+      font-family: "Nunito Sans", sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+
+    .visit-value {
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--text-soft);
+    }
+
+    .contact {
+      background: var(--cream);
+    }
+
+    .contact-panel,
+    .connect-form {
+      background: var(--white);
+      border: 1px solid var(--border);
+      box-shadow: var(--shadow);
+      padding: 36px;
+    }
+
+    .contact-panel h3,
+    .connect-form h3 {
+      font-family: "Cinzel", serif;
+      font-size: 28px;
+      color: var(--burgundy);
+      margin-bottom: 8px;
+    }
+
+    .contact-panel p,
+    .connect-form p {
+      color: var(--text-muted);
+      line-height: 1.8;
+      margin-bottom: 22px;
+      font-size: 14px;
+    }
+
+    .contact-list {
+      display: grid;
+      gap: 14px;
+    }
+
+    .contact-item {
+      display: flex;
+      gap: 14px;
+      align-items: flex-start;
+      padding: 14px 0;
+      border-bottom: 1px solid var(--cream-dark);
+    }
+
+    .contact-item:last-child {
+      border-bottom: 0;
+    }
+
+    .contact-icon {
+      width: 38px;
+      height: 38px;
+      border-radius: 50%;
+      background: var(--gold-pale);
+      border: 1px solid var(--border);
+      display: grid;
+      place-items: center;
+      color: var(--burgundy);
+      flex-shrink: 0;
+    }
+
+    .contact-name {
+      font-family: "Nunito Sans", sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.15em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 4px;
+    }
+
+    .contact-value {
+      font-size: 14px;
+      line-height: 1.8;
+      color: var(--text-soft);
+    }
+
+    footer {
+      background: var(--burgundy-dark);
+      color: rgba(255,255,255,0.72);
+      border-top: 1px solid rgba(201,151,58,0.12);
+      padding: 70px 0 32px;
+    }
+
+    .footer-grid {
+      display: grid;
+      grid-template-columns: 2fr 1fr 1fr 1fr;
+      gap: 40px;
+      padding-bottom: 34px;
+      border-bottom: 1px solid rgba(201,151,58,0.14);
+    }
+
+    .footer-brand h3 {
+      font-family: "Cinzel", serif;
+      font-size: 28px;
+      color: var(--gold-pale);
+      margin-bottom: 10px;
+      letter-spacing: 0.04em;
+    }
+
+    .footer-brand p {
+      max-width: 340px;
+      line-height: 1.85;
+      color: rgba(255,255,255,0.62);
+      font-size: 14px;
+    }
+
+    .footer-title {
+      font-family: "Nunito Sans", sans-serif;
+      font-size: 11px;
+      font-weight: 800;
+      letter-spacing: 0.18em;
+      text-transform: uppercase;
+      color: var(--gold);
+      margin-bottom: 16px;
+    }
+
+    .footer-links {
+      list-style: none;
+      display: grid;
+      gap: 10px;
+    }
+
+    .footer-links a {
+      font-family: "Nunito Sans", sans-serif;
+      font-size: 13px;
+      color: rgba(255,255,255,0.68);
+    }
+
+    .footer-links a:hover {
+      color: var(--gold-light);
+    }
+
+    .footer-bottom {
+      padding-top: 22px;
+      display: flex;
+      justify-content: space-between;
+      gap: 16px;
+      flex-wrap: wrap;
+      font-family: "Nunito Sans", sans-serif;
+      font-size: 12px;
+      color: rgba(255,255,255,0.46);
+    }
+
+    .footer-credit {
+      color: var(--gold-light);
+    }
+
+    .whatsapp-float {
+      position: fixed;
+      right: 20px;
+      bottom: 20px;
+      z-index: 1200;
+      width: 58px;
+      height: 58px;
+      border-radius: 50%;
+      background: var(--whatsapp);
+      color: white;
+      display: grid;
+      place-items: center;
+      font-size: 28px;
+      box-shadow: 0 18px 30px rgba(37, 211, 102, 0.28);
+      transition: transform 0.2s ease;
+    }
+
+    .whatsapp-float:hover {
+      transform: translateY(-4px) scale(1.03);
+    }
+
+    .reveal {
+      opacity: 0;
+      transform: translateY(24px);
+      transition: opacity 0.8s ease, transform 0.8s ease;
+    }
+
+    .reveal.visible {
+      opacity: 1;
+      transform: translateY(0);
+    }
+
+    @media (max-width: 1100px) {
+      .nav-links {
+        display: none;
+      }
+
+      .beliefs-grid,
+      .services-grid,
+      .testimonials-grid,
+      .expect-grid,
+      .ministries-grid,
+      .leaders-grid,
+      .footer-grid {
+        grid-template-columns: repeat(2, 1fr);
+      }
+
+      .about-grid,
+      .watch-grid,
+      .giving-grid,
+      .visit-grid,
+      .contact-grid {
+        grid-template-columns: 1fr;
+      }
+    }
+
+    @media (max-width: 760px) {
+      section {
+        padding: 78px 0;
+      }
+
+      .topbar .container,
+      .nav-inner {
+        width: min(var(--max), calc(100% - 24px));
+      }
+
+      .topbar {
+        display: none;
+      }
+
+      .nav-inner {
+        min-height: 68px;
+      }
+
+      .nav-cta {
+        display: none;
+      }
+
+      .hero-inner {
+        padding: 90px 0 150px;
+      }
+
+      .hero-times {
+        grid-template-columns: 1fr;
+        position: static;
+        transform: none;
+        margin: 30px auto 0;
+        width: min(620px, calc(100% - 30px));
+      }
+
+      .beliefs-grid,
+      .services-grid,
+      .testimonials-grid,
+      .expect-grid,
+      .ministries-grid,
+      .leaders-grid,
+      .footer-grid,
+      .amount-grid,
+      .field-row,
+      .stats-grid {
+        grid-template-columns: 1fr;
+      }
+
+      .about-quote,
+      .giving-panel,
+      .contact-panel,
+      .connect-form {
+        padding: 28px;
+      }
+
+      .service-card,
+      .belief-card,
+      .testimonial-card,
+      .expect-card,
+      .ministry-card {
+        padding: 30px 24px;
+      }
+
+      .footer-bottom {
+        flex-direction: column;
+        align-items: flex-start;
+      }
+    }
+  </style>
+</head>
+<body>
+  <a
+    class="whatsapp-float"
+    href="https://wa.me/27730000000"
+    target="_blank"
+    aria-label="Chat with us on WhatsApp"
+    title="Chat with us on WhatsApp"
+  >
+    ✆
+  </a>
+
+  <div class="topbar">
+    <div class="container">
+      <div class="topbar-left">
+        <div>Sunday Services <strong>08:00 and 10:30</strong></div>
+        <div>Wednesday Prayer <strong>18:30</strong></div>
+        <div>Johannesburg, South Africa</div>
+      </div>
+      <div class="topbar-right">
+        <div>Call <strong>011 784 3300</strong></div>
+        <div>WhatsApp <strong>073 000 0000</strong></div>
+      </div>
+    </div>
+  </div>
+
+  <nav id="navbar">
+    <div class="container nav-inner">
+      <a href="#home" class="brand">
+        <div class="brand-mark" aria-hidden="true">
+          <svg viewBox="0 0 32 32" fill="none">
+            <rect x="14" y="3" width="4" height="26" rx="1" fill="#5c1a1a"></rect>
+            <rect x="5" y="12" width="22" height="4" rx="1" fill="#5c1a1a"></rect>
+          </svg>
+        </div>
+        <div>
+          <div class="brand-name">Covenant Fire Church</div>
+          <div class="brand-tag">Welcome Home</div>
+        </div>
+      </a>
+
+      <ul class="nav-links">
+        <li><a href="#about">About</a></li>
+        <li><a href="#watch">Watch</a></li>
+        <li><a href="#services">Services</a></li>
+        <li><a href="#visit">Plan Your Visit</a></li>
+        <li><a href="#ministries">Ministries</a></li>
+        <li><a href="#giving">Giving</a></li>
+        <li><a href="#contact">Contact</a></li>
+      </ul>
+
+      <a class="nav-cta" href="#visit">Plan Your Visit</a>
+    </div>
+  </nav>
+
+  <header class="hero" id="home">
+    <div class="hero-window" aria-hidden="true"></div>
+
+    <div class="hero-inner">
+      <div class="hero-icon" aria-hidden="true">
+        <svg viewBox="0 0 60 60" fill="none">
+          <rect x="27" y="4" width="6" height="52" rx="1" fill="#c9973a"></rect>
+          <rect x="6" y="19" width="48" height="6" rx="1" fill="#c9973a"></rect>
+          <circle cx="30" cy="30" r="27" stroke="rgba(201,151,58,0.32)" stroke-width="1.5"></circle>
+        </svg>
+      </div>
+
+      <div class="hero-kicker">A Church for Every Generation</div>
+
+      <h1>
+        Covenant Fire
+        <span>Church</span>
+      </h1>
+
+      <p class="hero-sub">
+        A Christ-centred church in Johannesburg where people can worship, grow in the Word,
+        build strong relationships, and find a place to belong.
+      </p>
+
+      <div class="hero-verse">
+        Come to me, all you who are weary and burdened, and I will give you rest.
+        <cite>Matthew 11:28</cite>
+      </div>
+
+      <div class="hero-actions">
+        <a class="btn btn-primary" href="#visit">Plan Your Visit</a>
+        <a class="btn btn-secondary" href="#watch">Watch Live</a>
+      </div>
+    </div>
+
+    <div class="hero-times">
+      <div class="time-card">
+        <div class="time-day">Sunday</div>
+        <div class="time-main">08:00 and 10:30</div>
+        <div class="time-sub">Main Worship Services</div>
+      </div>
+      <div class="time-card">
+        <div class="time-day">Wednesday</div>
+        <div class="time-main">18:30</div>
+        <div class="time-sub">Word and Prayer Night</div>
+      </div>
+      <div class="time-card">
+        <div class="time-day">Friday</div>
+        <div class="time-main">19:00</div>
+        <div class="time-sub">Prayer and Worship Evening</div>
+      </div>
+    </div>
+  </header>
+
+  <div class="ticker">
+    <div class="ticker-track" id="tickerTrack"></div>
+  </div>
+
+  <section id="about">
+    <div class="container about-grid">
+      <div class="reveal">
+        <div class="about-quote card">
+          <span class="about-quote-mark">"</span>
+          <blockquote>
+            We are a church family committed to the presence of God, the truth of His Word,
+            and the work of the Gospel in our city.
+          </blockquote>
+          <cite>Pastor Elijah Mokoena · Senior Pastor</cite>
+        </div>
+
+        <div class="stats-grid">
+          <div class="stat-box">
+            <div class="stat-num">28+</div>
+            <div class="stat-label">Years in Ministry</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">4,200+</div>
+            <div class="stat-label">Church Family</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">14</div>
+            <div class="stat-label">Cell Groups</div>
+          </div>
+          <div class="stat-box">
+            <div class="stat-num">6</div>
+            <div class="stat-label">Community Outreach Programs</div>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="eyebrow">Our Story</div>
+        <h2 class="section-title">
+          A Church Built on <em>Faithful Prayer</em>
+        </h2>
+        <div class="gold-rule"></div>
+        <p class="section-copy">
+          Covenant Fire Church began in 1996 with a small group of believers gathering in Soweto
+          for prayer, worship, and Bible study. What started in a modest setting grew over time
+          into a vibrant church community serving families, students, professionals, and children
+          across Johannesburg.
+        </p>
+        <br />
+        <p class="section-copy">
+          We are passionate about helping people know Christ, grow in faith, and walk together in
+          biblical community. Whether you are new to church, returning after many years, or looking
+          for a place to serve, there is room for you here.
+        </p>
+        <a class="btn btn-burgundy" style="margin-top:28px" href="#leadership">Meet Our Leadership</a>
+      </div>
+    </div>
+  </section>
+
+  <section class="beliefs">
+    <div class="container">
+      <div class="center-head reveal">
+        <div class="eyebrow">What We Believe</div>
+        <h2 class="section-title">The Foundations of Our <em>Faith</em></h2>
+        <div class="gold-rule" style="margin-left:auto;margin-right:auto"></div>
+        <p class="section-copy" style="margin:0 auto;">
+          Our church is rooted in the authority of Scripture, the saving work of Jesus Christ,
+          the power of prayer, and a call to love God and love people.
+        </p>
+      </div>
+
+      <div class="beliefs-grid">
+        <article class="belief-card reveal">
+          <div class="belief-icon">✝</div>
+          <h3 class="belief-title">The Bible</h3>
+          <p class="belief-text">
+            We believe the Bible is the inspired Word of God and the foundation for faith, doctrine, and daily life.
+          </p>
+          <span class="belief-verse">2 Timothy 3:16</span>
+        </article>
+
+        <article class="belief-card reveal">
+          <div class="belief-icon">❤</div>
+          <h3 class="belief-title">Jesus Christ</h3>
+          <p class="belief-text">
+            We believe salvation is found in Jesus Christ alone through His death, burial, and resurrection.
+          </p>
+          <span class="belief-verse">John 14:6</span>
+        </article>
+
+        <article class="belief-card reveal">
+          <div class="belief-icon">🕊</div>
+          <h3 class="belief-title">The Holy Spirit</h3>
+          <p class="belief-text">
+            We believe the Holy Spirit empowers believers to live holy lives, serve others, and grow in spiritual maturity.
+          </p>
+          <span class="belief-verse">Acts 1:8</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="watch" id="watch">
+    <div class="container watch-grid">
+      <div class="watch-copy reveal">
+        <div class="eyebrow" style="color:var(--gold-light)">Watch With Us</div>
+        <h2 class="section-title light">
+          Join the Service <em>Online</em>
+        </h2>
+        <div class="gold-rule"></div>
+        <p class="section-copy">
+          Unable to attend in person this week? You can still worship with us online.
+          Join our live stream, catch up on recent messages, and stay connected throughout the week.
+        </p>
+        <div style="margin-top:28px; display:flex; gap:12px; flex-wrap:wrap;">
+          <a class="btn btn-primary" href="#">Watch Live</a>
+          <a class="btn btn-secondary" href="#">Latest Sermon</a>
+        </div>
+      </div>
+
+      <div class="watch-box reveal">
+        <div class="watch-panel">
+          <div class="watch-frame">
+            <div class="play-circle">▶</div>
+            <h3>Sunday Worship Broadcast</h3>
+            <p>
+              Live every Sunday at 10:30. You can also browse previous sermons,
+              devotional messages, and special services.
+            </p>
+            <div class="watch-links">
+              <a href="#" class="watch-chip">YouTube</a>
+              <a href="#" class="watch-chip">Facebook</a>
+              <a href="#" class="watch-chip">Church App</a>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="services" id="services">
+    <div class="container">
+      <div class="center-head reveal">
+        <div class="eyebrow">Gather With Us</div>
+        <h2 class="section-title">Service Times and <em>Weekly Gatherings</em></h2>
+        <div class="gold-rule" style="margin-left:auto;margin-right:auto"></div>
+      </div>
+
+      <div class="services-grid">
+        <article class="service-card reveal">
+          <div class="service-day">Sunday</div>
+          <div class="service-time">08:00 and 10:30</div>
+          <h3 class="service-title">Worship Service</h3>
+          <p class="service-text">
+            A welcoming service with worship, biblical preaching, prayer ministry, and children’s church.
+          </p>
+          <span class="service-badge">Live Stream Available</span>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-day">Wednesday</div>
+          <div class="service-time">18:30</div>
+          <h3 class="service-title">Word and Prayer Night</h3>
+          <p class="service-text">
+            Midweek teaching, corporate prayer, and time to grow deeper in the Word with the church family.
+          </p>
+          <span class="service-badge">In Person</span>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-day">Friday</div>
+          <div class="service-time">19:00</div>
+          <h3 class="service-title">Prayer and Worship Evening</h3>
+          <p class="service-text">
+            An evening of worship, prayer, and ministry as we seek God together and encourage one another in faith.
+          </p>
+          <span class="service-badge">Weekly Gathering</span>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-day">Saturday</div>
+          <div class="service-time">09:00</div>
+          <h3 class="service-title">Youth Gathering</h3>
+          <p class="service-text">
+            A space for young people to worship, build friendships, and grow in confidence in Christ.
+          </p>
+          <span class="service-badge">Youth Ministry</span>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-day">Monthly</div>
+          <div class="service-time">First Sunday</div>
+          <h3 class="service-title">Communion Service</h3>
+          <p class="service-text">
+            On the first Sunday of each month, we share communion together as a church family.
+          </p>
+          <span class="service-badge">Holy Communion</span>
+        </article>
+
+        <article class="service-card reveal">
+          <div class="service-day">All Week</div>
+          <div class="service-time">Online Resources</div>
+          <h3 class="service-title">Messages and Devotionals</h3>
+          <p class="service-text">
+            Access sermons, Bible encouragement, and updates through our digital channels throughout the week.
+          </p>
+          <span class="service-badge">Online</span>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="leadership" id="leadership">
+    <div class="container">
+      <div class="reveal">
+        <div class="eyebrow">Meet the Team</div>
+        <h2 class="section-title">Leadership and <em>Pastoral Care</em></h2>
+        <div class="gold-rule"></div>
+      </div>
+
+      <div class="leaders-grid">
+        <article class="leader-card reveal">
+          <div class="leader-photo">
+            <div class="leader-badge">Senior Pastor</div>
+          </div>
+          <div class="leader-content">
+            <h3 class="leader-name">Elijah Mokoena</h3>
+            <div class="leader-role">Senior Pastor</div>
+            <div class="leader-rule"></div>
+            <p class="leader-bio">
+              Pastor Elijah has faithfully led Covenant Fire Church for many years with a strong emphasis
+              on prayer, biblical teaching, family life, and practical discipleship.
+            </p>
+          </div>
+        </article>
+
+        <article class="leader-card reveal">
+          <div class="leader-photo placeholder-2">
+            <div class="leader-badge">Pastoral Care</div>
+          </div>
+          <div class="leader-content">
+            <h3 class="leader-name">Sarah Mokoena</h3>
+            <div class="leader-role">Pastor · Women and Family Ministry</div>
+            <div class="leader-rule"></div>
+            <p class="leader-bio">
+              Pastor Sarah oversees women’s ministry, marriage support, and care initiatives for families and new members.
+            </p>
+          </div>
+        </article>
+
+        <article class="leader-card reveal">
+          <div class="leader-photo placeholder-3">
+            <div class="leader-badge">Next Generation</div>
+          </div>
+          <div class="leader-content">
+            <h3 class="leader-name">Sifiso Ndlovu</h3>
+            <div class="leader-role">Pastor · Youth and Campus Ministry</div>
+            <div class="leader-rule"></div>
+            <p class="leader-bio">
+              Pastor Sifiso works with teenagers, young adults, and campus groups, helping the next generation follow Christ with conviction.
+            </p>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="expect" id="visit">
+    <div class="container">
+      <div class="center-head reveal">
+        <div class="eyebrow">First Time Here</div>
+        <h2 class="section-title">What to <em>Expect</em></h2>
+        <div class="gold-rule" style="margin-left:auto;margin-right:auto"></div>
+        <p class="section-copy" style="margin:0 auto;">
+          We want your first visit to feel easy and welcoming. Here is what you can expect when you join us.
+        </p>
+      </div>
+
+      <div class="expect-grid">
+        <article class="expect-card reveal">
+          <div class="expect-icon">⏱</div>
+          <h3 class="expect-title">Service Length</h3>
+          <p class="expect-text">
+            Our Sunday services usually last about 90 minutes, including worship, prayer, and preaching.
+          </p>
+        </article>
+
+        <article class="expect-card reveal">
+          <div class="expect-icon">👕</div>
+          <h3 class="expect-title">Dress</h3>
+          <p class="expect-text">
+            You are welcome to come as you are. Some people dress formally, others come casually.
+          </p>
+        </article>
+
+        <article class="expect-card reveal">
+          <div class="expect-icon">👨‍👩‍👧</div>
+          <h3 class="expect-title">Children’s Ministry</h3>
+          <p class="expect-text">
+            Safe, age-appropriate children’s church runs during our main Sunday service.
+          </p>
+        </article>
+
+        <article class="expect-card reveal">
+          <div class="expect-icon">☕</div>
+          <h3 class="expect-title">Welcome Desk</h3>
+          <p class="expect-text">
+            Our team is available before and after service to help you find your way and answer questions.
+          </p>
+        </article>
+      </div>
+
+      <div class="ministries-grid" id="ministries">
+        <article class="ministry-card reveal">
+          <span class="ministry-tag">Families</span>
+          <h3 class="ministry-title">Children and Families</h3>
+          <p class="ministry-text">
+            Support for parents, children’s ministry, and family discipleship resources throughout the year.
+          </p>
+        </article>
+
+        <article class="ministry-card reveal">
+          <span class="ministry-tag">Youth</span>
+          <h3 class="ministry-title">Youth and Young Adults</h3>
+          <p class="ministry-text">
+            Weekly gatherings, discipleship, and community for teenagers, students, and young professionals.
+          </p>
+        </article>
+
+        <article class="ministry-card reveal">
+          <span class="ministry-tag">Care</span>
+          <h3 class="ministry-title">Community and Outreach</h3>
+          <p class="ministry-text">
+            Practical ministry through prayer support, counselling referrals, local outreach, and care initiatives.
+          </p>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section>
+    <div class="container">
+      <div class="center-head reveal">
+        <div class="eyebrow">Changed Lives</div>
+        <h2 class="section-title">Stories of <em>Grace</em></h2>
+        <div class="gold-rule" style="margin-left:auto;margin-right:auto"></div>
+      </div>
+
+      <div class="testimonials-grid">
+        <article class="testimonial-card reveal">
+          <span class="quote-mark">"</span>
+          <p class="testimonial-text">
+            We came to Covenant Fire during a difficult season in our family. We found prayer, wisdom,
+            and people who genuinely walked with us.
+          </p>
+          <div class="testimonial-author">
+            <div class="avatar">T</div>
+            <div>
+              <div class="author-name">Thabo Sithole</div>
+              <div class="author-meta">Member since 2021 · Johannesburg</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="testimonial-card reveal">
+          <span class="quote-mark">"</span>
+          <p class="testimonial-text">
+            The Wednesday prayer service helped me rebuild consistency in my faith. It has become an important part of my week.
+          </p>
+          <div class="testimonial-author">
+            <div class="avatar">N</div>
+            <div>
+              <div class="author-name">Nomsa Khumalo</div>
+              <div class="author-meta">Member since 2018 · Soweto</div>
+            </div>
+          </div>
+        </article>
+
+        <article class="testimonial-card reveal">
+          <span class="quote-mark">"</span>
+          <p class="testimonial-text">
+            We visited once, felt welcomed immediately, and kept coming back. This church made it easy for us to connect and grow.
+          </p>
+          <div class="testimonial-author">
+            <div class="avatar">A</div>
+            <div>
+              <div class="author-name">Adeola and Femi Adeyemi</div>
+              <div class="author-meta">Members since 2020 · Sandton</div>
+            </div>
+          </div>
+        </article>
+      </div>
+    </div>
+  </section>
+
+  <section class="giving" id="giving">
+    <div class="container giving-grid">
+      <div class="giving-copy reveal">
+        <div class="eyebrow" style="color:var(--gold-light)">Giving</div>
+        <h2 class="section-title light">Give with <em>Purpose</em></h2>
+        <div class="gold-rule"></div>
+        <p class="section-copy">
+          Thank you for your generosity. Your giving helps support ministry, discipleship,
+          outreach, and the daily work of the church in our community.
+        </p>
+
+        <div class="giving-scripture">
+          Each of you should give what you have decided in your heart to give,
+          not reluctantly or under compulsion, for God loves a cheerful giver.
+          <cite>2 Corinthians 9:7</cite>
+        </div>
+
+        <div class="giving-list">
+          <div class="giving-item">
+            <div class="giving-icon">🏦</div>
+            <div>
+              <div class="giving-label">Bank Transfer</div>
+              <div class="giving-value">
+                Covenant Fire Church<br />
+                Standard Bank · Account No. 012345678<br />
+                Branch Code 051001
+              </div>
+            </div>
+          </div>
+
+          <div class="giving-item">
+            <div class="giving-icon">📱</div>
+            <div>
+              <div class="giving-label">Online Giving</div>
+              <div class="giving-value">
+                Secure giving is available through our website and mobile giving options.
+              </div>
+            </div>
+          </div>
+
+          <div class="giving-item">
+            <div class="giving-icon">❤</div>
+            <div>
+              <div class="giving-label">Purpose Areas</div>
+              <div class="giving-value">
+                Tithes, offerings, missions, benevolence, and building support.
+              </div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="giving-panel reveal">
+        <h3>Online Giving</h3>
+        <p>Select an amount and complete your details below.</p>
+
+        <div class="amount-grid">
+          <button class="amount-btn active" type="button">R100</button>
+          <button class="amount-btn" type="button">R250</button>
+          <button class="amount-btn" type="button">R500</button>
+          <button class="amount-btn" type="button">R1 000</button>
+          <button class="amount-btn" type="button">R2 500</button>
+          <button class="amount-btn" type="button">Other</button>
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="give-name">First Name</label>
+            <input id="give-name" type="text" placeholder="First name" />
+          </div>
+          <div class="field">
+            <label for="give-surname">Last Name</label>
+            <input id="give-surname" type="text" placeholder="Last name" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="give-email">Email Address</label>
+          <input id="give-email" type="email" placeholder="you@example.com" />
+        </div>
+
+        <div class="field">
+          <label for="give-type">Giving Type</label>
+          <select id="give-type">
+            <option>Tithe</option>
+            <option>Offering</option>
+            <option>Missions</option>
+            <option>Benevolence</option>
+            <option>Building Fund</option>
+          </select>
+        </div>
+
+        <button class="btn btn-primary" style="width:100%" type="button" id="giveBtn">
+          Continue to Give
+        </button>
+
+        <div class="secure-note">Secure payment placeholder for PayFast, Yoco, or Ozow integration.</div>
+      </div>
+    </div>
+  </section>
+
+  <section class="visit">
+    <div class="container visit-grid">
+      <div class="visit-map reveal">
+        <div class="map-center">
+          <div>
+            <div class="map-pin">📍</div>
+            <h3>Visit Us This Sunday</h3>
+            <p>
+              14 Fredman Drive, Sandton, Johannesburg, 2196.
+              Replace this section with an embedded Google Map or a live directions widget.
+            </p>
+            <a class="btn btn-burgundy" href="#">Get Directions</a>
+          </div>
+        </div>
+      </div>
+
+      <div class="reveal">
+        <div class="eyebrow">Plan Your Visit</div>
+        <h2 class="section-title">Everything You Need for Your <em>First Sunday</em></h2>
+        <div class="gold-rule"></div>
+        <p class="section-copy">
+          We want your first visit to feel simple and stress free. Our welcome team is ready to help
+          with parking, children’s check-in, and any questions you may have.
+        </p>
+
+        <div class="visit-list">
+          <div class="visit-item">
+            <div class="visit-icon">🚗</div>
+            <div>
+              <div class="visit-label">Parking</div>
+              <div class="visit-value">On-site parking is available with volunteers to direct first-time visitors.</div>
+            </div>
+          </div>
+
+          <div class="visit-item">
+            <div class="visit-icon">🧒</div>
+            <div>
+              <div class="visit-label">Children’s Check-In</div>
+              <div class="visit-value">A safe children’s ministry environment is available during Sunday services.</div>
+            </div>
+          </div>
+
+          <div class="visit-item">
+            <div class="visit-icon">🤝</div>
+            <div>
+              <div class="visit-label">Welcome Team</div>
+              <div class="visit-value">You can stop by the welcome desk before or after service for help and information.</div>
+            </div>
+          </div>
+
+          <div class="visit-item">
+            <div class="visit-icon">📱</div>
+            <div>
+              <div class="visit-label">WhatsApp</div>
+              <div class="visit-value">Message us before your visit if you need help with directions or service information.</div>
+            </div>
+          </div>
+        </div>
+      </div>
+    </div>
+  </section>
+
+  <section class="contact" id="contact">
+    <div class="container contact-grid">
+      <div class="contact-panel reveal">
+        <h3>Contact Us</h3>
+        <p>Reach out to us during the week. Our team would be glad to help.</p>
+
+        <div class="contact-list">
+          <div class="contact-item">
+            <div class="contact-icon">📍</div>
+            <div>
+              <div class="contact-name">Address</div>
+              <div class="contact-value">14 Fredman Drive, Sandton, Johannesburg, 2196</div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">📞</div>
+            <div>
+              <div class="contact-name">Phone</div>
+              <div class="contact-value">011 784 3300</div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">✉</div>
+            <div>
+              <div class="contact-name">Email</div>
+              <div class="contact-value">info@covenantfirechurch.co.za</div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">💬</div>
+            <div>
+              <div class="contact-name">WhatsApp</div>
+              <div class="contact-value">073 000 0000</div>
+            </div>
+          </div>
+
+          <div class="contact-item">
+            <div class="contact-icon">🕘</div>
+            <div>
+              <div class="contact-name">Office Hours</div>
+              <div class="contact-value">Monday to Friday · 09:00 to 16:00</div>
+            </div>
+          </div>
+        </div>
+      </div>
+
+      <div class="connect-form reveal">
+        <h3>Let Us Know You’re Coming</h3>
+        <p>Fill in your details and our team will make your first visit easier.</p>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="first-name">First Name</label>
+            <input id="first-name" type="text" placeholder="First name" />
+          </div>
+          <div class="field">
+            <label for="last-name">Last Name</label>
+            <input id="last-name" type="text" placeholder="Last name" />
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="email">Email Address</label>
+          <input id="email" type="email" placeholder="you@example.com" />
+        </div>
+
+        <div class="field-row">
+          <div class="field">
+            <label for="phone">Phone Number</label>
+            <input id="phone" type="tel" placeholder="073 000 0000" />
+          </div>
+          <div class="field">
+            <label for="visit-service">Service</label>
+            <select id="visit-service">
+              <option>Sunday 08:00</option>
+              <option>Sunday 10:30</option>
+              <option>Wednesday 18:30</option>
+              <option>Friday 19:00</option>
+            </select>
+          </div>
+        </div>
+
+        <div class="field">
+          <label for="message">Anything We Can Help With?</label>
+          <textarea id="message" rows="5" placeholder="Children’s ministry, parking, prayer request, or any other question"></textarea>
+        </div>
+
+        <button class="btn btn-burgundy" style="width:100%" type="button" id="visitBtn">
+          Submit
+        </button>
+      </div>
+    </div>
+  </section>
+
+  <footer>
+    <div class="container">
+      <div class="footer-grid">
+        <div class="footer-brand">
+          <h3>Covenant Fire Church</h3>
+          <p>
+            A welcoming church in Johannesburg committed to worship, biblical teaching,
+            prayer, discipleship, and serving our community.
+          </p>
+        </div>
+
+        <div>
+          <div class="footer-title">Visit</div>
+          <ul class="footer-links">
+            <li><a href="#visit">Plan Your Visit</a></li>
+            <li><a href="#services">Service Times</a></li>
+            <li><a href="#watch">Watch Online</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-title">Church Life</div>
+          <ul class="footer-links">
+            <li><a href="#ministries">Ministries</a></li>
+            <li><a href="#leadership">Leadership</a></li>
+            <li><a href="#giving">Giving</a></li>
+          </ul>
+        </div>
+
+        <div>
+          <div class="footer-title">Contact</div>
+          <ul class="footer-links">
+            <li><a href="#contact">Get in Touch</a></li>
+            <li><a href="#">Privacy Policy</a></li>
+            <li><a href="#">Terms of Use</a></li>
+          </ul>
+        </div>
+      </div>
+
+      <div class="footer-bottom">
+        <div>© 2026 Covenant Fire Church. All rights reserved.</div>
+        <div class="footer-credit">Website concept by VusoNgwane Consulting</div>
+      </div>
+    </div>
+  </footer>
+
+  <script>
+    const tickerMessages = [
+      "Sunday Services 08:00 and 10:30",
+      "Wednesday Word and Prayer 18:30",
+      "Friday Prayer and Worship Evening 19:00",
+      "Children’s Ministry Available",
+      "Watch Live Every Sunday",
+      "Plan Your Visit This Week"
+    ];
+
+    const tickerTrack = document.getElementById("tickerTrack");
+    if (tickerTrack) {
+      let markup = "";
+      for (let i = 0; i < 2; i++) {
+        tickerMessages.forEach((item) => {
+          markup += `<div class="ticker-item"><span class="ticker-dot"></span>${item}</div>`;
+        });
+      }
+      tickerTrack.innerHTML = markup;
+    }
+
+    const reveals = document.querySelectorAll(".reveal");
+    const observer = new IntersectionObserver((entries) => {
+      entries.forEach((entry) => {
+        if (entry.isIntersecting) {
+          entry.target.classList.add("visible");
+        }
+      });
+    }, { threshold: 0.12 });
+
+    reveals.forEach((el) => observer.observe(el));
+
+    const amountButtons = document.querySelectorAll(".amount-btn");
+    amountButtons.forEach((btn) => {
+      btn.addEventListener("click", () => {
+        amountButtons.forEach((b) => b.classList.remove("active"));
+        btn.classList.add("active");
+      });
+    });
+
+    const giveBtn = document.getElementById("giveBtn");
+    if (giveBtn) {
+      giveBtn.addEventListener("click", function () {
+        this.textContent = "Giving Link Ready";
+        this.disabled = true;
+      });
+    }
+
+    const visitBtn = document.getElementById("visitBtn");
+    if (visitBtn) {
+      visitBtn.addEventListener("click", function () {
+        this.textContent = "Submitted";
+        this.disabled = true;
+      });
+    }
+  </script>
+</body>
+</html>

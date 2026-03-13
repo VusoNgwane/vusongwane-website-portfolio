@@ -1,0 +1,1273 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+<meta charset="UTF-8">
+<meta name="viewport" content="width=device-width, initial-scale=1.0">
+<title>Hargreave & Morrow | Attorneys at Law</title>
+<link rel="preconnect" href="https://fonts.googleapis.com">
+<link href="https://fonts.googleapis.com/css2?family=Cormorant+Garamond:ital,wght@0,300;0,400;0,500;0,600;1,300;1,400;1,500&family=Montserrat:wght@300;400;500;600&family=EB+Garamond:ital,wght@0,400;0,500;1,400&display=swap" rel="stylesheet">
+<style>
+  :root {
+    --black:    #0a0a0a;
+    --charcoal: #111111;
+    --dark:     #1a1a1a;
+    --mid:      #2a2a2a;
+    --border:   #2e2e2e;
+    --gold:     #c9a84c;
+    --gold-lt:  #e2c97e;
+    --gold-dk:  #8c6d2f;
+    --cream:    #f5f0e8;
+    --warm:     #d4cfc6;
+    --muted:    #888880;
+    --text:     #e8e4dc;
+  }
+
+  *, *::before, *::after { margin:0; padding:0; box-sizing:border-box; }
+
+  html { scroll-behavior: smooth; }
+
+  body {
+    background: var(--black);
+    color: var(--text);
+    font-family: 'Montserrat', sans-serif;
+    font-weight: 300;
+    overflow-x: hidden;
+    cursor: none;
+  }
+
+  /* ── CUSTOM CURSOR ────────────────────────────────────────── */
+  .cursor {
+    width: 8px; height: 8px;
+    background: var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9999;
+    transition: transform 0.15s ease;
+    mix-blend-mode: difference;
+  }
+  .cursor-ring {
+    width: 36px; height: 36px;
+    border: 1px solid var(--gold);
+    border-radius: 50%;
+    position: fixed;
+    top: 0; left: 0;
+    pointer-events: none;
+    z-index: 9998;
+    transition: transform 0.35s cubic-bezier(0.23,1,0.32,1), width 0.3s, height 0.3s, opacity 0.3s;
+    opacity: 0.6;
+  }
+  .cursor-ring.hover { width: 60px; height: 60px; opacity: 0.3; }
+
+  /* ── NAVIGATION ───────────────────────────────────────────── */
+  nav {
+    position: fixed;
+    top: 0; left: 0; right: 0;
+    z-index: 100;
+    padding: 28px 60px;
+    display: flex;
+    align-items: center;
+    justify-content: space-between;
+    transition: background 0.5s, padding 0.4s;
+  }
+  nav.scrolled {
+    background: rgba(10,10,10,0.95);
+    backdrop-filter: blur(12px);
+    padding: 18px 60px;
+    border-bottom: 1px solid var(--border);
+  }
+  .nav-logo {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 22px;
+    font-weight: 500;
+    letter-spacing: 0.08em;
+    color: var(--cream);
+    text-decoration: none;
+  }
+  .nav-logo span { color: var(--gold); }
+  .nav-links {
+    display: flex; gap: 40px; list-style: none;
+  }
+  .nav-links a {
+    color: var(--warm);
+    text-decoration: none;
+    font-size: 11px;
+    font-weight: 500;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    transition: color 0.3s;
+    position: relative;
+  }
+  .nav-links a::after {
+    content: '';
+    position: absolute;
+    bottom: -4px; left: 0;
+    width: 0; height: 1px;
+    background: var(--gold);
+    transition: width 0.4s ease;
+  }
+  .nav-links a:hover { color: var(--gold-lt); }
+  .nav-links a:hover::after { width: 100%; }
+  .nav-cta {
+    padding: 10px 28px;
+    border: 1px solid var(--gold);
+    color: var(--gold);
+    text-decoration: none;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 500;
+    transition: all 0.35s;
+  }
+  .nav-cta:hover {
+    background: var(--gold);
+    color: var(--black);
+  }
+
+  /* ── HERO ─────────────────────────────────────────────────── */
+  .hero {
+    height: 100vh;
+    min-height: 700px;
+    position: relative;
+    display: flex;
+    align-items: flex-end;
+    justify-content: flex-start;
+    overflow: hidden;
+  }
+
+  .hero-bg {
+    position: absolute;
+    inset: 0;
+    background:
+      linear-gradient(135deg, rgba(10,10,10,0.92) 0%, rgba(20,16,10,0.75) 60%, rgba(10,10,10,0.88) 100%),
+      url('data:image/svg+xml,<svg xmlns="http://www.w3.org/2000/svg" width="800" height="600"><defs><radialGradient id="g" cx="60%" cy="40%" r="60%"><stop offset="0%" stop-color="%23c9a84c" stop-opacity="0.12"/><stop offset="100%" stop-color="%230a0a0a" stop-opacity="0"/></radialGradient></defs><rect width="800" height="600" fill="%230a0a0a"/><rect width="800" height="600" fill="url(%23g)"/></svg>') center/cover;
+  }
+
+  /* Animated grain overlay */
+  .hero-bg::after {
+    content: '';
+    position: absolute;
+    inset: -100%;
+    background-image: url("data:image/svg+xml,%3Csvg viewBox='0 0 256 256' xmlns='http://www.w3.org/2000/svg'%3E%3Cfilter id='noise'%3E%3CfeTurbulence type='fractalNoise' baseFrequency='0.9' numOctaves='4' stitchTiles='stitch'/%3E%3C/filter%3E%3Crect width='100%25' height='100%25' filter='url(%23noise)' opacity='0.04'/%3E%3C/svg%3E");
+    opacity: 0.5;
+    animation: grain 0.5s steps(1) infinite;
+  }
+  @keyframes grain {
+    0%,100%{transform:translate(0,0)}
+    10%{transform:translate(-2%,-3%)}
+    20%{transform:translate(3%,2%)}
+    30%{transform:translate(-1%,4%)}
+    40%{transform:translate(2%,-1%)}
+    50%{transform:translate(-3%,1%)}
+    60%{transform:translate(1%,3%)}
+    70%{transform:translate(-2%,-2%)}
+    80%{transform:translate(4%,1%)}
+    90%{transform:translate(-1%,-3%)}
+  }
+
+  /* Decorative vertical gold lines */
+  .hero-lines {
+    position: absolute;
+    inset: 0;
+    pointer-events: none;
+  }
+  .hero-lines::before, .hero-lines::after {
+    content: '';
+    position: absolute;
+    top: 0; bottom: 0;
+    width: 1px;
+    background: linear-gradient(to bottom, transparent 0%, var(--gold-dk) 30%, var(--gold) 50%, var(--gold-dk) 70%, transparent 100%);
+    opacity: 0.4;
+  }
+  .hero-lines::before { left: 60px; animation: lineReveal 2s 0.5s ease both; }
+  .hero-lines::after  { right: 60px; animation: lineReveal 2s 0.8s ease both; }
+  @keyframes lineReveal {
+    from { clip-path: inset(50% 0 50% 0); }
+    to   { clip-path: inset(0% 0 0% 0); }
+  }
+
+  .hero-content {
+    position: relative;
+    z-index: 2;
+    padding: 0 80px 100px;
+    max-width: 900px;
+    opacity: 0;
+    animation: heroIn 1.4s 0.4s cubic-bezier(0.22,1,0.36,1) both;
+  }
+  @keyframes heroIn {
+    from { opacity: 0; transform: translateY(40px); }
+    to   { opacity: 1; transform: translateY(0); }
+  }
+
+  .hero-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 28px;
+  }
+  .hero-eyebrow span {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+  }
+  .hero-eyebrow::before {
+    content: '';
+    width: 48px; height: 1px;
+    background: var(--gold);
+  }
+
+  .hero h1 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(56px, 7vw, 96px);
+    font-weight: 300;
+    line-height: 1.0;
+    letter-spacing: -0.01em;
+    color: var(--cream);
+    margin-bottom: 28px;
+  }
+  .hero h1 em {
+    font-style: italic;
+    color: var(--gold-lt);
+  }
+
+  .hero-sub {
+    font-size: 13px;
+    letter-spacing: 0.06em;
+    color: var(--muted);
+    line-height: 1.8;
+    max-width: 480px;
+    margin-bottom: 52px;
+  }
+
+  .hero-actions {
+    display: flex;
+    gap: 24px;
+    align-items: center;
+  }
+  .btn-primary {
+    padding: 16px 44px;
+    background: var(--gold);
+    color: var(--black);
+    text-decoration: none;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-weight: 600;
+    transition: all 0.35s;
+    display: inline-block;
+  }
+  .btn-primary:hover {
+    background: var(--gold-lt);
+    transform: translateY(-2px);
+  }
+  .btn-ghost {
+    color: var(--warm);
+    text-decoration: none;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    font-weight: 500;
+    display: flex;
+    align-items: center;
+    gap: 12px;
+    transition: color 0.3s;
+  }
+  .btn-ghost::after {
+    content: '→';
+    font-size: 16px;
+    transition: transform 0.3s;
+  }
+  .btn-ghost:hover { color: var(--gold); }
+  .btn-ghost:hover::after { transform: translateX(6px); }
+
+  /* Hero scroll indicator */
+  .scroll-indicator {
+    position: absolute;
+    bottom: 36px;
+    right: 70px;
+    display: flex;
+    flex-direction: column;
+    align-items: center;
+    gap: 10px;
+    z-index: 2;
+    opacity: 0;
+    animation: heroIn 1.4s 1.2s ease both;
+  }
+  .scroll-indicator span {
+    font-size: 9px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--muted);
+    writing-mode: vertical-rl;
+  }
+  .scroll-line {
+    width: 1px;
+    height: 60px;
+    background: linear-gradient(to bottom, var(--gold), transparent);
+    animation: scrollPulse 2s ease-in-out infinite;
+  }
+  @keyframes scrollPulse {
+    0%,100%{transform:scaleY(1);opacity:1}
+    50%{transform:scaleY(0.5);opacity:0.4}
+  }
+
+  /* ── STATS BAR ────────────────────────────────────────────── */
+  .stats-bar {
+    background: var(--dark);
+    border-top: 1px solid var(--border);
+    border-bottom: 1px solid var(--border);
+    padding: 48px 80px;
+    display: grid;
+    grid-template-columns: repeat(4, 1fr);
+    gap: 0;
+  }
+  .stat {
+    text-align: center;
+    padding: 0 20px;
+    border-right: 1px solid var(--border);
+  }
+  .stat:last-child { border-right: none; }
+  .stat-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 54px;
+    font-weight: 300;
+    color: var(--gold);
+    line-height: 1;
+    margin-bottom: 8px;
+  }
+  .stat-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+  }
+
+  /* ── SECTIONS COMMON ──────────────────────────────────────── */
+  section { padding: 120px 80px; }
+  .section-eyebrow {
+    display: flex;
+    align-items: center;
+    gap: 16px;
+    margin-bottom: 20px;
+  }
+  .section-eyebrow span {
+    font-size: 10px;
+    letter-spacing: 0.3em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-weight: 500;
+  }
+  .section-eyebrow::before {
+    content: '';
+    width: 36px; height: 1px;
+    background: var(--gold);
+  }
+  h2 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(38px, 4vw, 60px);
+    font-weight: 300;
+    line-height: 1.1;
+    color: var(--cream);
+    margin-bottom: 24px;
+  }
+  h2 em { font-style: italic; color: var(--gold-lt); }
+
+  /* ── ABOUT / PHILOSOPHY ───────────────────────────────────── */
+  .about {
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 100px;
+    align-items: center;
+    background: var(--charcoal);
+  }
+  .about-text p {
+    font-size: 15px;
+    line-height: 1.9;
+    color: var(--warm);
+    margin-bottom: 20px;
+  }
+  .about-text p strong {
+    color: var(--gold-lt);
+    font-weight: 400;
+  }
+  .about-quote {
+    border-left: 2px solid var(--gold);
+    padding: 32px 40px;
+    background: var(--dark);
+    position: relative;
+  }
+  .about-quote::before {
+    content: '"';
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 120px;
+    color: var(--gold);
+    opacity: 0.15;
+    position: absolute;
+    top: -10px; left: 20px;
+    line-height: 1;
+  }
+  .about-quote blockquote {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-style: italic;
+    font-weight: 300;
+    line-height: 1.5;
+    color: var(--cream);
+    margin-bottom: 20px;
+  }
+  .about-quote cite {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    font-style: normal;
+  }
+
+  /* ── PRACTICE AREAS ───────────────────────────────────────── */
+  .practice {
+    background: var(--black);
+  }
+  .practice-header {
+    display: flex;
+    justify-content: space-between;
+    align-items: flex-end;
+    margin-bottom: 70px;
+  }
+  .practice-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 2px;
+  }
+  .practice-card {
+    background: var(--dark);
+    padding: 50px 44px;
+    border-top: 2px solid transparent;
+    transition: all 0.4s ease;
+    position: relative;
+    overflow: hidden;
+  }
+  .practice-card::before {
+    content: '';
+    position: absolute;
+    bottom: 0; left: 0; right: 0;
+    height: 2px;
+    background: var(--gold);
+    transform: scaleX(0);
+    transform-origin: left;
+    transition: transform 0.5s ease;
+  }
+  .practice-card:hover { background: var(--mid); }
+  .practice-card:hover::before { transform: scaleX(1); }
+  .practice-card:hover .card-arrow { opacity: 1; transform: translateX(0); }
+  .practice-number {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 13px;
+    color: var(--gold-dk);
+    letter-spacing: 0.15em;
+    margin-bottom: 24px;
+    display: block;
+  }
+  .practice-card h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 16px;
+    line-height: 1.2;
+  }
+  .practice-card p {
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--muted);
+    margin-bottom: 30px;
+  }
+  .card-arrow {
+    color: var(--gold);
+    font-size: 20px;
+    opacity: 0;
+    transform: translateX(-10px);
+    transition: all 0.3s ease;
+    display: block;
+  }
+
+  /* ── ATTORNEYS ─────────────────────────────────────────────── */
+  .attorneys {
+    background: var(--charcoal);
+  }
+  .attorneys-grid {
+    display: grid;
+    grid-template-columns: repeat(3, 1fr);
+    gap: 40px;
+    margin-top: 70px;
+  }
+  .attorney-card {
+    position: relative;
+    overflow: hidden;
+  }
+  .attorney-photo {
+    width: 100%;
+    aspect-ratio: 3/4;
+    background: var(--dark);
+    position: relative;
+    overflow: hidden;
+    margin-bottom: 24px;
+  }
+  /* SVG silhouette placeholder */
+  .attorney-photo svg {
+    position: absolute;
+    bottom: 0;
+    left: 50%;
+    transform: translateX(-50%);
+    width: 70%;
+    opacity: 0.2;
+  }
+  .attorney-photo-overlay {
+    position: absolute;
+    inset: 0;
+    background: linear-gradient(to top, rgba(10,10,10,0.7) 0%, transparent 50%);
+  }
+  /* Gradient placeholder backgrounds */
+  .photo-1 { background: linear-gradient(135deg, #1a1408 0%, #2d2010 50%, #1a1a1a 100%); }
+  .photo-2 { background: linear-gradient(135deg, #0e1520 0%, #1a2535 50%, #1a1a1a 100%); }
+  .photo-3 { background: linear-gradient(135deg, #120e1a 0%, #1e1628 50%, #1a1a1a 100%); }
+
+  .attorney-name {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 26px;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 6px;
+  }
+  .attorney-title {
+    font-size: 11px;
+    letter-spacing: 0.18em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 14px;
+  }
+  .attorney-spec {
+    font-size: 13px;
+    color: var(--muted);
+    line-height: 1.7;
+  }
+  .attorney-bar {
+    width: 36px; height: 1px;
+    background: var(--gold);
+    margin: 18px 0;
+  }
+
+  /* ── TESTIMONIALS ─────────────────────────────────────────── */
+  .testimonials {
+    background: var(--black);
+    text-align: center;
+    padding: 120px 80px;
+  }
+  .testimonials h2 { margin-bottom: 60px; }
+  .testimonial-slider {
+    max-width: 780px;
+    margin: 0 auto;
+  }
+  .testimonial-item {
+    display: none;
+    opacity: 0;
+    transition: opacity 0.5s;
+  }
+  .testimonial-item.active { display: block; opacity: 1; }
+  .testimonial-text {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: clamp(22px, 2.5vw, 32px);
+    font-style: italic;
+    font-weight: 300;
+    color: var(--cream);
+    line-height: 1.6;
+    margin-bottom: 40px;
+    position: relative;
+  }
+  .testimonial-text::before, .testimonial-text::after {
+    font-size: 60px;
+    color: var(--gold);
+    opacity: 0.4;
+    font-family: 'Cormorant Garamond', serif;
+    line-height: 0;
+    vertical-align: -0.4em;
+  }
+  .testimonial-text::before { content: '"'; margin-right: 4px; }
+  .testimonial-text::after  { content: '"'; margin-left: 4px; }
+  .testimonial-author {
+    font-size: 11px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+  }
+  .testimonial-dots {
+    display: flex;
+    justify-content: center;
+    gap: 12px;
+    margin-top: 40px;
+  }
+  .dot {
+    width: 6px; height: 6px;
+    border-radius: 50%;
+    background: var(--border);
+    cursor: pointer;
+    transition: background 0.3s;
+  }
+  .dot.active { background: var(--gold); }
+
+  /* ── CONTACT ──────────────────────────────────────────────── */
+  .contact {
+    background: var(--charcoal);
+    display: grid;
+    grid-template-columns: 1fr 1fr;
+    gap: 0;
+    padding: 0;
+  }
+  .contact-info {
+    padding: 100px 80px;
+    background: var(--dark);
+    border-right: 1px solid var(--border);
+  }
+  .contact-info h2 { margin-bottom: 40px; }
+  .contact-details {
+    margin-top: 50px;
+    display: flex;
+    flex-direction: column;
+    gap: 32px;
+  }
+  .contact-item {
+    display: flex;
+    gap: 20px;
+    align-items: flex-start;
+  }
+  .contact-icon {
+    width: 40px; height: 40px;
+    border: 1px solid var(--border);
+    display: flex;
+    align-items: center;
+    justify-content: center;
+    color: var(--gold);
+    font-size: 16px;
+    flex-shrink: 0;
+    margin-top: 2px;
+  }
+  .contact-item-label {
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 6px;
+  }
+  .contact-item-value {
+    font-size: 14px;
+    color: var(--warm);
+    line-height: 1.6;
+  }
+  .contact-form {
+    padding: 100px 80px;
+  }
+  .contact-form h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 32px;
+    font-weight: 300;
+    color: var(--cream);
+    margin-bottom: 40px;
+  }
+  .form-group { margin-bottom: 24px; }
+  .form-group label {
+    display: block;
+    font-size: 10px;
+    letter-spacing: 0.2em;
+    text-transform: uppercase;
+    color: var(--muted);
+    margin-bottom: 10px;
+  }
+  .form-group input,
+  .form-group select,
+  .form-group textarea {
+    width: 100%;
+    background: var(--dark);
+    border: 1px solid var(--border);
+    color: var(--text);
+    padding: 14px 18px;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 13px;
+    font-weight: 300;
+    outline: none;
+    transition: border-color 0.3s;
+    appearance: none;
+  }
+  .form-group input:focus,
+  .form-group select:focus,
+  .form-group textarea:focus { border-color: var(--gold); }
+  .form-group textarea { height: 120px; resize: vertical; }
+  .form-grid { display: grid; grid-template-columns: 1fr 1fr; gap: 16px; }
+  .btn-submit {
+    width: 100%;
+    padding: 18px;
+    background: var(--gold);
+    color: var(--black);
+    border: none;
+    font-family: 'Montserrat', sans-serif;
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    font-weight: 600;
+    cursor: none;
+    transition: all 0.35s;
+    margin-top: 8px;
+  }
+  .btn-submit:hover { background: var(--gold-lt); transform: translateY(-2px); }
+
+  /* ── FOOTER ───────────────────────────────────────────────── */
+  footer {
+    background: var(--black);
+    border-top: 1px solid var(--border);
+    padding: 60px 80px 40px;
+  }
+  .footer-top {
+    display: grid;
+    grid-template-columns: 2fr 1fr 1fr 1fr;
+    gap: 60px;
+    margin-bottom: 60px;
+    padding-bottom: 60px;
+    border-bottom: 1px solid var(--border);
+  }
+  .footer-brand h3 {
+    font-family: 'Cormorant Garamond', serif;
+    font-size: 28px;
+    font-weight: 400;
+    color: var(--cream);
+    margin-bottom: 16px;
+  }
+  .footer-brand h3 span { color: var(--gold); }
+  .footer-brand p {
+    font-size: 13px;
+    line-height: 1.8;
+    color: var(--muted);
+  }
+  .footer-col h4 {
+    font-size: 10px;
+    letter-spacing: 0.25em;
+    text-transform: uppercase;
+    color: var(--gold);
+    margin-bottom: 24px;
+  }
+  .footer-col ul { list-style: none; }
+  .footer-col ul li { margin-bottom: 12px; }
+  .footer-col ul li a {
+    color: var(--muted);
+    text-decoration: none;
+    font-size: 13px;
+    transition: color 0.3s;
+  }
+  .footer-col ul li a:hover { color: var(--warm); }
+  .footer-bottom {
+    display: flex;
+    justify-content: space-between;
+    align-items: center;
+  }
+  .footer-bottom p {
+    font-size: 12px;
+    color: var(--muted);
+  }
+  .footer-disclaimer {
+    font-size: 11px;
+    color: var(--border);
+    margin-top: 8px;
+  }
+
+  /* ── GOLD DIVIDER LINE ───────────────────────────────────── */
+  .gold-divider {
+    width: 100%;
+    height: 1px;
+    background: linear-gradient(to right, transparent, var(--gold), transparent);
+    opacity: 0.4;
+  }
+
+  /* ── REVEAL ANIMATIONS ───────────────────────────────────── */
+  .reveal {
+    opacity: 0;
+    transform: translateY(30px);
+    transition: opacity 0.8s ease, transform 0.8s ease;
+  }
+  .reveal.visible {
+    opacity: 1;
+    transform: translateY(0);
+  }
+  .reveal-delay-1 { transition-delay: 0.1s; }
+  .reveal-delay-2 { transition-delay: 0.2s; }
+  .reveal-delay-3 { transition-delay: 0.3s; }
+  .reveal-delay-4 { transition-delay: 0.4s; }
+  .reveal-delay-5 { transition-delay: 0.5s; }
+
+  /* ── SCALES OF JUSTICE ICON ──────────────────────────────── */
+  .scales-icon {
+    width: 60px;
+    height: 60px;
+    margin-bottom: 24px;
+  }
+</style>
+</head>
+<body>
+
+<!-- Custom Cursor -->
+<div class="cursor" id="cursor"></div>
+<div class="cursor-ring" id="cursorRing"></div>
+
+<!-- Navigation -->
+<nav id="navbar">
+  <a href="#" class="nav-logo">Hargreave <span>&</span> Morrow</a>
+  <ul class="nav-links">
+    <li><a href="#about">About</a></li>
+    <li><a href="#practice">Practice Areas</a></li>
+    <li><a href="#attorneys">Attorneys</a></li>
+    <li><a href="#contact">Contact</a></li>
+  </ul>
+  <a href="#contact" class="nav-cta">Request Consultation</a>
+</nav>
+
+<!-- Hero -->
+<section class="hero">
+  <div class="hero-bg"></div>
+  <div class="hero-lines"></div>
+  <div class="hero-content">
+    <div class="hero-eyebrow">
+      <span>Est. 1987 · Johannesburg</span>
+    </div>
+    <h1>Justice<br>Demands <em>Excellence.</em><br>So Do We.</h1>
+    <p class="hero-sub">
+      Hargreave & Morrow is a premier South African law firm offering strategic counsel to corporations, institutions, and individuals navigating complex legal terrain.
+    </p>
+    <div class="hero-actions">
+      <a href="#contact" class="btn-primary">Schedule a Consultation</a>
+      <a href="#practice" class="btn-ghost">Our Practice Areas</a>
+    </div>
+  </div>
+  <div class="scroll-indicator">
+    <div class="scroll-line"></div>
+    <span>Scroll</span>
+  </div>
+</section>
+
+<!-- Stats Bar -->
+<div class="stats-bar">
+  <div class="stat reveal">
+    <div class="stat-number">38<sup style="font-size:24px;color:var(--gold-dk)">+</sup></div>
+    <div class="stat-label">Years of Practice</div>
+  </div>
+  <div class="stat reveal reveal-delay-1">
+    <div class="stat-number">1,200<sup style="font-size:24px;color:var(--gold-dk)">+</sup></div>
+    <div class="stat-label">Cases Resolved</div>
+  </div>
+  <div class="stat reveal reveal-delay-2">
+    <div class="stat-number">94<sup style="font-size:24px;color:var(--gold-dk)">%</sup></div>
+    <div class="stat-label">Success Rate</div>
+  </div>
+  <div class="stat reveal reveal-delay-3">
+    <div class="stat-number">18</div>
+    <div class="stat-label">Senior Advocates</div>
+  </div>
+</div>
+
+<!-- About -->
+<section class="about" id="about">
+  <div class="about-text reveal">
+    <div class="section-eyebrow"><span>Our Philosophy</span></div>
+    <h2>Precision. <em>Integrity.</em> Results.</h2>
+    <p>
+      Founded in 1987 by <strong>Charles Hargreave SC</strong> and <strong>Adv. Nadia Morrow</strong>, our firm has grown from a boutique litigation practice into one of South Africa's most respected full-service legal institutions.
+    </p>
+    <p>
+      We believe that exceptional legal counsel is built on a foundation of <strong>deep expertise</strong>, relentless preparation, and an unwavering commitment to our clients' interests. Every matter, regardless of scale, receives the same rigorous attention.
+    </p>
+    <p>
+      Our attorneys are trusted advisors to JSE-listed corporates, multinational enterprises, government entities, and high-net-worth individuals — bringing clarity to complexity at every stage.
+    </p>
+    <div style="margin-top:40px;display:flex;gap:40px;">
+      <div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--gold);font-weight:300;">Tier 1</div>
+        <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-top:4px;">Chambers Africa Ranked</div>
+      </div>
+      <div style="width:1px;background:var(--border);"></div>
+      <div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--gold);font-weight:300;">LSSA</div>
+        <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-top:4px;">Member Firm</div>
+      </div>
+      <div style="width:1px;background:var(--border);"></div>
+      <div>
+        <div style="font-family:'Cormorant Garamond',serif;font-size:36px;color:var(--gold);font-weight:300;">AA100</div>
+        <div style="font-size:11px;letter-spacing:0.15em;text-transform:uppercase;color:var(--muted);margin-top:4px;">BBBEE Compliant</div>
+      </div>
+    </div>
+  </div>
+  <div class="about-quote reveal reveal-delay-2">
+    <blockquote>
+      "The law is not merely a vocation. It is the architecture of a just society — and we are its most diligent custodians."
+    </blockquote>
+    <cite>— Charles Hargreave SC, Founding Partner</cite>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- Practice Areas -->
+<section class="practice" id="practice">
+  <div class="practice-header">
+    <div>
+      <div class="section-eyebrow reveal"><span>What We Do</span></div>
+      <h2 class="reveal">Our Areas of <em>Expertise</em></h2>
+    </div>
+    <a href="#contact" class="btn-ghost reveal" style="color:var(--warm)">All Practice Areas</a>
+  </div>
+  <div class="practice-grid">
+    <div class="practice-card reveal">
+      <span class="practice-number">01</span>
+      <h3>Corporate & Commercial Law</h3>
+      <p>Mergers, acquisitions, joint ventures, and corporate governance counsel for public and private entities operating across Southern Africa.</p>
+      <span class="card-arrow">→</span>
+    </div>
+    <div class="practice-card reveal reveal-delay-1">
+      <span class="practice-number">02</span>
+      <h3>Dispute Resolution & Litigation</h3>
+      <p>High Court litigation, arbitration, and mediation across commercial, constitutional, and administrative law matters.</p>
+      <span class="card-arrow">→</span>
+    </div>
+    <div class="practice-card reveal reveal-delay-2">
+      <span class="practice-number">03</span>
+      <h3>Employment & Labour Law</h3>
+      <p>Strategic employment counsel, CCMA representation, disciplinary proceedings, and transformative workplace restructuring.</p>
+      <span class="card-arrow">→</span>
+    </div>
+    <div class="practice-card reveal reveal-delay-3">
+      <span class="practice-number">04</span>
+      <h3>Real Estate & Conveyancing</h3>
+      <p>Commercial property transactions, development finance, leasing, and sectional title matters across the full property lifecycle.</p>
+      <span class="card-arrow">→</span>
+    </div>
+    <div class="practice-card reveal reveal-delay-4">
+      <span class="practice-number">05</span>
+      <h3>Tax Law & Structuring</h3>
+      <p>Corporate tax planning, SARS disputes, international tax structuring, and VAT compliance for complex business arrangements.</p>
+      <span class="card-arrow">→</span>
+    </div>
+    <div class="practice-card reveal reveal-delay-5">
+      <span class="practice-number">06</span>
+      <h3>Trusts, Estates & Wills</h3>
+      <p>Estate planning, inter vivos trusts, testamentary dispositions, and executor services for private clients and family offices.</p>
+      <span class="card-arrow">→</span>
+    </div>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- Attorneys -->
+<section class="attorneys" id="attorneys">
+  <div class="section-eyebrow reveal"><span>Our Team</span></div>
+  <h2 class="reveal">The <em>Advocates</em> Behind Your Case</h2>
+  <div class="attorneys-grid">
+    <div class="attorney-card reveal">
+      <div class="attorney-photo photo-1">
+        <svg viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="100" cy="80" rx="45" ry="52" fill="white"/>
+          <path d="M20 300 C20 200 180 200 180 300" fill="white"/>
+        </svg>
+        <div class="attorney-photo-overlay"></div>
+      </div>
+      <div class="attorney-title">Senior Partner · SC</div>
+      <div class="attorney-name">Charles Hargreave</div>
+      <div class="attorney-bar"></div>
+      <div class="attorney-spec">Corporate Litigation · Constitutional Law · Arbitration<br><br>Called to the Bar in 1984 and silk in 2001. Over four decades of landmark commercial and constitutional practice across South African courts.</div>
+    </div>
+    <div class="attorney-card reveal reveal-delay-2">
+      <div class="attorney-photo photo-2">
+        <svg viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="100" cy="80" rx="42" ry="48" fill="white"/>
+          <path d="M25 300 C25 195 175 195 175 300" fill="white"/>
+        </svg>
+        <div class="attorney-photo-overlay"></div>
+      </div>
+      <div class="attorney-title">Founding Partner</div>
+      <div class="attorney-name">Nadia Morrow</div>
+      <div class="attorney-bar"></div>
+      <div class="attorney-spec">Employment Law · Labour Tribunals · Corporate Restructuring<br><br>A leading voice in South African employment law with particular expertise in large-scale corporate restructurings and executive disputes.</div>
+    </div>
+    <div class="attorney-card reveal reveal-delay-4">
+      <div class="attorney-photo photo-3">
+        <svg viewBox="0 0 200 300" fill="none" xmlns="http://www.w3.org/2000/svg">
+          <ellipse cx="100" cy="78" rx="43" ry="50" fill="white"/>
+          <path d="M22 300 C22 198 178 198 178 300" fill="white"/>
+        </svg>
+        <div class="attorney-photo-overlay"></div>
+      </div>
+      <div class="attorney-title">Partner</div>
+      <div class="attorney-name">Sipho Dlamini</div>
+      <div class="attorney-bar"></div>
+      <div class="attorney-spec">Tax Law · SARS Disputes · Cross-Border Structuring<br><br>Recognised by International Tax Review as a leading practitioner in South African tax law. Advises on complex multi-jurisdictional structures.</div>
+    </div>
+  </div>
+</section>
+
+<!-- Testimonials -->
+<section class="testimonials">
+  <div class="section-eyebrow" style="justify-content:center;margin-bottom:20px;"><span>Client Testimonials</span></div>
+  <h2>Trusted by <em>Those Who Matter</em></h2>
+  <div class="testimonial-slider">
+    <div class="testimonial-item active">
+      <p class="testimonial-text">Hargreave & Morrow navigated our R1.8 billion acquisition with extraordinary skill. Their understanding of both the commercial and legal landscape gave us complete confidence throughout a very complex process.</p>
+      <div class="testimonial-author">— CEO, JSE-Listed Resources Group</div>
+    </div>
+    <div class="testimonial-item">
+      <p class="testimonial-text">When facing a disputed executive dismissal, Nadia Morrow's command of the facts and law was nothing short of remarkable. The matter was resolved swiftly and decisively in our favour.</p>
+      <div class="testimonial-author">— Group HR Director, Financial Services Firm</div>
+    </div>
+    <div class="testimonial-item">
+      <p class="testimonial-text">We have retained Hargreave & Morrow as our primary legal counsel for eleven years. Their integrity, depth of knowledge, and genuine commitment to our interests are unmatched in the profession.</p>
+      <div class="testimonial-author">— Managing Director, Private Equity Fund</div>
+    </div>
+  </div>
+  <div class="testimonial-dots">
+    <div class="dot active" onclick="changeTesti(0)"></div>
+    <div class="dot" onclick="changeTesti(1)"></div>
+    <div class="dot" onclick="changeTesti(2)"></div>
+  </div>
+</section>
+
+<div class="gold-divider"></div>
+
+<!-- Contact -->
+<section class="contact" id="contact">
+  <div class="contact-info">
+    <div class="section-eyebrow"><span>Get In Touch</span></div>
+    <h2>Begin Your <em>Consultation</em></h2>
+    <p style="font-size:14px;color:var(--muted);line-height:1.8;margin-top:16px;">
+      We offer a confidential initial consultation to assess your matter and advise on the most appropriate course of action.
+    </p>
+    <div class="contact-details">
+      <div class="contact-item">
+        <div class="contact-icon">📍</div>
+        <div>
+          <div class="contact-item-label">Office Address</div>
+          <div class="contact-item-value">14 Fredman Drive, Sandton<br>Johannesburg, 2196</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">📞</div>
+        <div>
+          <div class="contact-item-label">Telephone</div>
+          <div class="contact-item-value">+27 (11) 784 3300</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">✉</div>
+        <div>
+          <div class="contact-item-label">General Enquiries</div>
+          <div class="contact-item-value">enquiries@hargreavemorrow.co.za</div>
+        </div>
+      </div>
+      <div class="contact-item">
+        <div class="contact-icon">⏱</div>
+        <div>
+          <div class="contact-item-label">Office Hours</div>
+          <div class="contact-item-value">Monday – Friday<br>08:00 – 17:30</div>
+        </div>
+      </div>
+    </div>
+  </div>
+  <div class="contact-form">
+    <h3>Request a Consultation</h3>
+    <div class="form-grid">
+      <div class="form-group">
+        <label>First Name</label>
+        <input type="text" placeholder="Charles">
+      </div>
+      <div class="form-group">
+        <label>Last Name</label>
+        <input type="text" placeholder="Hargreave">
+      </div>
+    </div>
+    <div class="form-group">
+      <label>Email Address</label>
+      <input type="email" placeholder="you@company.com">
+    </div>
+    <div class="form-group">
+      <label>Telephone</label>
+      <input type="tel" placeholder="+27 (0) __ ___ ____">
+    </div>
+    <div class="form-group">
+      <label>Area of Law</label>
+      <select>
+        <option value="" disabled selected>Select a practice area</option>
+        <option>Corporate & Commercial Law</option>
+        <option>Dispute Resolution & Litigation</option>
+        <option>Employment & Labour Law</option>
+        <option>Real Estate & Conveyancing</option>
+        <option>Tax Law & Structuring</option>
+        <option>Trusts, Estates & Wills</option>
+        <option>Other</option>
+      </select>
+    </div>
+    <div class="form-group">
+      <label>Brief Description of Matter</label>
+      <textarea placeholder="Provide a brief, confidential summary of your legal matter..."></textarea>
+    </div>
+    <button class="btn-submit">Submit Consultation Request →</button>
+    <p style="font-size:11px;color:var(--muted);margin-top:16px;line-height:1.7;">
+      All enquiries are treated with strict confidentiality. Submission does not constitute legal advice or establish a solicitor-client relationship.
+    </p>
+  </div>
+</section>
+
+<!-- Footer -->
+<footer>
+  <div class="footer-top">
+    <div class="footer-brand">
+      <h3>Hargreave <span>&</span> Morrow</h3>
+      <p>Attorneys · Notaries · Conveyancers<br>Sandton, Johannesburg · Est. 1987</p>
+      <div style="margin-top:24px;display:flex;gap:14px;">
+        <div style="width:34px;height:34px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:14px;cursor:none;transition:all 0.3s;" onmouseenter="this.style.borderColor='var(--gold)'" onmouseleave="this.style.borderColor='var(--border)'">in</div>
+        <div style="width:34px;height:34px;border:1px solid var(--border);display:flex;align-items:center;justify-content:center;color:var(--gold);font-size:14px;cursor:none;transition:all 0.3s;" onmouseenter="this.style.borderColor='var(--gold)'" onmouseleave="this.style.borderColor='var(--border)'">𝕏</div>
+      </div>
+    </div>
+    <div class="footer-col">
+      <h4>Practice Areas</h4>
+      <ul>
+        <li><a href="#">Corporate Law</a></li>
+        <li><a href="#">Litigation</a></li>
+        <li><a href="#">Labour Law</a></li>
+        <li><a href="#">Property Law</a></li>
+        <li><a href="#">Tax Law</a></li>
+        <li><a href="#">Estates</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>The Firm</h4>
+      <ul>
+        <li><a href="#">Our History</a></li>
+        <li><a href="#">Our Team</a></li>
+        <li><a href="#">News & Insights</a></li>
+        <li><a href="#">Pro Bono Work</a></li>
+        <li><a href="#">Careers</a></li>
+      </ul>
+    </div>
+    <div class="footer-col">
+      <h4>Legal</h4>
+      <ul>
+        <li><a href="#">Privacy Policy</a></li>
+        <li><a href="#">Terms of Use</a></li>
+        <li><a href="#">PAIA Manual</a></li>
+        <li><a href="#">Disclaimer</a></li>
+      </ul>
+    </div>
+  </div>
+  <div class="footer-bottom">
+    <div>
+      <p>© 2025 Hargreave & Morrow Inc. All rights reserved.</p>
+      <p class="footer-disclaimer">Hargreave & Morrow Inc. is a company incorporated under the Laws of South Africa. Registration No. 1987/004821/21.</p>
+    </div>
+    <div style="text-align:right;">
+      <p style="font-size:11px;color:var(--muted);">Regulated by the Law Society of South Africa</p>
+    </div>
+  </div>
+</footer>
+
+<script>
+  // ── CUSTOM CURSOR ──────────────────────────────────────────
+  const cursor = document.getElementById('cursor');
+  const ring   = document.getElementById('cursorRing');
+  let mx = 0, my = 0, rx = 0, ry = 0;
+
+  document.addEventListener('mousemove', e => {
+    mx = e.clientX; my = e.clientY;
+    cursor.style.transform = `translate(${mx - 4}px, ${my - 4}px)`;
+  });
+
+  function animateRing() {
+    rx += (mx - rx) * 0.12;
+    ry += (my - ry) * 0.12;
+    ring.style.transform = `translate(${rx - 18}px, ${ry - 18}px)`;
+    requestAnimationFrame(animateRing);
+  }
+  animateRing();
+
+  document.querySelectorAll('a, button, .dot, .practice-card').forEach(el => {
+    el.addEventListener('mouseenter', () => ring.classList.add('hover'));
+    el.addEventListener('mouseleave', () => ring.classList.remove('hover'));
+  });
+
+  // ── NAVBAR SCROLL ──────────────────────────────────────────
+  const nav = document.getElementById('navbar');
+  window.addEventListener('scroll', () => {
+    nav.classList.toggle('scrolled', window.scrollY > 60);
+  });
+
+  // ── SCROLL REVEAL ──────────────────────────────────────────
+  const reveals = document.querySelectorAll('.reveal');
+  const observer = new IntersectionObserver(entries => {
+    entries.forEach(e => {
+      if (e.isIntersecting) { e.target.classList.add('visible'); }
+    });
+  }, { threshold: 0.12 });
+  reveals.forEach(r => observer.observe(r));
+
+  // ── TESTIMONIAL SLIDER ─────────────────────────────────────
+  let currentTesti = 0;
+  const items = document.querySelectorAll('.testimonial-item');
+  const dots  = document.querySelectorAll('.dot');
+
+  function changeTesti(idx) {
+    items[currentTesti].classList.remove('active');
+    dots[currentTesti].classList.remove('active');
+    currentTesti = idx;
+    items[currentTesti].classList.add('active');
+    dots[currentTesti].classList.add('active');
+  }
+
+  setInterval(() => {
+    changeTesti((currentTesti + 1) % items.length);
+  }, 5000);
+
+  // ── COUNTER ANIMATION ─────────────────────────────────────
+  function animateCounters() {
+    document.querySelectorAll('.stat-number').forEach(el => {
+      const target = parseInt(el.textContent.replace(/\D/g, ''));
+      if (!target) return;
+      let current = 0;
+      const step = target / 60;
+      const timer = setInterval(() => {
+        current = Math.min(current + step, target);
+        const formatted = target >= 1000 
+          ? Math.floor(current).toLocaleString()
+          : Math.floor(current);
+        // Preserve the superscript
+        const sup = el.querySelector('sup');
+        if (sup) {
+          el.childNodes[0].textContent = formatted;
+        }
+        if (current >= target) clearInterval(timer);
+      }, 20);
+    });
+  }
+
+  const statsBar = document.querySelector('.stats-bar');
+  const statsObs = new IntersectionObserver(entries => {
+    if (entries[0].isIntersecting) {
+      animateCounters();
+      statsObs.disconnect();
+    }
+  }, { threshold: 0.4 });
+  statsObs.observe(statsBar);
+
+  // ── FORM SUBMIT ────────────────────────────────────────────
+  document.querySelector('.btn-submit').addEventListener('click', function(e) {
+    this.textContent = 'Request Sent — We Will Be In Touch';
+    this.style.background = 'var(--dark)';
+    this.style.color = 'var(--gold)';
+    this.style.border = '1px solid var(--gold)';
+  });
+</script>
+</body>
+</html>
